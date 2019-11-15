@@ -7,7 +7,6 @@
     <build>
         <plugins>
             <plugin>
-
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
@@ -44,7 +43,7 @@
             <artifactId>ojdbc</artifactId>
             <version>8</version>
             <scope>system</scope>
-            <systemPath>C:/Users/Igor/IdeaProjects/houseManagerMVC/lib/ojdbc8.jar</systemPath>
+            <systemPath>C:/Users/aleks/IdeaProjects/houseManagerMVC/lib/ojdbc8.jar</systemPath>
         </dependency>
 
     </dependencies>
