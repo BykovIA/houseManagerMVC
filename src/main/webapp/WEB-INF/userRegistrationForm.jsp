@@ -29,13 +29,10 @@
         <%@include file="registration.css"%>
     </style>
     <script type="text/javascript">
-        <%@include file="bootstrap.min.js"%>
-    </script>
-    <script type="text/javascript">
         <%@include file="jquery.min.js"%>
     </script>
 
-    <script src="bootstrap.min.js"></script>
+    <script src="WEB-INF/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" ></script>
@@ -56,14 +53,14 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/house.manager/">Авторизация</a></li>
-                <li><a href="/house.manager/user-registration/">Регистрация</a></li>
+                <li><a href="${pageContext.request.contextPath}redirect:/">Авторизация</a></li>
+                <li><a href="${pageContext.request.contextPath}">Регистрация</a></li>
             </ul>
         </div>
     </div>
 </div>
 <div class="container">
-    <form class="form-signin" action="/house.manager/user-registration" method="POST" accept-charset="UTF-8" role="form">
+    <form class="form-signin" action="${pageContext.request.contextPath}" method="POST" accept-charset="UTF-8" role="form">
         <h3 class="form-signin-heading">Регистрация</h3>
         <div class="registration-code">
             <h4 class="advice">Введите код доступа для регистрации</h4>
