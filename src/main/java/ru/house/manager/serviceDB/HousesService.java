@@ -5,7 +5,7 @@ import ru.house.manager.EntityDB.Houses;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import  java.sql.*;
+import java.sql.*;
 import java.util.Random;
 
 public class HousesService extends Util implements HousesDao{
