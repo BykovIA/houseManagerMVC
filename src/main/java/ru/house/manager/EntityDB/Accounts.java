@@ -4,17 +4,17 @@ import org.springframework.http.converter.json.GsonBuilderUtils;
 
 public class Accounts {
 
-    private int id;
+    private Integer id;
     private String eMail;
     private String hashPassword;
     private String salt;
-    private int residentFlag;
+    private Integer residentFlag;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -42,11 +42,11 @@ public class Accounts {
         this.salt = salt;
     }
 
-    public int getResidentFlag() {
+    public Integer getResidentFlag() {
         return residentFlag;
     }
 
-    public void setResidentFlag(int residentFlag) {
+    public void setResidentFlag(Integer residentFlag) {
         this.residentFlag = residentFlag;
     }
 

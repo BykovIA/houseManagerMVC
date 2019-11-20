@@ -1,19 +1,28 @@
 package ru.house.manager.EntityDB;
 
 public class Houses {
-    public int getHouseId() {
+
+    public Houses() {
+    }
+    private Integer houseId;
+    private Integer manageCompanyId;
+    private String adress;
+    private String city;
+    private Integer residentsNumber;
+    private Integer accessToken;
+    public Integer getHouseId() {
         return houseId;
     }
 
-    public void setHouseId(int houseId) {
+    public void setHouseId(Integer houseId) {
         this.houseId = houseId;
     }
 
-    public int getManageCompanyId() {
+    public Integer getManageCompanyId() {
         return manageCompanyId;
     }
 
-    public void setManageCompanyId(int manageCompanyId) {
+    public void setManageCompanyId(Integer manageCompanyId) {
         this.manageCompanyId = manageCompanyId;
     }
 
@@ -33,30 +42,19 @@ public class Houses {
         this.city = city;
     }
 
-    public int getResidentsNumber() {
+    public Integer getResidentsNumber() {
         return residentsNumber;
     }
 
-    public void setResidentsNumber(int residentsNumber) {
+    public void setResidentsNumber(Integer residentsNumber) {
         this.residentsNumber = residentsNumber;
     }
 
-    public int getAccessToken() {
+    public Integer getAccessToken() {
         return accessToken;
     }
 
     public void setAccessToken(int accessToken) {
         this.accessToken = accessToken;
-    }
-
-    private int houseId;
-    private int manageCompanyId;
-    private String adress;
-    private String city;
-    private int residentsNumber;
-    private int accessToken;
-
-    public Houses() {
-
     }
 }

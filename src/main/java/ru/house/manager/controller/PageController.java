@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
+import org.springframework.aop.scope.ScopedProxyUtils;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import ru.house.manager.EntityDB.Houses;
 import ru.house.manager.EntityDB.Managers;
 import ru.house.manager.EntityDB.Users;
@@ -36,11 +38,7 @@ public class PageController {
 
         AccountsService accountsService = new AccountsService();
         Accounts account = new Accounts();
-        try {
-            account = accountsService.getByEmail(new String(eMail.getBytes("ISO-8859-1"), "UTF-8"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        account = accountsService.getByEmail(new String(eMail.getBytes("ISO-8859-1"), "UTF-8"));
         if (HashFunction.getHash(new String(password.getBytes("ISO-8859-1"), "UTF-8"), account.getSalt(), HashFunction.getSalt2()).equals(account.getHashPassword())) {
             client_account_id = account.getId();
             if(account.getResidentFlag() == 1) {
@@ -92,7 +90,7 @@ public class PageController {
             user.setLastName(new String(lastName.getBytes("ISO-8859-1"), "UTF-8"));
             user.setFatherName(new String(fatherName.getBytes("ISO-8859-1"), "UTF-8"));
             user.setPhoneNumber(new String(phoneNumber.getBytes("ISO-8859-1"), "UTF-8"));
-            user.seteMail(new String(eMail.getBytes("ISO-8859-1"), "UTF-8"));
+            user.setEmail(new String(eMail.getBytes("ISO-8859-1"), "UTF-8"));
             user.setRoomNumber(new String(roomNumber.getBytes("ISO-8859-1"), "UTF-8"));
             usersService.add(user);
 

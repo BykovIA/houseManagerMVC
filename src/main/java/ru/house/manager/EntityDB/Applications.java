@@ -4,29 +4,35 @@ public class Applications {
     public Applications() {
 
     }
-    private int applicationsId;
+    private Integer manageId;
+    private Integer userId;
+    private String data;
+    private String text;
+    private String status;
+    private String imageName;
+    private Integer applicationsId;
 
-    public int getApplicationsId() {
+    public Integer getApplicationsId() {
         return applicationsId;
     }
 
-    public void setApplicationsId(int applicationsId) {
+    public void setApplicationsId(Integer applicationsId) {
         this.applicationsId = applicationsId;
     }
 
-    public int getManageId() {
+    public Integer getManageId() {
         return manageId;
     }
 
-    public void setManageId(int manageId) {
+    public void setManageId(Integer manageId) {
         this.manageId = manageId;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -61,12 +67,4 @@ public class Applications {
     public void setImageName(String imageName) {
         this.imageName = imageName;
     }
-
-    private int manageId;
-    private int userId;
-    private String data;
-    private String text;
-    private String status;
-    private String imageName;
-
 }

@@ -1,19 +1,33 @@
 package ru.house.manager.EntityDB;
 
 public class Managers {
-    public int getId() {
+
+    public Managers() {
+
+    }
+    private Integer id;
+    private Integer accountId;
+    private String companyName;
+    private String firstName;
+    private String lastName;
+    private String fatherName;
+    private String email;
+    private String phoneNumber;
+    private String someInfo;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getAccountId() {
+    public Integer getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(int accountId) {
+    public void setAccountId(Integer accountId) {
         this.accountId = accountId;
     }
 
@@ -72,19 +86,4 @@ public class Managers {
     public void setSomeInfo(String someInfo) {
         this.someInfo = someInfo;
     }
-
-    private int id;
-    private int accountId;
-    private String companyName;
-    private String firstName;
-    private String lastName;
-    private String fatherName;
-    private String email;
-    private String phoneNumber;
-    private String someInfo;
-
-    public Managers() {
-
-    }
-
 }

@@ -18,8 +18,8 @@
         <link href="WEB-INF/bootstrap.css" rel="stylesheet">
         <link href="WEB-INF/bootstrap.min.css" rel="stylesheet">
         <!-- Custom styles for this template -->
-        <link href="WEB-INF/signin.css" rel="stylesheet">
-        <link href="WEB-INF/navigation.css" rel="stylesheet">
+        <link href="signin.css" rel="stylesheet">
+        <link href="navigation.css" rel="stylesheet">
         <!-- Fonts-->
         <link href="http://allfont.ru/allfont.css?fonts=montserrat" rel="stylesheet" type="text/css" />
         <style>
@@ -44,7 +44,7 @@
             <%@include file="jquery.min.js"%>
         </script>
 
-    <script src="WEB-INF/bootstrap.min.js"></script>
+    <script src="bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" ></script>
@@ -68,8 +68,8 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="${pageContext.request.contextPath}">Авторизация</a></li>
-                <li><a href="${pageContext.request.contextPath}/user-registration">Регистрация</a></li>
+                <li><a href="/house.manager/">Авторизация</a></li>
+                <li><a href="/house.manager/user-registration/">Регистрация</a></li>
                 <!--<li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -83,7 +83,7 @@
     </div>
 </div>
 <div class="container">
-    <form class="form-signin" role="form" action="${pageContext.request.contextPath}" method="post">
+    <form class="form-signin" role="form" action="/house.manager/" method="post">
 
         <h3 class="form-signin-heading">Вход в сервис</h3>
         <input type="email" class="form-control" placeholder="Адрес электронной почты" name = "eMail" autofocus>
@@ -98,7 +98,7 @@
         <h3 class="form-signin-footing">Нет учётной записи?</h3>
         <form>
             <button class="btn btn-lg btn-info btn-block" >
-                <a class="redirection" href="${pageContext.request.contextPath}/user-registration">Зарегистрироваться</a>
+                <a class="redirection" href="/house.manager/user-registration">Зарегистрироваться</a>
             </button>
         </form>
     </form>
@@ -112,6 +112,6 @@
 
 <!--<a href="/simplmvcapp_war/add-new-order">Add new order</a>-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="bootstrap.min.js"></script>
+<script src="WEB-INF/bootstrap.min.js"></script>
 </body>
 </html>
