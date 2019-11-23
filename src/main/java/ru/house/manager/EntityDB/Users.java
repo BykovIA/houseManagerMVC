@@ -2,27 +2,11 @@ package ru.house.manager.EntityDB;
 
 public class Users {
 
-    private int id;
-
-    public int getHouseId() {
-        return houseId;
+    public Users() {
     }
-
-    public void setHouseId(int houseId) {
-        this.houseId = houseId;
-    }
-
-    private int houseId;
-
-    public int getAccount_id() {
-        return account_id;
-    }
-
-    public void setAccount_id(int account_id) {
-        this.account_id = account_id;
-    }
-
-    private  int account_id;
+    private Integer id;
+    private Integer houseId;
+    private Integer account_id;
     private String firstName;
     private String lastName;
     private String fatherName;
@@ -30,11 +14,27 @@ public class Users {
     private String roomNumber;
     private String eMail;
 
-    public int getId() {
+    public Integer getHouseId() {
+        return houseId;
+    }
+
+    public void setHouseId(int houseId) {
+        this.houseId = houseId;
+    }
+
+    public Integer getAccount_id() {
+        return account_id;
+    }
+
+    public void setAccount_id(int account_id) {
+        this.account_id = account_id;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -78,14 +78,11 @@ public class Users {
         this.roomNumber = roomNumber;
     }
 
-    public String geteMail() {
+    public String getEmail() {
         return eMail;
     }
 
-    public void seteMail(String eMail) {
+    public void setEmail(String eMail) {
         this.eMail = eMail;
-    }
-
-    public Users() {
     }
 }

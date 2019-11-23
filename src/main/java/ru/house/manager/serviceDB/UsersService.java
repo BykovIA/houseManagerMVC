@@ -25,7 +25,7 @@ public class UsersService extends Util implements UsersDao {
             preparedStatement.setString(4, testUser.getLastName());
             preparedStatement.setString(5, testUser.getFatherName());
             preparedStatement.setString(6, testUser.getPhoneNumber());
-            preparedStatement.setString(7, testUser.geteMail());
+            preparedStatement.setString(7, testUser.getEmail());
             preparedStatement.setString(8, testUser.getRoomNumber());
 
             preparedStatement.executeUpdate();

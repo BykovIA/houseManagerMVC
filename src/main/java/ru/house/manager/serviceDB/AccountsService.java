@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountsService extends Util implements AccountsDao{
+    private static final String ACCOUNT_ID_CONST = "ACCOUNT_ID";
+    private static final String EMAIL_CONST = "E_MAIL";
+    private static final String HASH_PASSWORD_CONST = "HASH_PASSWORD";
+    private static final String RESIDENT_FLAG_CONST = "RESIDENT_FLAG";
+    private static final String SALT_CONST = "SALT";
 
     Connection connection = getConnection();
 
@@ -48,11 +53,11 @@ public class AccountsService extends Util implements AccountsDao{
 
             while (resultSet.next()) {
                 Accounts account = new Accounts();
-                account.setId(resultSet.getInt("ACCOUNT_ID"));
-                account.seteMail(resultSet.getString("E_MAIL"));
-                account.setHashPassword(resultSet.getString("HASH_PASSWORD"));
-                account.setResidentFlag(resultSet.getInt("RESIDENT_FLAG"));
-                account.setSalt(resultSet.getString("SALT"));
+                account.setId(resultSet.getInt(ACCOUNT_ID_CONST));
+                account.seteMail(resultSet.getString(EMAIL_CONST));
+                account.setHashPassword(resultSet.getString(HASH_PASSWORD_CONST));
+                account.setResidentFlag(resultSet.getInt(RESIDENT_FLAG_CONST));
+                account.setSalt(resultSet.getString(SALT_CONST));
                 accountsList.add(account);
             }
         } catch (SQLException e) {
@@ -80,10 +85,10 @@ public class AccountsService extends Util implements AccountsDao{
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            account.seteMail(resultSet.getString("E_MAIL"));
-            account.setHashPassword(resultSet.getString("HASH_PASSWORD"));
-            account.setResidentFlag(resultSet.getInt("RESIDENT_FLAG"));
-            account.setSalt(resultSet.getString("SALT"));
+            account.seteMail(resultSet.getString(EMAIL_CONST));
+            account.setHashPassword(resultSet.getString(HASH_PASSWORD_CONST));
+            account.setResidentFlag(resultSet.getInt(RESIDENT_FLAG_CONST));
+            account.setSalt(resultSet.getString(SALT_CONST));
 
             preparedStatement.executeUpdate();
 
@@ -113,10 +118,10 @@ public class AccountsService extends Util implements AccountsDao{
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
 
-            account.setHashPassword(resultSet.getString("HASH_PASSWORD"));
-            account.setResidentFlag(resultSet.getInt("RESIDENT_FLAG"));
-            account.setSalt(resultSet.getString("SALT"));
-            account.setId(resultSet.getInt("ACCOUNT_ID"));
+            account.setHashPassword(resultSet.getString(HASH_PASSWORD_CONST));
+            account.setResidentFlag(resultSet.getInt(RESIDENT_FLAG_CONST));
+            account.setSalt(resultSet.getString(SALT_CONST));
+            account.setId(resultSet.getInt(ACCOUNT_ID_CONST));
 
             preparedStatement.executeUpdate();
 
