@@ -21,7 +21,7 @@
         <link href="signin.css" rel="stylesheet">
         <link href="navigation.css" rel="stylesheet">
         <!-- Fonts-->
-        <link href="http://allfont.ru/allfont.css?fonts=montserrat" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
         <style>
             <%@include file="bootstrap.css"%>
         </style>
@@ -53,65 +53,66 @@
 
 
 <body>
-
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
+    <div class="container navigation">
         <div class="navbar-header">
-            <img class="navbar-left" alt="gavniWE" src="https://i.ibb.co/qm4cXtK/logo-site.png" style="width: 40px; height: 40px;">
+            <div id="logo-brand">
+                <img id="logo" src="logo-site.png" alt="Лого">
+                <div id="brand">
+                    <a href="#">HOUSE MANAGER</a>
+                </div>
+            </div>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">HOUSE MANAGER</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/house.manager/">Авторизация</a></li>
-                <li><a href="/house.manager/user-registration/">Регистрация</a></li>
-                <!--<li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                    </ul>
-                </li>-->
             </ul>
-        </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+<div class="container roflan">
+    <div class="roflan-content">
+        <img src="https://www.nastol.com.ua/pic/201712/960x800/nastol.com.ua-261758.jpg">
+    </div>
+    <div class="expire">
+        <div>
+            <form class="form-signin" action="/house.manager/user-profile" method="POST" accept-charset="UTF-8" role="form">
+                <h3 class="form-signin-heading">Вход в сервис</h3>
+                <input type="email" class="form-control" placeholder="Адрес электронной почты" name = "eMail" autofocus required>
+                <input type="password" class="form-control" placeholder="Пароль" name = "password" required>
+                <label class="checkbox">
+                    <input type="checkbox" value="remember-me">Запомнить меня
+                </label>
+                <div class="btn-signin">
+                    <button class="button-signin" type="submit">Войти</button>
+                </div>
+                <div class="form-group">
+                    <a href="#">Забыли пароль?</a>
+                </div>
+                <h3 class="form-signin-footing">Нет учётной записи?</h3>
+                <div class="btn-registration">
+                    <a class="button-registration" href="/house.manager/user-registration">Зарегистрироваться</a>
+                </div>
+            </form>
+        </div>
+        <div id="management-company">
+            <h3 id="management-company-heading">Вы из Управляющей Компании?</h3>
+            <div class="btn-mc-registration">
+                <a class="button-mc-registration" href="management-company.html">Подключиться к системе</a>
+            </div>
+        </div>
     </div>
 </div>
 <div class="container">
-    <form class="form-signin" role="form" action="/house.manager/" method="post">
-
-        <h3 class="form-signin-heading">Вход в сервис</h3>
-        <input type="email" class="form-control" placeholder="Адрес электронной почты" name = "eMail" autofocus>
-        <input type="password" class="form-control" placeholder="Пароль" name = "password">
-        <label class="checkbox">
-            <input type="checkbox" value="remember-me">Запомнить меня
-        </label>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
-        <div class="form-group">
-            <a href="#">Забыли пароль?</a>
-        </div>
-        <h3 class="form-signin-footing">Нет учётной записи?</h3>
-        <form>
-            <button class="btn btn-lg btn-info btn-block" >
-                <a class="redirection" href="/house.manager/user-registration">Зарегистрироваться</a>
-            </button>
-        </form>
-    </form>
-</div> <!-- /container -->
-
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-
-
-<!--<a href="/simplmvcapp_war/add-new-order">Add new order</a>-->
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="WEB-INF/bootstrap.min.js"></script>
 </body>
 </html>
+href="/house.manager/user-registration">Зарегистрироваться
+<li><a href="/house.manager/">Авторизация</a></li>

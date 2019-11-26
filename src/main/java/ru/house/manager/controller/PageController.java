@@ -33,7 +33,7 @@ public class PageController {
         return "loginForm";
     }
 
-    @RequestMapping(value="/", method = RequestMethod.POST)
+    @RequestMapping(value="/user-profile", method = RequestMethod.POST)
     public String postLoginPage(@RequestParam(value="eMail") String eMail, @RequestParam(value="password") String password) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
 
         AccountsService accountsService = new AccountsService();
@@ -42,7 +42,7 @@ public class PageController {
         if (HashFunction.getHash(new String(password.getBytes("ISO-8859-1"), "UTF-8"), account.getSalt(), HashFunction.getSalt2()).equals(account.getHashPassword())) {
             client_account_id = account.getId();
             if(account.getResidentFlag() == 1) {
-                return "userMainForm";
+                return "userProFileForm";
             }
             if(account.getResidentFlag() == 0) {
                 return "managerMainForm";
@@ -60,8 +60,7 @@ public class PageController {
 
     @RequestMapping(value="/user-registration", method=RequestMethod.POST)
     public String postNewUserPage(@RequestParam(value="firstName") String firstName, @RequestParam(value="lastName") String lastName, @RequestParam(value="fatherName") String fatherName,
-                                  @RequestParam(value="phoneNumb") String phoneNumber, @RequestParam(value="eMail") String eMail, @RequestParam(value="roomNumb") String roomNumber,
-                                  @RequestParam(value="login") String login, @RequestParam(value="password") String password,
+                                  @RequestParam(value="phoneNumb") String phoneNumber, @RequestParam(value="eMail") String eMail, @RequestParam(value="roomNumb") String roomNumber, @RequestParam(value="password") String password,
                                   @RequestParam(value="password2") String password2, @RequestParam(value="accessCode") int accessCode) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
 
         if (!password.equals(password2)) {
@@ -94,7 +93,7 @@ public class PageController {
             user.setRoomNumber(new String(roomNumber.getBytes("ISO-8859-1"), "UTF-8"));
             usersService.add(user);
 
-            return "redirect:/";
+            return "loginForm";
         }
     }
 
@@ -163,5 +162,34 @@ public class PageController {
             housesService.add(house);
             return "houseRegistrationForm";
     }
+
+
+
+
+
+    @RequestMapping(value="/user-profile", method=RequestMethod.GET)
+    public String getUserProfilePage(Model model) {
+        return "userProFileForm";
+    }
+
+    /*@RequestMapping(value="/user-profile", method = RequestMethod.POST)
+    public String postUserProfilePage(@RequestParam(value="eMail") String eMail, @RequestParam(value="password") String password) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
+
+        AccountsService accountsService = new AccountsService();
+        Accounts account = new Accounts();
+        account = accountsService.getByEmail(new String(eMail.getBytes("ISO-8859-1"), "UTF-8"));
+        if (HashFunction.getHash(new String(password.getBytes("ISO-8859-1"), "UTF-8"), account.getSalt(), HashFunction.getSalt2()).equals(account.getHashPassword())) {
+            client_account_id = account.getId();
+            if(account.getResidentFlag() == 1) {
+                return "userProFileForm";
+            }
+            if(account.getResidentFlag() == 0) {
+                return "managerMainForm";
+            }
+            else { return  "residentFlag not exst";}
+        } else {
+            return "userProFileForm";
+        }
+    }*/
 
 }

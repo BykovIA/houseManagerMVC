@@ -1,125 +1,236 @@
+a.button-registration{
+  color: white;
+  text-decoration: none;
+}
+
+a.button-mc-registration{
+  color: white;
+  text-decoration: none;
+}
+
 body {
-    padding-top: 135px;
-    padding-bottom: 135px;
-    /*background: radial-gradient(ellipse at center, rgba(249,250,182,1) 0%, rgba(198,255,176,1) 100%);*/
-    background-size: 2560px 1440px;
-    background-image: linear-gradient(120deg, #2ecc71, white, #2ecc71);
-    background-repeat: no-repeat;
-  }
+  margin-top: 100px;
+  margin-bottom: 50px;
+  min-height: 100%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background:  #EEF0ED;
+  /*background: url(https://i.redd.it/f42q8ogdl7k31.png);*/
+  background-size: cover;
+}
     
-  @media (max-width: 600px){
-    .form-signin {
-        max-width: 280px;
-        padding: 15px;
-        margin: 0px auto;
-        background: linear-gradient(120deg, #f1c40f, #2ecc71);
-        border-top-right-radius: 20px;
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
-        border-top-left-radius: 20px;
-      }
- }
+@media (max-width: 600px){
+  .container.roflan{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .roflan-content>img{
+    max-width: 720px;
+    height: 280px;
+  } 
+  .form-signin {
+      width: 280px;
+      padding: 15px;
+      margin: 0px auto;
+      background: white;
+      border: 1px #DCAC01 solid;
+      border-radius: 20px;
+    }
+    #management-company{
+      margin: 15px auto;
+      width: 280px;
+      background: white;
+      border: 1px #DCAC01 solid;
+      border-radius: 20px;
+      padding: 15px;
+    }
+    .expire{
+      margin-left: auto;
+      margin-right: auto;
+    }
+}
  
- @media (min-width: 601px) and (max-width: 2560px)
- {
-    .form-signin {
-        max-width: 350px;
-        padding: 15px;
-        margin: auto auto;
-        background: linear-gradient(120deg, #f1c40f, #2ecc71);
-        border-top-right-radius: 20px;
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
-        border-top-left-radius: 20px;
-      }
- }
-  .form-signin .form-signin-heading,
-  .form-signin .checkbox {
-    margin-bottom: 10px;
+@media (min-width: 601px) and (max-width: 2560px)
+{
+  .form-signin {
+    width: 350px;
+    padding: 15px;
+    margin: auto auto;
+    background: white;
+    border: 1px #DCAC01 solid;
+    border-radius: 20px;
   }
-  .form-signin .checkbox {
-    font-weight: normal;
+  #management-company{
+    margin-top: 15px;
+    width: 350px;
+    background: white;
+    border: 1px #DCAC01 solid;
+    border-radius: 20px;
+    padding: 15px;
   }
-  .form-signin .form-control {
-    position: relative;
-    height: auto;
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
-    padding: 10px;
-    font-size: 16px;
+  .expire{
+    margin-left: auto;
   }
-  .form-signin .form-control:focus {
-    z-index: 2;
-  }
-  .form-signin input{
-    border-radius: 10px;
-  }
-  .form-signin input[type="email"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
-  }
-  .form-signin input[type="password"] {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-  form.form-signin h3{
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    text-align: center;
-    padding-bottom: 10px;
-    color: black;
 }
+
+div.btn-signin, div.btn-registration, div.btn-mc-registration{
+  display: flex;
+  justify-content: center;
+}
+
+div.container.roflan>div{
+  
+}
+
+div.form-group {
+  padding-top: 10px;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+div.form-group a{
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+form.form-signin h3{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+  padding-bottom: 10px;
+  color: black;
+}
+
 form.form-signin input{
-  font-family: 'Montserrat';
+  font-family: 'Montserrat', sans-serif;
 }
 
+label.checkbox input{
+  font-family: 'Montserrat', sans-serif;
+}
 
-   div.form-group {
-       padding-top: 10px;
-       text-align: center;
-       margin-bottom: 10px;
-   }
-   div.form-group a{
-       font-size: 16px;
-       font-family: 'Montserrat';
-   }
+.button-signin, .button-registration, .button-mc-registration{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  color: white;
+}
 
-   .form-signin-footing{
-       padding-top: 10px;
-   }
-   .form-signin .checkbox{
-    font-family: 'Montserrat';
-    color: black;
-   }
-   button.btn.btn-lg.btn-primary.btn-block{
-    font-family: 'Montserrat';
-   }
-   button.btn.btn-lg.btn-info.btn-block {
-       padding-bottom: 10px;
-       margin-bottom: 10px;
-       font-family: 'Montserrat';
-   }
-   nav.navbar.navbar-default.navbar-fixed-top {
-    background-color: lime;
-       border: 0px;
-   }
-   .navbar-default .navbar-brand { 
-       color: black;
-   }
-   .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus{
-       background-color: greenyellow;
-   }
+.button-signin{
+  background-color: #317434;
+  border: none;
+  border-radius: 7px;
+  padding: 8px 15px;
+  width: 60%;
+}
 
-   label.checkbox input{
-    font-family: 'Montserrat';
-   }
+.button-registration{
+  background-color: #8ED647;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 7px;
+  width: 80%;
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
 
-   a.redirection{
-     text-decoration: none;
-     color: white;
-   }
+.button-mc-registration{
+  background-color: #DCAC01;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 7px;
+  width: 75%;
+  margin-bottom: 10px;
+}
+
+.button-signin:hover{
+  background-color: #3b883f;
+}
+.button-registration:hover{
+  background-color: rgb(162, 221, 103);
+}
+.button-mc-registration:hover{
+  background-color: rgb(221, 190, 77);
+}
+
+.container.roflan{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.expire{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+  font-weight: normal;
+  font-family: 'Montserrat', sans-serif;
+  color: black;
+}
+
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.form-signin-footing{
+  padding-top: 10px;
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+
+.form-signin input{
+  border-radius: 10px;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.form-signin input[type="password"] {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.form-signin .form-control:focus {
+  z-index: 2;
+  border-color: #DCAC01;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(240, 206, 94, 0.6)
+}
+
+.roflan-content>img{
+  max-width: 720px;
+  max-height: 580px;
+  border-radius: 10px;
+  border: 1px solid #DCAC01;
+}
+
+#management-company-heading{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+  color: black;
+  margin-top: 10px;
+}

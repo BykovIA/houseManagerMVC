@@ -39,7 +39,7 @@
 </head>
 <body>
 
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<!--<div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <img class="navbar-left" alt="gavniWE" src="https://i.ibb.co/qm4cXtK/logo-site.png" style="width: 40px; height: 40px;">
@@ -94,6 +94,72 @@
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Зарегистрироваться</button>
     </form>
+</div>-->
+
+
+
+
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container navigation">
+        <div class="navbar-header">
+            <div id="logo-brand">
+                <img id="logo" src="logo-site.png" alt="Лого">
+                <div id="brand">
+                    <a href="#">HOUSE MANAGER</a>
+                </div>
+            </div>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="${pageContext.request.contextPath}redirect:/">Авторизация</a></li>
+            </ul>
+        </div>
+    </div>
 </div>
+<div class="container">
+    <form class="form-signin" action="/house.manager/user-registration/" method="POST" accept-charset="UTF-8" role="form">
+        <h3 class="form-signin-heading">Регистрация</h3>
+        <div class="registration-code">
+            <h4 class="advice">Введите код доступа для регистрации</h4>
+            <div class="form-group">
+                <input class="form-control" placeholder="Код регистрации" required autofocus name = "accessCode">
+            </div>
+        </div>
+        <div class="registration-fio">
+            <h4 class="advice">Введите фамилию, имя и отчество</h4>
+            <div class="form-group">
+                <input class="form-control first" placeholder="Фамилия" required name = "lastName">
+                <input class="form-control between" placeholder="Имя" required name = "firstName">
+                <input class="form-control last" placeholder="Отчество" required name = "fatherName">
+            </div>
+        </div>
+        <div class="registration-contact">
+            <h4 class="advice">Введите номер квартиры, e-mail и номер мобильного телефона</h4>
+            <div class="form-group">
+                <input class="form-control first" placeholder="Номер квартиры" required name = "roomNumb">
+                <input type="email" class="form-control between" placeholder="E-mail" required name = "eMail">
+                <input type="tel" class="form-control last" placeholder="Номер телефона" required name = "phoneNumb">
+            </div>
+        </div>
+        <div class="registration-account">
+            <h4 class="advice">Придумайте пароль</h4>
+            <div class="form-group">
+                <input type="password" class="form-control first" placeholder="Пароль" required name = "password">
+                <input type="password" class="form-control last" placeholder="Повторите пароль" required name = "password2">
+            </div>
+        </div>
+        <div class="btn-registration">
+            <button class="button-registration" type="submit">Зарегистрироваться</button>
+        </div>
+    </form>
+</div>
+
 </body>
 </html>

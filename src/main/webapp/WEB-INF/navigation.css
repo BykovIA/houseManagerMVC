@@ -1,91 +1,157 @@
 .navbar.navbar-default.navbar-fixed-top{
-    background: #4CAF50;
-    border: 0px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    background: #317434;
+    border-bottom: 10px #DCAC01 solid;
+    font-family: 'Montserrat', sans-serif;
     font-size: 14px;
-    /*background: #27ae60;*/
-    /*background: #008a00;*/
-    /*background: linear-gradient(60deg, #27ae60, #f1c40f, #27ae60);*/
-    /*color: black;*/
+    text-transform: uppercase;
+}
+
+@media (max-width: 30000px){
+    #brand>a{
+        color: #8ED647;
+        font-size: 24px;
+        font-weight: bold;
+        font-family: 'Montserrat', sans-serif;
+        text-decoration: none;
+    }
+    #brand>a:hover{
+        font-size: 25px;
+        transition: 0.6s;
+    }
+}
+
+@media (max-width: 540px){
+    #brand>a{
+        color: #8ED647;
+        font-size: 16px;
+        font-weight: bold;
+        font-family: 'Montserrat', sans-serif;
+        text-decoration: none;
+    }
+    #brand>a:hover{
+        font-size: 17px;
+        transition: 0.6s;
+    }
+}
+
+div.navbar-header img{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 10px;
+}
+
+#brand{
+    margin-top: 0px;
+}
+
+
+img#logo{
+    width: 40px;
+    height: 40px;
+}
+
+div#logo-brand{
+    display: flex;
+}
+div#brand{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+div.navbar-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+div.navbar-header>button{
+    margin-left: auto;
+}
+
+div.navbar-header>div#logo-brand{
+    margin-left: 15px;
+}
+
+
+/*Dropdown*/
+
+ul.nav.navbar-nav.navbar-right
+{
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 ul.nav.navbar-nav.navbar-right li:hover{
-    background: #8BC34A;
-    color: black;
-    /*background: #2ecc71;*/
-    /*background: #60a917;*/
+    background: #8ED647;
 }
+
 ul.nav.navbar-nav.navbar-right li.dropdown.open:hover{
-    background: #4CAF50;
-    color: black;
+    background: #317434;    
+    color: white;
 }
 
 .navbar-default .navbar-nav>li>a, .navbar-default .navbar-nav>li>a:active, .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>li>a:focus{
-    color:black;
+    color:white;
 }
+
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
-    background: #8BC34A;
+    background: #8ED647;
 }
+
 .navbar-default .navbar-toggle .icon-bar {
     background-color: white;
 }
+
 .navbar-default .navbar-toggle{
     border-color: white;
-    color: black;
 }
 
 .navbar-header a.navbar-brand:hover, .navbar-header a.navbar-brand:active, .navbar-header a.navbar-brand:focus{
     color: white;
 }
+
 .navbar-header a.navbar-brand:active div.navbar-collapse.in{
     border: 0;
 }
+
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
-    color: black;
-    background-color: #8BC34A;
+    color: white;
+    background-color: #8ED647;
 }
+
 .navbar-default .navbar-collapse, .navbar-default .navbar-form {
     border: 0;
 }
+
 ul.dropdown-menu{
-    background-color:  #4CAF50;
+    background-color:  #317434;
+    margin-top: 0px;
+    margin-bottom: 0px; 
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
+
 ul.dropdown-menu li{
-    background-color:  #4CAF50;
-    color: black;
+    background-color:  #317434; 
+    color: white;
+}
+ul.dropdown-menu li>a{
+    background-color:  #317434; 
+    color: white;
+}
+
+ul.dropdown-menu>li>a:hover{
+    background-color:  #8ED647;
 }
 
 @media (max-width: 767px) {
     .navbar-default .navbar-nav .open .dropdown-menu>li>a {
-        color: black;
+        color: white;
     }      
 }
 li.dropdown.open:hover>ul.dropdown-menu>li:hover, li.dropdown.open:hover>ul.dropdown-menu>li:focus, li.dropdown.open:hover>ul.dropdown-menu>li:active{
-    background: #8BC34A;
-}
-
-@media (max-width: 1920px){
-    div.navbar-header a.navbar-brand{
-        color: white;
-        font-size: 24px;
-        font-family: Georgia, 'Times New Roman', Times, serif;
-        /*font-family: 'Montserrat', Arial, Helvetica, sans-serif;*/
-    }
-}
-
-@media (max-width: 540px){
-    div.navbar-header a.navbar-brand{
-        color: white;
-        font-size: 16px;
-        font-family: Georgia, 'Times New Roman', Times, serif;
-        /*font-family: 'Montserrat', Arial, Helvetica, sans-serif;*/
-    }
-}
-
-div.navbar-header img{
-    background-image: url("https://drive.google.com/file/d/1-ODUv-k-ARxd-YKWTrzXNfyKoqA8YTKX/view?usp=sharing");
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-right: 10px;
+    background: #8ED647;
 }
