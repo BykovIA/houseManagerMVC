@@ -106,10 +106,10 @@ public class PageController {
 
     @RequestMapping(value="/manager-registration", method=RequestMethod.POST)
     public String postNewManagerPage(@RequestParam(value="firstName") String firstName, @RequestParam(value="lastName") String lastName, @RequestParam(value="fatherName") String fatherName,
-                                  @RequestParam(value="phoneNumb") String phoneNumber, @RequestParam(value="eMail") String eMail, @RequestParam(value="companyName") String companyName,
-                                  @RequestParam(value="login") String login, @RequestParam(value="password") String password,
-                                  @RequestParam(value="password2") String password2, @RequestParam(value="someInfo") String someInfo) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
-
+                                  @RequestParam(value="phoneNumber") String phoneNumber, @RequestParam(value="eMail") String eMail, @RequestParam(value="companyName") String companyName,
+                                  @RequestParam(value="password1") String password,
+                                  @RequestParam(value="password2") String password2, @RequestParam(value="comment") String someInfo) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
+        Integer a= 0;
         if (!password.equals(password2)) {
             return "passwordNotEquals";
         } else {
@@ -167,10 +167,10 @@ public class PageController {
 
 
 
-    @RequestMapping(value="/user-profile", method=RequestMethod.GET)
+    /*@RequestMapping(value="/user-profile", method=RequestMethod.GET)
     public String getUserProfilePage(Model model) {
         return "userProFileForm";
-    }
+    }*/
 
     /*@RequestMapping(value="/user-profile", method = RequestMethod.POST)
     public String postUserProfilePage(@RequestParam(value="eMail") String eMail, @RequestParam(value="password") String password) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {

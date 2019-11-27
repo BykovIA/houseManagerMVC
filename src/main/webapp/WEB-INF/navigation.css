@@ -6,16 +6,16 @@
     text-transform: uppercase;
 }
 
-@media (max-width: 30000px){
+@media (max-width: 3500px){
     #brand>a{
         color: #8ED647;
-        font-size: 24px;
+        font-size: 21px;
         font-weight: bold;
         font-family: 'Montserrat', sans-serif;
         text-decoration: none;
     }
     #brand>a:hover{
-        font-size: 25px;
+        font-size: 22px;
         transition: 0.6s;
     }
 }
@@ -23,13 +23,13 @@
 @media (max-width: 540px){
     #brand>a{
         color: #8ED647;
-        font-size: 16px;
+        font-size: 21px;
         font-weight: bold;
         font-family: 'Montserrat', sans-serif;
         text-decoration: none;
     }
     #brand>a:hover{
-        font-size: 17px;
+        font-size: 22px;
         transition: 0.6s;
     }
 }
@@ -37,7 +37,7 @@
 div.navbar-header img{
     margin-top: 5px;
     margin-bottom: 5px;
-    margin-right: 10px;
+    margin-right: 0px;
 }
 
 #brand{
@@ -46,8 +46,8 @@ div.navbar-header img{
 
 
 img#logo{
-    width: 40px;
-    height: 40px;
+    width: 51px;
+    height: 38px;
 }
 
 div#logo-brand{
@@ -57,7 +57,7 @@ div#brand{
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-content: center;
 }
 
@@ -77,12 +77,18 @@ div.navbar-header>div#logo-brand{
 
 /*Dropdown*/
 
-ul.nav.navbar-nav.navbar-right
-{
+ul.nav.navbar-nav.navbar-right{
     margin-top: 0px;
     margin-bottom: 0px;
 }
-
+.navbar-collapse.in>ul.nav.navbar-nav.navbar-right>li>a{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.navbar-collapse.collapse>ul.nav.navbar-nav.navbar-right>li>a{
+    padding-top: 22px;
+    padding-bottom: 8px;
+}
 ul.nav.navbar-nav.navbar-right li:hover{
     background: #8ED647;
 }

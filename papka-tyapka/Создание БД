@@ -1,0 +1,130 @@
+create table Accounts_HMS
+(
+account_id numeric(10) primary key not null,
+e_mail varchar2(20) not null,
+hash_password varchar(128) not null,
+resident_flag char(1) not null,
+SALT VARCHAR2(8) NOT NULL
+);
+CREATE SEQUENCE accounts_tmp START WITH 1;
+CREATE OR REPLACE TRIGGER accounts_trg
+BEFORE INSERT ON accounts_HMS
+FOR EACH ROW
+
+BEGIN
+  SELECT ACCOUNTS_TMP.nextval
+  INTO   :new.account_id
+  FROM   dual;
+END;
+
+create table USERS_HMS
+(
+user_id numeric(10) primary key not null,
+house_id numeric(10) not null,
+account_id numeric(10) not null,
+first_name VARCHAR2(20) not null,
+last_name varchar2(20) not null,
+father_name varchar2(20),
+phone_number varchar2(15) not null,
+e_mail varchar2(20) not null,
+room_number varchar2(5)
+);
+CREATE SEQUENCE users_tmp START WITH 1;
+CREATE OR REPLACE TRIGGER ausers_trg
+BEFORE INSERT ON users_HMS
+FOR EACH ROW
+
+BEGIN
+  SELECT users_TMP.nextval
+  INTO   :new.user_id
+  FROM   dual;
+END;
+alter table USERS_HMS
+add constraint resident_fk1
+   FOREIGN KEY (ACCOUNT_ID)
+   REFERENCES ACCOUNTS_HMS(ACCOUNT_ID);
+
+create table ManageCompanies_HMS
+(
+manage_company_id numeric(10) primary key not null,
+company_name varchar2(20) not null,
+first_name varchar2(25) not null,
+last_name varchar2(25) not null,
+father_name varchar2(25) not null,
+email varchar2(20) NOT NULL,
+telephone varchar2(20),
+some_info varchar2(164)
+);
+alter table ManageCompanies_HMS
+    add account_id numeric(10) not null;
+alter table MANAGECOMPANIES_HMS
+add constraint accounts_fk2
+  FOREIGN KEY (ACCOUNT_ID)
+  REFERENCES ACCOUNTS_HMS(ACCOUNT_ID);
+
+CREATE SEQUENCE managers_tmp START WITH 1;
+CREATE OR REPLACE TRIGGER managers_trg
+BEFORE INSERT ON MANAGECOMPANIES_HMS
+FOR EACH ROW
+
+BEGIN
+  SELECT managers_TMP.nextval
+  INTO   :new.manage_company_id
+  FROM   dual;
+END;
+
+create table Houses_HMS
+(house_id numeric(10) not null,
+manage_company_id numeric(10) not null,
+adress varchar2(40) not null,
+city_name varchar2(20) not null,
+amount_of_residents numeric(4) not null,
+access_token varchar2(10) not null,
+CONSTRAINT Houses_pk2 PRIMARY KEY(house_id)
+);
+CREATE SEQUENCE house_tmp START WITH 1;
+CREATE OR REPLACE TRIGGER houses_trg
+BEFORE INSERT ON houseS_HMS
+FOR EACH ROW
+
+BEGIN
+  SELECT house_TMP.nextval
+  INTO   :new.house_id
+  FROM   dual;
+END;
+alter table HOUSES_HMS
+add constraint mc_fk12
+  FOREIGN KEY (MANAGE_COMPANY_ID)
+  REFERENCES MANAGECOMPANIES_HMS(MANAGE_COMPANY_ID);
+alter table HOUSES_HMS
+MODIFY access_token numeric(10);
+
+create table applications_HMS
+(application_id numeric(10) not null,
+manage_company_id numeric(10) not null,
+resident_id numeric(10) not null,
+data_time varchar2(30) not null,
+text varchar2(1000) not null,
+status varchar2(20) not null,
+images_name varchar2(250) not null,
+CONSTRAINT applications_pk5 PRIMARY KEY(application_id)
+);
+CREATE SEQUENCE application_tmp START WITH 1;
+CREATE OR REPLACE TRIGGER application_trg
+BEFORE INSERT ON applications_HMS
+FOR EACH ROW
+
+BEGIN
+  SELECT application_TMP.nextval
+  INTO   :new.application_id
+  FROM   dual;
+END;
+alter table applications_HMS
+add constraint mc_fk11
+  FOREIGN KEY (MANAGE_COMPANY_ID)
+  REFERENCES MANAGECOMPANIES_HMS(MANAGE_COMPANY_ID);
+alter table applications_HMS
+add constraint mc_fk10
+  FOREIGN KEY (resident_ID)
+  REFERENCES USERS_HMS(user_ID);
+

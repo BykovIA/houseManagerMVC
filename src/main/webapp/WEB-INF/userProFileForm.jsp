@@ -1,4 +1,16 @@
 <%@ page import ="ru.house.manager.Hash.magicString"%>
+<%@ page import ="ru.house.manager.serviceDB.UsersService"%>
+<%@ page import ="ru.house.manager.EntityDB.Users"%>
+<%@ page import ="ru.house.manager.serviceDB.HousesService"%>
+<%@ page import ="ru.house.manager.EntityDB.Houses"%>
+<%@ page import="ru.house.manager.controller.PageController"%>
+<% UsersService usersService = new UsersService();
+HousesService housesService = new HousesService();
+Users user = new Users();
+Houses house = new Houses();
+user = usersService.getById(PageController.client_account_id);
+house = housesService.getById(user.getHouseId());
+%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -25,6 +37,9 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <style>
         <%@include file="bootstrap.css"%>
+    </style>
+    <style>
+        <%@include file="account.css"%>
     </style>
     <style>
         <%@include file="bootstrap.min.css"%>
@@ -91,7 +106,7 @@
                     <p>Фамилия:</p>
                 </div>
                 <div class="form-row-value">
-                    <input id="user-info" disabled value="Family">
+                    <input id="user-info" disabled value="<%=user.getLastName()%>">
                 </div>
             </div>
             <div class="form-row">
@@ -99,7 +114,7 @@
                     <p>Имя:</p>
                 </div>
                 <div class="form-row-value">
-                    <input id="user-info" disabled value="Name">
+                    <input id="user-info" disabled value="<%=user.getFirstName()%>">
                 </div>
             </div>
             <div class="form-row">
@@ -107,15 +122,7 @@
                     <p>Отчество:</p>
                 </div>
                 <div class="form-row-value">
-                    <input id="user-info" disabled value="Family name">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-row-label">
-                    <p>Дата рождения:</p>
-                </div>
-                <div class="form-row-value">
-                    <input id="user-info" disabled value="06.04.1997">
+                    <input id="user-info" disabled value="<%=user.getFatherName()%>">
                 </div>
             </div>
             <div class="form-row">
@@ -123,7 +130,7 @@
                     <p>Адрес дома:</p>
                 </div>
                 <div class="form-row-value">
-                    <input id="user-info" disabled value="ул. Пушкина, д. 50А">
+                    <input id="user-info" disabled value="<%=house.getAdress()%>">
                 </div>
             </div>
             <div class="form-row">
@@ -131,7 +138,7 @@
                     <p>Квартира:</p>
                 </div>
                 <div class="form-row-value">
-                    <input id="user-info" disabled value="39">
+                    <input id="user-info" disabled value="<%=user.getRoomNumber()%>">
                 </div>
             </div>
             <div class="form-row">
@@ -139,23 +146,36 @@
                     <p>Телефон:</p>
                 </div>
                 <div class="form-row-value">
-                    <input id="user-info" disabled value="assdsd">
+                    <input id="user-info" disabled value="<%=user.getPhoneNumber()%>">
                 </div>
-            </div>
-            <div >
-                <%=magicString.MAGIC_STRING%>
             </div>
             <div class="form-row">
                 <div class="form-row-label">
                     <p>Электронная почта:</p>
                 </div>
                 <div class="form-row-value">
-                    <input id="user-info" disabled value="shishu.ad@mail.ru">
+                    <input id="user-info" disabled value="<%=user.getEmail()%>">
                 </div>
             </div>
-            <div class="form-row to-right">
-                <button class="button-edit">Редактировать</button>
+            <div class="form-row edit to-right">
+                <button class="button-edit" id="edit" onclick="Edit()" type="button">Редактировать</button>
             </div>
+            <script>
+                function Edit(){
+                    $(':disabled').each(function(){
+                        $(this).removeAttr('disabled');
+                    });
+                    $('button.button-edit#edit').hide();
+                    $('div.form-row.edit.to-right').append("<button class='button-save' type='button' onclick='Save()'>Сохранить изменения</button>");
+                }
+                function Save(){
+                    $('div.form-row-value>input#user-info').each(function(){
+                        $(this).prop('disabled', true);
+                    });
+                    $('button.button-save').remove();
+                    $('button.button-edit#edit').show();
+                }
+            </script>
         </form>
     </div>
     <div class="form-user-password">

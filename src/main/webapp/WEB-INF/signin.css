@@ -96,7 +96,7 @@ div.form-group a{
 }
 
 form.form-signin h3{
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
   padding-bottom: 10px;
   color: black;
@@ -116,6 +116,7 @@ label.checkbox input{
   font-weight: 600;
   text-align: center;
   color: white;
+  outline: none;
 }
 
 .button-signin{
@@ -229,7 +230,7 @@ label.checkbox input{
 }
 
 #management-company-heading{
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
   color: black;
   margin-top: 10px;

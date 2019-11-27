@@ -75,7 +75,7 @@ public class UsersService extends Util implements UsersDao {
     @Override
     public Users getById(int id) throws SQLException {
 
-        String sql = "SELECT FIRST_NAME, LAST_NAME, HOUSE_ID FROM USERS_HMS WHERE USER_ID = ?";
+        String sql = "SELECT FIRST_NAME, LAST_NAME, FATHER_NAME, PHONE_NUMBER, E_MAIL, ROOM_NUMBER, HOUSE_ID FROM USERS_HMS WHERE ACCOUNT_ID = ?";
         PreparedStatement preparedStatement = null;
         Users users = new Users();
 
@@ -86,9 +86,13 @@ public class UsersService extends Util implements UsersDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
 
+            users.setFatherName(resultSet.getString("FATHER_NAME"));
             users.setFirstName(resultSet.getString("FIRST_NAME"));
             users.setLastName(resultSet.getString("LAST_NAME"));
             users.setHouseId(resultSet.getInt("HOUSE_ID"));
+            users.setPhoneNumber(resultSet.getString("PHONE_NUMBER"));
+            users.setEmail(resultSet.getString("E_MAIL"));
+            users.setRoomNumber(resultSet.getString("ROOM_NUMBER"));
 
             preparedStatement.executeUpdate();
 

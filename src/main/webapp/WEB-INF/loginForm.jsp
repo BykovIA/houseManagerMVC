@@ -103,7 +103,7 @@
         <div id="management-company">
             <h3 id="management-company-heading">Вы из Управляющей Компании?</h3>
             <div class="btn-mc-registration">
-                <a class="button-mc-registration" href="management-company.html">Подключиться к системе</a>
+                <a class="button-mc-registration" href="/house.manager/manager-registration">Подключиться к системе</a>
             </div>
         </div>
     </div>
