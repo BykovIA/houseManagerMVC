@@ -199,15 +199,9 @@ public class PageController {
 
 
     @RequestMapping(value="/manager-requests", method=RequestMethod.POST)
-    public String postManagerRequestsPage(@RequestParam(value="button") String numb, @RequestParam(value="button0") String numb0) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
+    public String postManagerRequestsPage(@RequestParam(value="button") String numb) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
 
-        int numb0r = Integer.parseInt(numb0);
-        if (numb0r == -1) {
-            request_context = 0;
-        }
-        if (numb0r == -2) {
-            request_context = 1;
-        }
+
         int number = Integer.parseInt(numb);
         ApplicationsService applicationsService = new ApplicationsService();
         List<Applications> applicationsOpenList = new ArrayList<>();

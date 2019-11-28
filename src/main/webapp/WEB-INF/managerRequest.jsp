@@ -154,9 +154,9 @@
                         </div>
                         <div class="date"><span class="glyphicon glyphicon-calendar"></span><%=applicationsCloseList.get(j).getData()%></div>
                     </div>
-                    <div class="request-row btn-delete">
-                        <button type="submit" value = "<%=j%>" name = "button">Закрыть заявку</button>
-                    </div>
+<%--                    <div class="request-row btn-delete">--%>
+<%--                        <button type="submit" value = "<%=j%>" name = "button">Закрыть заявку</button>--%>
+<%--                    </div>--%>
                 </div>
             </form>
             <% }
