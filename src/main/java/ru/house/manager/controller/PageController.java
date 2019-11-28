@@ -22,6 +22,7 @@ public class PageController {
 
     public static int client_account_id = -1;
     public static int manager_id = -1;
+    public static int request_context = -1;
 
     @RequestMapping(value="/", method=RequestMethod.GET)
     public String getLoginPage(Model model) {
@@ -189,5 +190,35 @@ public class PageController {
         applicationsService.add(application);
 
         return "userRequest";
+    }
+
+    @RequestMapping(value = "/manager-requests", method = RequestMethod.GET)
+    public String getManagerRequestsPage() {
+        return "managerRequest";
+    }
+
+
+    @RequestMapping(value="/manager-requests", method=RequestMethod.POST)
+    public String postManagerRequestsPage(@RequestParam(value="button") String numb) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
+
+
+        int number = Integer.parseInt(numb);
+        ApplicationsService applicationsService = new ApplicationsService();
+        List<Applications> applicationsOpenList = new ArrayList<>();
+        ManagersService managersService = new ManagersService();
+        Managers manager = new Managers();
+        manager = managersService.getByAccountId(PageController.client_account_id);
+        applicationsOpenList = applicationsService.getAllForManager(manager.getId(), Applications.STATUS_OPEN);
+
+
+        ApplicationsService applicationsService2 = new ApplicationsService();
+        Applications application = new Applications();
+        application.setStatus(Applications.STATUS_CLOSE);
+        application.setApplicationsId(applicationsOpenList.get(number).getApplicationsId());
+
+
+        applicationsService2.update(application);
+        return "managerRequest";
+
     }
 }

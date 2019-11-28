@@ -43,12 +43,12 @@ public class ApplicationsService extends Util implements ApplicationsDao {
     @Override
     public void update(Applications Application) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE APPLICATIONS_HMS SET STATUS = ? WHERE MANAGE_COMPANY_ID = ?)";
+        String sql = "UPDATE APPLICATIONS_HMS SET STATUS = ? WHERE APPLICATION_ID = ?";
 
         try {
             preparedStatement = connection.prepareStatement((sql));
             preparedStatement.setString(1, Application.getStatus());
-            preparedStatement.setInt(2,Application.getManageId());
+            preparedStatement.setInt(2,Application.getApplicationsId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

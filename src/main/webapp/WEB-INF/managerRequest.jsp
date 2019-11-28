@@ -23,6 +23,7 @@
     manager = managersService.getByAccountId(PageController.client_account_id);
     applicationsOpenList = applicationsService.getAllForManager(manager.getId(), Applications.STATUS_OPEN);
     applicationsCloseList = applicationsService.getAllForManager(manager.getId(), Applications.STATUS_CLOSE);
+
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -103,21 +104,32 @@
             <button id="opened" onclick="ChangeToOpenedContent()">Открытые</button>
             <button id="archived" onclick="ChangeToArchivedContent()">Архивные</button>
         </div>
-        <% for(int i = 0; i < applicationsOpenList.size(); i++) {
-            int j = 0;%>
-        <div class="request">
-            <div class="request-row label-description">Описание:</div>
-            <div class="request-row description"><%=applicationsOpenList.get(i).getText()%></div>
-            <div class="request-row status-and-date">
-                <div class="status">
-                    <div class="status-label">Статус:</div>
-                    <div class="status-value status-new">Новая</div>
-                    <div class="imported-content"><span class="glyphicon glyphicon-picture"></span>1</div>
+        <div id="requests">
+            <% for(int i = 0; i < applicationsOpenList.size(); i++) {
+                PageController.request_context = applicationsOpenList.get(i).getApplicationsId();%>
+            <form method="post" action="/house.manager/manager-requests" accept-charset="UTF-8" role ="form">
+                <div class="request">
+                    <div class="request-row author-request">
+                        <div class="label-description">Отправил:</div>
+                        <div class="description"><%=applicationsOpenList.get(i).getUserId()%></div>
+                    </div>
+                    <div class="request-row label-description">Описание:</div>
+                    <div class="request-row description"><%=applicationsOpenList.get(i).getText()%></div>
+                    <div class="request-row status-and-date">
+                        <div class="status">
+                            <div class="status-label">Статус:</div>
+                            <div class="status-value status-new">Новая</div>
+                            <div class="imported-content"><span class="glyphicon glyphicon-picture"></span>1</div>
+                        </div>
+                        <div class="date"><span class="glyphicon glyphicon-calendar"></span><%=applicationsOpenList.get(i).getData()%></div>
+                    </div>
+                    <div class="request-row btn-delete">
+                        <button type="submit" value = "<%=i%>" name = "button">Закрыть заявку</button>
+                    </div>
                 </div>
-                <div class="date"><span class="glyphicon glyphicon-calendar"></span><%=applicationsOpenList.get(i).getData()%></div>
-            </div>
+                </form>
+                    <% } %>
         </div>
-        <% } %>
     </div>
 </div>
 <script>

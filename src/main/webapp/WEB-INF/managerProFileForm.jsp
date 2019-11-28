@@ -82,7 +82,7 @@
                 <li><a href="mc-main.html">Главная</a></li>
                 <li><a href="mc-account.html">Профиль</a></li>
                 <li><a href="/house.manager/house-registration">Дома</a></li>
-                <li><a href="mc-requests.html">Заявки</a></li>
+                <li><a href="/house.manager/manager-requests">Заявки</a></li>
                 <li><a href="#">Настройки</a></li>
                 <li><a href="login.html">Выйти</a></li>
             </ul>
