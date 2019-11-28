@@ -1,4 +1,140 @@
-.row.main{
-    display: flex;
+.to-left{
+    text-align: left;
+}
+.to-right{
+    text-align: right;
+}
+.example{
+    display: flexbox;
     justify-content: space-between;
+}
+.example>div{
+    flex: 1;
+    margin: 5px 10px;
+}
+div.row.example{
+    margin: 0 auto;
+}
+.left-block{
+    background-color: white;
+    border-radius: 25px;
+    font-family: 'Montserrat', sans-serif;
+}
+.right-block{
+    background-color: whitesmoke;
+    border-radius: 25px;
+    font-family: 'Montserrat', sans-serif;
+}
+.form-request-heading{
+    text-align: center;
+    margin: 10px 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.main>div{
+    margin-right: 0px;
+}
+button{
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(49, 193, 236);
+    padding: 5px 10px;
+}
+input{
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+}
+input[type="file"]{
+    border-radius: 0px;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+}
+textarea{
+    width: 100%;
+    border-radius: 10px;
+}
+.requests-types{
+    display: flex;
+    justify-content: space-around;
+}
+ul{
+    list-style-type: none;
+    padding-left: 15px;
+}
+.status-and-date{
+    display: flex;
+    justify-content: space-around;
+}
+.status{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+.status>div{
+    margin-right: 5px;
+}
+.date{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+.date>div{
+    margin-left: 5px;
+}
+div.requests>ul>li{
+    margin-bottom: 10px;
+}
+div.requests-types>button{
+    background-color: transparent;
+    border-bottom-color: transparent;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-radius: 0px;
+    margin-bottom: 5px;
+}
+div.requests-types>button:hover{
+    background-color: transparent;
+    border-bottom-color: black;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-radius: 0px;
+    margin-bottom: 5px;
+    /*transition-duration: 500ms;
+    transition-delay: 100ms;*/
+    transition: cubic-bezier(0.55, 0.085, 0.68, 0.53)
+}
+.label-description{
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.status-label{
+    font-weight: 700;
+}
+div.status-value.label-danger{
+    padding: 0px 5px;
+    border-radius: 10px;
+}
+div.status-value.label-success{
+    padding: 0px 5px;
+    border-radius: 10px;
+}
+span.glyphicon.glyphicon-picture{
+    margin-right: 5px;
+}
+span.glyphicon.glyphicon-calendar{
+    margin-right: 5px;
+}
+div.status-and-date{
+    margin-top: 10px;
+}
+
+.row.main>div{
+    margin-left: 30px;
+    margin-right: 50px;
+}
+div.button-completed.to-right>button{
+    padding: 5 5;
+    margin-top: 5px;
+    background-color: goldenrod;
 }

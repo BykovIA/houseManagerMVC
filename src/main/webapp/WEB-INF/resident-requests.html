@@ -1,117 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-    <title>Личный кабинет</title>
+        <title>Личный кабинет</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="bootstrap.css" rel="stylesheet">
-    <link href="bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="requests.css" rel="stylesheet">
-    <link href="navigation.css" rel="stylesheet">
-    <link href="glyphs.css" rel="stylesheet">
-    <!-- Fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-
-  </head>
-  
-  <body>
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <img class="navbar-left" src="logo-site.png" style="width: 40px; height: 40px;">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">HOUSE MANAGER</a>
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap.css" rel="stylesheet">
+        <link href="bootstrap.min.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+        <link href="requests.css" rel="stylesheet">
+        <link href="navigation.css" rel="stylesheet">
+        <!-- Fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container navigation">
+                <div class="navbar-header">
+                    <div id="logo-brand">
+                        <img id="logo" src="brandlogo.png" alt="Лого">
+                        <div id="brand">
+                            <a href="#">HOUSE MANAGER</a>
+                        </div>
+                    </div>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="resident-main.html">Главная</a></li>
+                        <li><a href="resident-account.html">Профиль</a></li>
+                        <li><a href="resident-requests.html">Оставить заявку</a></li>
+                        <li><a href="#">Новости и объявления</a></li>
+                        <li><a href="#">Настройки</a></li>
+                        <li><a href="login.html">Выйти</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="resident-main.html">Главная</a></li>
-                    <li><a href="resident-account.html">Профиль</a></li>
-                    <li><a href="resident-requests.html">Оставить заявку</a></li>
-                    <li><a href="#">Новости и объявления</a></li>
-                    <li><a href="#">Настройки</a></li>
-                    <li><a href="login.html">Выйти</a></li>
-                </ul>
-            </div>
-        </div>
-    </div> 
-    <div class="container">
-        <div class="row main">
-            <div class="col-sm-5 left-block"> 
-                <form role="form" method="POST">
-                <h3 class="account-info-heading">Создание новой заявки</h3>
-                    <div class="row example">
-                        <div>
+        </div> 
+        <div class="container requests">
+            <div class="form-create-request">
+                <form class="form-request" role="form" method="POST">
+                    <h3 class="form-request-heading">Создание новой заявки</h3>
+                    <div class="form-row">
+                        <div class="form-row-label">
                             <p>Опишите проблему, с которой столкнулись</p>
                         </div>
-                        <div>
+                        <div class="form-row-value">
                             <textarea rows="5" placeholder="Текст заявки"></textarea>
                         </div>
                     </div>
-                    <div class="row example">
-                        <div>
+                    <div class="form-row file">
+                        <div class="form-row-label">
                             <p>Прикрепите фотографии</p>
                         </div>
-                        <div>
-                            <input type="file" multiple accept="image/*">
+                        <div class="form-row-value">
+                            <input type="file" id="file" multiple accept="image/*" class="inputfile">
+                            <label for="file" class="choosefile">Выберите файлы</label>
                         </div>
                     </div>
-                    <div class="row example">
-                        <div class="to-right">
-                            <button type="submit">Отправить</button>
-                        </div>
+                    <div class="form-row to-right">
+                        <button class="button-create" type="submit">Отправить</button>
                     </div>
                 </form>
             </div>
-            <div class="col-sm-5 right-block">
-                <h3 class="account-info-heading">Заявки</h3>
+            <div class="form-show-requests">
+                <h3 class="form-request-heading">Заявки</h3>
                 <div class="requests-types">
                     <button id="opened" onclick="ChangeToOpenedContent()">Открытые</button>
                     <button id="archived" onclick="ChangeToArchivedContent()">Архивные</button>
                 </div>
-                <div class="requests">
-                    <ul>
-                        <li>
-                            <div class="label-description">Описание:</div>
-                            <div class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex doloremque magnam dolor ab natus nostrum corporis voluptate repellendus numquam repellat molestiae cum maiores nulla tempora velit, totam necessitatibus, praesentium omnis.</div>
-                            <div class="status-and-date">
-                                <div class="status">
-                                    <div class="status-label">Статус:</div>
-                                    <div class="status-value label-danger">Новая</div>
-                                    <div class="imported-content"><span class="glyphicon glyphicon-picture"></span>2</div>
-                                </div>
-                                <div class="date"><span class="glyphicon glyphicon-calendar"></span> 6 апреля</div>
+                <div id="requests">
+                    <div class="request">
+                        <div class="request-row label-description">Описание:</div>
+                        <div class="request-row description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex doloremque magnam dolor ab natus nostrum corporis voluptate repellendus numquam repellat molestiae cum maiores nulla tempora velit, totam necessitatibus, praesentium omnis.</div>
+                        <div class="request-row status-and-date">
+                            <div class="status">
+                                <div class="status-label">Статус:</div>
+                                <div class="status-value status-new">Новая</div>
+                                <div class="imported-content"><span class="glyphicon glyphicon-picture"></span>2</div>
                             </div>
-                        </li>
-                        <li>
-                            <div class="label-description">Описание:</div>
-                            <div class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex doloremque magnam dolor ab natus nostrum corporis voluptate repellendus numquam repellat molestiae cum maiores nulla tempora velit, totam necessitatibus, praesentium omnis.</div>
-                            <div class="status-and-date">
-                                <div class="status">
-                                    <div class="status-label">Статус:</div>
-                                    <div class="status-value label-danger">Новая</div>
-                                    <div class="imported-content"><span class="glyphicon glyphicon-picture"></span>1</div>
-                                </div>
-                                <div class="date"><span class="glyphicon glyphicon-calendar"></span> 8 апреля</div>
+                            <div class="date"><span class="glyphicon glyphicon-calendar"></span> 6 апреля</div>
+                        </div>
+                    </div>
+                    <div class="request">
+                        <div class="request-row label-description">Описание:</div>
+                        <div class="request-row description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex doloremque magnam dolor ab natus nostrum corporis voluptate repellendus numquam repellat molestiae cum maiores nulla tempora velit, totam necessitatibus, praesentium omnis.</div>
+                        <div class="request-row status-and-date">
+                            <div class="status">
+                                <div class="status-label">Статус:</div>
+                                <div class="status-value status-new">Новая</div>
+                                <div class="imported-content"><span class="glyphicon glyphicon-picture"></span>1</div>
                             </div>
-                        </li>
-                    </ul>
+                            <div class="date"><span class="glyphicon glyphicon-calendar"></span> 8 апреля</div>
+                        </div>
+                    </div>
+                    <div class="request">
+                        <div class="request-row label-description">Описание:</div>
+                        <div class="request-row description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex doloremque magnam dolor ab natus nostrum corporis voluptate repellendus numquam repellat molestiae cum maiores nulla tempora velit, totam necessitatibus, praesentium omnis.</div>
+                        <div class="request-row status-and-date">
+                            <div class="status">
+                                <div class="status-label">Статус:</div>
+                                <div class="status-value status-new">Новая</div>
+                                <div class="imported-content"><span class="glyphicon glyphicon-picture"></span>2</div>
+                            </div>
+                            <div class="date"><span class="glyphicon glyphicon-calendar"></span> 6 апреля</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div> 
     <script>
         function ChangeToArchivedContent(){
             $('.requests>ul').empty();
