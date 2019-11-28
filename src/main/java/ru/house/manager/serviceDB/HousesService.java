@@ -112,4 +112,37 @@ public class HousesService extends Util implements HousesDao{
         System.out.println(house.getHouseId());
         return house;
     }
+    @Override
+    public Houses getByManagerId(int id) throws SQLException {
+
+        String sql = "SELECT adress, city_name, amount_of_residents, access_token FROM houses_HMS WHERE manage_company_id = ?";
+        PreparedStatement preparedStatement = null;
+        Houses house = new Houses();
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+
+            house.setAccessToken(resultSet.getInt("access_token"));
+            house.setAdress(resultSet.getString("adress"));
+            house.setResidentsNumber(resultSet.getInt("AMOUNT_OF_RESIDENTS"));
+            house.setCity(resultSet.getString("city_name"));
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return house;
+    }
 }

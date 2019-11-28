@@ -3,23 +3,18 @@ package ru.house.manager.controller;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.*;
 
 import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.http.converter.json.GsonBuilderUtils;
-import ru.house.manager.EntityDB.Houses;
-import ru.house.manager.EntityDB.Managers;
-import ru.house.manager.EntityDB.Users;
-import ru.house.manager.EntityDB.Accounts;
+import ru.house.manager.EntityDB.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ru.house.manager.serviceDB.AccountsService;
-import ru.house.manager.serviceDB.HousesService;
-import ru.house.manager.serviceDB.ManagersService;
-import ru.house.manager.serviceDB.UsersService;
+import ru.house.manager.serviceDB.*;
 import ru.house.manager.Hash.*;
 
 @Controller
@@ -45,7 +40,7 @@ public class PageController {
                 return "userProFileForm";
             }
             if(account.getResidentFlag() == 0) {
-                return "managerMainForm";
+                return "managerProFileForm";
             }
             else { return  "residentFlag not exst";}
         } else {
@@ -144,7 +139,7 @@ public class PageController {
 
     @RequestMapping(value = "/house-registration", method=RequestMethod.GET)
     public String getNewHousePage() {
-        return "houseRegistrationForm";
+        return "managerHousesForm";
     }
 
     @RequestMapping(value="/house-registration", method=RequestMethod.POST)
@@ -159,37 +154,40 @@ public class PageController {
             house.setAdress(new String(address.getBytes("ISO-8859-1"), "UTF-8"));
             house.setCity(new String(city.getBytes("ISO-8859-1"), "UTF-8"));
             house.setResidentsNumber(residentsNumber);
+            Random random=new Random();
+            int rage=999999;
+            house.setAccessToken(random.nextInt(rage));
             housesService.add(house);
-            return "houseRegistrationForm";
+            return "managerHousesForm";
     }
 
 
+    @RequestMapping(value = "/users-requests", method = RequestMethod.GET)
+    public String getUsersRequestsPage() {
+        return "userRequest";
+    }
 
 
+    @RequestMapping(value="/users-requests", method=RequestMethod.POST)
+    public String postUsersRequestsPage(@RequestParam(value="text") String text) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
 
-    /*@RequestMapping(value="/user-profile", method=RequestMethod.GET)
-    public String getUserProfilePage(Model model) {
-        return "userProFileForm";
-    }*/
+        ApplicationsService applicationsService = new ApplicationsService();
+        Applications application = new Applications();
+        Users user = new Users();
+        UsersService usersService = new UsersService();
+        user = usersService.getById(client_account_id);
+        application.setUserId(user.getId());
+        HousesService housesService = new HousesService();
+        Houses house = new Houses();
+        house = housesService.getById(user.getHouseId());
+        application.setManageId(house.getManageCompanyId());
+        application.setImageName("NONE");
+        application.setText(new String(text.getBytes("ISO-8859-1"), "UTF-8"));
+        Date date = new Date();
+        application.setData(date.toString());
+        application.setStatus(Applications.STATUS_OPEN);
+        applicationsService.add(application);
 
-    /*@RequestMapping(value="/user-profile", method = RequestMethod.POST)
-    public String postUserProfilePage(@RequestParam(value="eMail") String eMail, @RequestParam(value="password") String password) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
-
-        AccountsService accountsService = new AccountsService();
-        Accounts account = new Accounts();
-        account = accountsService.getByEmail(new String(eMail.getBytes("ISO-8859-1"), "UTF-8"));
-        if (HashFunction.getHash(new String(password.getBytes("ISO-8859-1"), "UTF-8"), account.getSalt(), HashFunction.getSalt2()).equals(account.getHashPassword())) {
-            client_account_id = account.getId();
-            if(account.getResidentFlag() == 1) {
-                return "userProFileForm";
-            }
-            if(account.getResidentFlag() == 0) {
-                return "managerMainForm";
-            }
-            else { return  "residentFlag not exst";}
-        } else {
-            return "userProFileForm";
-        }
-    }*/
-
+        return "userRequest";
+    }
 }

@@ -6,4 +6,5 @@ public interface HousesDao {
     void add(Houses House) throws SQLException;
     Houses getById(int id) throws SQLException;
     Houses getIdByToken(int token) throws SQLException;
+    Houses getByManagerId (int id) throws  SQLException;
 }

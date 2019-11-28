@@ -12,7 +12,7 @@ body {
 @media (min-width: 300px) and (max-width: 500px){
     .container.register-house{
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
     }
     .form-row-label{
@@ -42,7 +42,7 @@ body {
     }
 }
 
-@media(min-width: 501px) and (max-width: 2550px){
+@media(min-width: 501px) and (max-width: 3500px){
     .container.register-house{
         display: flex;
         justify-content: flex-end;

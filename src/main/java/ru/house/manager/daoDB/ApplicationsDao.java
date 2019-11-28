@@ -8,8 +8,8 @@ public interface ApplicationsDao {
     void add(Applications Application) throws SQLException;
 
     // read
-    List<Applications> getAllResident(int id, String status) throws SQLException;
-    List<Applications> getAllManager(int id, String status) throws SQLException;
+    List<Applications> getAllForResident(int id, String status) throws SQLException;
+    List<Applications> getAllForManager(int id, String status) throws SQLException;
 
 
     // update

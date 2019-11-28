@@ -1,32 +1,28 @@
-<%@ page import ="ru.house.manager.Hash.magicString"%>
-<%@ page import ="ru.house.manager.serviceDB.UsersService"%>
-<%@ page import ="ru.house.manager.EntityDB.Users"%>
-<%@ page import ="ru.house.manager.serviceDB.HousesService"%>
-<%@ page import ="ru.house.manager.EntityDB.Houses"%>
+<%--
+  Created by IntelliJ IDEA.
+  User: Igor
+  Date: 28.11.2019
+  Time: 21:56
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page import="ru.house.manager.controller.PageController"%>
-<% UsersService usersService = new UsersService();
-HousesService housesService = new HousesService();
-Users user = new Users();
-Houses house = new Houses();
-user = usersService.getById(PageController.client_account_id);
-house = housesService.getById(user.getHouseId());
-%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-         pageEncoding="utf-8"%>
+<%@ page import ="ru.house.manager.serviceDB.ManagersService"%>
+<%@ page import ="ru.house.manager.EntityDB.Managers"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<% ManagersService managersService = new ManagersService();
+    Managers manager = new Managers();
+    manager = managersService.getByAccountId(PageController.client_account_id);
+%>
 <html>
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
-
-    <title>Личный кабинет</title>
-
+    <title>Личный кабинет УК</title>
     <!-- Bootstrap core CSS -->
     <link href="bootstrap.css" rel="stylesheet">
     <link href="bootstrap.min.css" rel="stylesheet">
@@ -59,21 +55,17 @@ house = housesService.getById(user.getHouseId());
     <script type="text/javascript">
         <%@include file="jquery.min.js"%>
     </script>
-
     <script src="bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" ></script>
-
 </head>
-
-
 <body>
+
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container navigation">
+    <div class="container">
         <div class="navbar-header">
             <div id="logo-brand">
-                <img id="logo" src="logo-site.png" alt="Лого">
+                <img id="logo" src="brandlogo.png" alt="Лого">
                 <div id="brand">
                     <a href="#">HOUSE MANAGER</a>
                 </div>
@@ -87,10 +79,10 @@ house = housesService.getById(user.getHouseId());
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="resident-main.html">Главная</a></li>
-                <li><a href="resident-account.html">Профиль</a></li>
-                <li><a href="/house.manager/users-requests">Оставить заявку</a></li>
-                <li><a href="#">Новости и объявления</a></li>
+                <li><a href="mc-main.html">Главная</a></li>
+                <li><a href="mc-account.html">Профиль</a></li>
+                <li><a href="/house.manager/house-registration">Дома</a></li>
+                <li><a href="mc-requests.html">Заявки</a></li>
                 <li><a href="#">Настройки</a></li>
                 <li><a href="login.html">Выйти</a></li>
             </ul>
@@ -100,45 +92,13 @@ house = housesService.getById(user.getHouseId());
 <div class="container account">
     <div class="form-user-info">
         <form id="form-account">
-            <h3 class="account-info-heading">Информация о пользователе</h3>
+            <h3 class="account-info-heading">Информация об УК</h3>
             <div class="form-row">
                 <div class="form-row-label">
-                    <p>Фамилия:</p>
+                    <p>Название:</p>
                 </div>
                 <div class="form-row-value">
-                    <input id="user-info" disabled value="<%=user.getLastName()%>">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-row-label">
-                    <p>Имя:</p>
-                </div>
-                <div class="form-row-value">
-                    <input id="user-info" disabled value="<%=user.getFirstName()%>">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-row-label">
-                    <p>Отчество:</p>
-                </div>
-                <div class="form-row-value">
-                    <input id="user-info" disabled value="<%=user.getFatherName()%>">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-row-label">
-                    <p>Адрес дома:</p>
-                </div>
-                <div class="form-row-value">
-                    <input id="user-info" disabled value="<%=house.getAdress()%>">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-row-label">
-                    <p>Квартира:</p>
-                </div>
-                <div class="form-row-value">
-                    <input id="user-info" disabled value="<%=user.getRoomNumber()%>">
+                    <input id="user-info" disabled value="<%=manager.getCompanyName()%>">
                 </div>
             </div>
             <div class="form-row">
@@ -146,7 +106,7 @@ house = housesService.getById(user.getHouseId());
                     <p>Телефон:</p>
                 </div>
                 <div class="form-row-value">
-                    <input id="user-info" disabled value="<%=user.getPhoneNumber()%>">
+                    <input id="user-info" disabled value="<%=manager.getPhoneNumber()%>">
                 </div>
             </div>
             <div class="form-row">
@@ -154,7 +114,7 @@ house = housesService.getById(user.getHouseId());
                     <p>Электронная почта:</p>
                 </div>
                 <div class="form-row-value">
-                    <input id="user-info" disabled value="<%=user.getEmail()%>">
+                    <input id="user-info" disabled value="<%=manager.getEmail()%>">
                 </div>
             </div>
             <div class="form-row edit to-right">
@@ -211,6 +171,7 @@ house = housesService.getById(user.getHouseId());
         </form>
     </div>
 </div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="bootstrap.min.js"></script>

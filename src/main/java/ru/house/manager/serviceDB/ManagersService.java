@@ -43,7 +43,7 @@ public class ManagersService extends Util implements ManagerDao{
     @Override
     public Managers getById(int id) throws SQLException {
 
-        String sql = "SELECT company_name, FIRST_NAME, LAST_NAME, account_id, email, telephone FROM ManageCompanies_HMS WHERE manage_company_id = ?";
+        String sql = "SELECT company_name, FIRST_NAME, LAST_NAME, email, telephone FROM ManageCompanies_HMS WHERE account_id = ?";
         PreparedStatement preparedStatement = null;
         Managers manager = new Managers();
 
@@ -57,7 +57,6 @@ public class ManagersService extends Util implements ManagerDao{
             manager.setCompanyName(resultSet.getString("COMPANY_NAME"));
             manager.setFirstName(resultSet.getString("FIRST_NAME"));
             manager.setLastName(resultSet.getString("LAST_NAME"));
-            manager.setAccountId(resultSet.getInt("ACCOUNT_ID"));
             manager.setPhoneNumber(resultSet.getString("TELEPHONE"));
             manager.setEmail(resultSet.getString("EMAIL"));
 

@@ -12,6 +12,9 @@ public class Applications {
     private String imageName;
     private Integer applicationsId;
 
+    public static final String STATUS_OPEN = "OPEN";
+    public static final String STATUS_CLOSE = "CLOSE";
+
     public Integer getApplicationsId() {
         return applicationsId;
     }
