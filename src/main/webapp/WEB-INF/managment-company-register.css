@@ -1,0 +1,112 @@
+@media (max-width: 410px){
+    button.btn-lg.btn-info{
+        width: 125px;
+        /*padding-bottom: 10px;*/
+        margin-bottom: 10px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 10px;
+    }
+    a.btn-lg.btn-danger{
+        text-align: center;
+        width: 125px;
+        /*padding-bottom: 10px;*/
+        /*margin-right: 10px;*/
+        margin-bottom: 10px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 10px;
+    }
+ }
+
+@media (min-width: 411px) and (max-width: 720px){
+    button.btn-lg.btn-info{
+        width: 150px;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+    }
+    a.btn-lg.btn-danger{
+        text-align: center;
+        width: 150px;
+        padding-bottom: 10px;
+        /*margin-right: 10px;*/
+        margin-bottom: 10px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+    }
+ }
+ 
+ @media (min-width: 721px) and (max-width: 2560px)
+ {
+    button.btn-lg.btn-info{
+        width: 200px;
+        padding-bottom: 10px;
+        font-family: 'Montserrat', sans-serif;
+    }
+    a.btn-lg.btn-danger{
+        width: 200px;
+        font-family: 'Montserrat', sans-serif;
+    }
+ }
+
+h4.form-registration-info {
+    text-align: left;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+textarea.form-control{
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 10px;
+}
+
+div.buttons-navigation{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.button-return{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+    background-color: red;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 7px;
+    width: auto;
+    margin-top: 0px;
+    margin-bottom: 5px;
+  }
+
+  .button-registration{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+    background-color: #8ED647;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 7px;
+    width: auto;
+    margin-top: 0px;
+    margin-bottom: 5px;
+  }
+  
+  div.btn-return{
+    display: flex;
+    justify-content: center;
+  }
+  div.btn-registration{
+    display: flex;
+    justify-content: center;
+  }
+
+  .button-return:hover{
+    background-color: rgb(250, 85, 85);
+  }
+
+  a.button-return{
+    color: white;
+    text-decoration: none;
+  }

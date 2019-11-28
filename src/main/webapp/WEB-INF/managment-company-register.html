@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>Подключение к сервису</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.css" rel="stylesheet">
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="navigation.css" rel="stylesheet">
+    <link href="registration.css" rel="stylesheet">
+    <link href="managment-company-register.css" rel="stylesheet">
+    <!-- Fonts-->
+    <!--<link href="http://allfont.ru/allfont.css?fonts=montserrat" rel="stylesheet" type="text/css" />-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+
+  </head>
+  
+  <body>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container navigation">
+            <div class="navbar-header">
+                <div id="logo-brand">
+                    <img id="logo" src="brandlogo.png" alt="Лого">
+                    <div id="brand">
+                        <a href="#">HOUSE MANAGER</a>
+                    </div>
+                </div>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="login.html">Авторизация</a></li>
+                </ul>
+            </div>
+        </div>
+    </div> 
+    <div class="container">
+        <form class="form-signin" role="form">
+            <h3 class="form-signin-heading">Регистрация</h3>
+            <h4 class="form-registration-info">Заполните форму ниже, и в течение 15 минут мы свяжемся с вами</h4>
+            <div class="registration-companyname">
+                <h4 class="advice">Название вашей организации</h4>
+                <div class="form-group">
+                    <input class="form-control" placeholder="Название" required autofocus>
+                </div>
+            </div>
+            <div class="registration-fio">
+                <h4 class="advice">Введите фамилию, имя и отчество представителя</h4>
+                <div class="form-group">
+                    <input class="form-control first" placeholder="Фамилия">
+                    <input class="form-control between" placeholder="Имя">
+                    <input class="form-control last" placeholder="Отчество">
+                </div>
+            </div>
+            <div class="registration-contact">
+                <h4 class="advice">Введите e-mail и номер мобильного телефона</h4>
+                <div class="form-group">
+                    <input type="email" class="form-control first" placeholder="E-mail">
+                    <input type="tel" class="form-control last" placeholder="Номер телефона">
+                </div>
+            </div>
+            <div class="registration-password">
+                <h4 class="advice">Введите пароль и подтвердите его</h4>
+                <div class="form-group">
+                    <input type="password" class="form-control first" placeholder="Пароль">
+                    <input type="password" class="form-control last" placeholder="Повторите пароль">
+                </div>
+            </div>
+            <div class="registration-comment">
+                <h4 class="advice">Комментарий</h4>
+                <div class="form-group">
+                    <textarea class="form-control" rows="3" placeholder="Текст комментария"></textarea>
+                </div>
+            </div>
+            <div class="buttons-navigation">
+                <div class="btn-return">
+                    <a class="button-return" href="management-company.html">Назад</a> 
+                </div>
+                <div class="btn-registration">
+                    <button class="button-registration" type="submit">Отправить заявку</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+  </body>
+</html>
