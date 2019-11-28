@@ -19,7 +19,8 @@
     Users user = new Users();
     user = usersService.getById(PageController.client_account_id);
     applicationsOpenList = applicationsService.getAllForResident(user.getId(), Applications.STATUS_OPEN);
-    applicationsCloseList = applicationsService.getAllForResident(user.getId(), Applications.STATUS_CLOSE);
+    ApplicationsService applicationsService2 = new ApplicationsService();
+    applicationsCloseList = applicationsService2.getAllForResident(user.getId(), Applications.STATUS_CLOSE);
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>

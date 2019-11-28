@@ -114,5 +114,3 @@
 <script src="WEB-INF/bootstrap.min.js"></script>
 </body>
 </html>
-href="/house.manager/user-registration">Зарегистрироваться
-<li><a href="/house.manager/">Авторизация</a></li>

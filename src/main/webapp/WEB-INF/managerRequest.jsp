@@ -5,7 +5,7 @@
   Time: 1:13
   To change this template use File | Settings | File Templates.
 --%>
---%>
+
 <%@ page import ="ru.house.manager.serviceDB.ApplicationsService"%>
 <%@ page import ="ru.house.manager.EntityDB.Applications"%>
 <%@ page import="ru.house.manager.controller.PageController"%>
@@ -22,7 +22,8 @@
     Managers manager = new Managers();
     manager = managersService.getByAccountId(PageController.client_account_id);
     applicationsOpenList = applicationsService.getAllForManager(manager.getId(), Applications.STATUS_OPEN);
-    applicationsCloseList = applicationsService.getAllForManager(manager.getId(), Applications.STATUS_CLOSE);
+    ApplicationsService applicationsService2 = new ApplicationsService();
+    applicationsCloseList = applicationsService2.getAllForManager(manager.getId(), Applications.STATUS_CLOSE);
 
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -101,12 +102,18 @@
     <div class="form-show-requests">
         <h3 class="form-request-heading">Заявки</h3>
         <div class="requests-types">
-            <button id="opened" onclick="ChangeToOpenedContent()">Открытые</button>
-            <button id="archived" onclick="ChangeToArchivedContent()">Архивные</button>
+            <form method="post" action="/house.manager/manager-requests-1" accept-charset="UTF-8" role ="form">
+            <button id="opened" type="submit"  name="button0" value ="-1">Открытые</button>
+            </form>
+            <form method="post" action="/house.manager/manager-requests-2" accept-charset="UTF-8" role ="form">
+            <button id="archived" type="submit"  name="button1" value="-2">Архивные</button>
+            </form>
         </div>
         <div id="requests">
-            <% for(int i = 0; i < applicationsOpenList.size(); i++) {
-                PageController.request_context = applicationsOpenList.get(i).getApplicationsId();%>
+            <% %>
+            <%
+                if (PageController.request_context == 0) {
+                    for(int i = 0; i < applicationsOpenList.size(); i++) { %>
             <form method="post" action="/house.manager/manager-requests" accept-charset="UTF-8" role ="form">
                 <div class="request">
                     <div class="request-row author-request">
@@ -128,7 +135,33 @@
                     </div>
                 </div>
                 </form>
-                    <% } %>
+                    <% }
+                    } if (PageController.request_context == 1) {
+                        for(int j = 0; j < applicationsCloseList.size(); j++) { %>
+            <form method="post" action="/house.manager/manager-requests" accept-charset="UTF-8" role ="form">
+                <div class="request">
+                    <div class="request-row author-request">
+                        <div class="label-description">Отправил:</div>
+                        <div class="description"><%=applicationsCloseList.get(j).getUserId()%></div>
+                    </div>
+                    <div class="request-row label-description">Описание:</div>
+                    <div class="request-row description"><%=applicationsCloseList.get(j).getText()%></div>
+                    <div class="request-row status-and-date">
+                        <div class="status">
+                            <div class="status-label">Статус:</div>
+                            <div class="status-value status-new">Новая</div>
+                            <div class="imported-content"><span class="glyphicon glyphicon-picture"></span>1</div>
+                        </div>
+                        <div class="date"><span class="glyphicon glyphicon-calendar"></span><%=applicationsCloseList.get(j).getData()%></div>
+                    </div>
+                    <div class="request-row btn-delete">
+                        <button type="submit" value = "<%=j%>" name = "button">Закрыть заявку</button>
+                    </div>
+                </div>
+            </form>
+            <% }
+            }%>
+            <% %>
         </div>
     </div>
 </div>
