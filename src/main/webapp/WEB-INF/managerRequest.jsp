@@ -103,10 +103,10 @@
         <h3 class="form-request-heading">Заявки</h3>
         <div class="requests-types">
             <form method="post" action="/house.manager/manager-requests-1" accept-charset="UTF-8" role ="form">
-            <button id="opened" type="submit"  name="button0" value ="-1">Открытые</button>
+                <button id="opened" type="submit"  name="button0" value ="-1">Открытые</button>
             </form>
             <form method="post" action="/house.manager/manager-requests-2" accept-charset="UTF-8" role ="form">
-            <button id="archived" type="submit"  name="button1" value="-2">Архивные</button>
+                <button id="archived" type="submit"  name="button1" value="-2">Архивные</button>
             </form>
         </div>
         <div id="requests">
@@ -131,7 +131,7 @@
                         <div class="date"><span class="glyphicon glyphicon-calendar"></span><%=applicationsOpenList.get(i).getData()%></div>
                     </div>
                     <div class="request-row btn-delete">
-                        <button type="submit" value = "<%=i%>" name = "button">Закрыть заявку</button>
+                        <button id="delete" type="submit" value = "<%=i%>" name = "button">Закрыть заявку</button>
                     </div>
                 </div>
                 </form>
