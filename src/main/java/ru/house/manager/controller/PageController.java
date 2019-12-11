@@ -5,8 +5,6 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.*;
 
-import org.springframework.aop.scope.ScopedProxyUtils;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import ru.house.manager.EntityDB.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

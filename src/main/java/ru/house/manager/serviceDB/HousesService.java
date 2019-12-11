@@ -16,16 +16,13 @@ public class HousesService extends Util implements HousesDao{
     public void add(Houses House) throws SQLException {
         PreparedStatement preparedStatement = null;
         String sql = "INSERT INTO HOUSES_HMS (manage_company_id, adress, city_name, amount_of_residents, access_token) VALUES(?, ?, ?, ?, ?)";
-        Random rnd = new Random();
-        int n = 10000 + rnd.nextInt(90000);
-
         try {
             preparedStatement = connection.prepareStatement((sql));
             preparedStatement.setInt(1,House.getManageCompanyId());
             preparedStatement.setString(2,House.getAdress());
             preparedStatement.setString(3, House.getCity());
             preparedStatement.setInt(4, House.getResidentsNumber());
-            preparedStatement.setInt(5, n);
+            preparedStatement.setInt(5, House.getAccessToken());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
