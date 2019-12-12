@@ -7,7 +7,8 @@
     List<Houses> housesList = new ArrayList<>();
     Houses house = new Houses();
     housesList = housesService.getAllHousesFromManagerId(PageController.manager_id);
-    int a = 10;
+    int token = -1;
+    if (housesList.size() > 0) token = housesList.get(housesList.size() - 1).getAccessToken();
 %>
 <%--
   Created by IntelliJ IDEA.
@@ -97,7 +98,7 @@
         <h3 id="list-houses-heading">Список ваших домов</h3>
         <ul id="list-houses">
             <% for(int i = 0; i < housesList.size(); i++) {
-                int j = 0;%>
+                %>
             <li class="house" onclick="location.href='mc-house.html';">
                 <a href=mc-house.html><%=housesList.get(i).getAdress() + "  город " + housesList.get(i).getCity()%></a>
             </li>
@@ -156,7 +157,7 @@
                     <p>Токен дома:</p>
                 </div>
                 <div class="form-row-value">
-                    <input class="house-info" id="token" disabled value=<%=housesList.get(housesList.size() - 1).getAccessToken()%>>
+                    <input class="house-info" id="token" disabled value=<%=token%>>
                 </div>
             </div>
         </form>
