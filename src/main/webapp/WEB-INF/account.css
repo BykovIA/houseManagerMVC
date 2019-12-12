@@ -5,7 +5,6 @@ body {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background:  #EEF0ED;
-    /*background: url(https://i.redd.it/f42q8ogdl7k31.png);*/
     background-size: cover;
 }
 
@@ -42,7 +41,7 @@ body {
     }
 }
 
-@media(min-width: 501px) and (max-width: 2550px){
+@media(min-width: 501px) and (max-width: 4000px){
     .container.account{
         display: flex;
         justify-content: space-around;
@@ -127,7 +126,7 @@ input{
 #form-account{
     margin: 0 auto;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 20px;
     border: 1px solid #DCAC01;
     background: white;
 }
@@ -174,6 +173,6 @@ input:disabled{
     outline: none;
 }
 
-.button-edit:hover{
-
+.button-edit:hover, .button-save:hover{
+    filter: contrast(50%) brightness(120%);
 }

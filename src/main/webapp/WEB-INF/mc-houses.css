@@ -5,14 +5,14 @@ body {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background:  #EEF0ED;
-    /*background: url(https://i.redd.it/f42q8ogdl7k31.png);*/
     background-size: cover;
+    
 }
 
 @media (min-width: 300px) and (max-width: 500px){
     .container.register-house{
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
     }
     .form-row-label{
@@ -42,12 +42,12 @@ body {
     }
 }
 
-@media(min-width: 501px) and (max-width: 3500px){
+@media(min-width: 501px) and (max-width: 4000px){
     .container.register-house{
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
     }
-    .form-row-value>input#house-info{
+    .form-row-value>input.house-info{
         width: 350px;
     }
     .form-row-label{
@@ -155,5 +155,72 @@ input:disabled{
 }
 
 .button-register:hover{
+    filter: contrast(50%) brightness(120%);
+}
 
+.container-list-houses{
+    background-color: white;
+    border: 1px solid #DCAC01;
+    border-radius: 10px;
+    padding: 15px;
+    width: 400px;
+}
+
+#list-houses-heading{
+    margin: 5px auto 20px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+#list-houses{
+    list-style: none;
+    padding: 0px;
+}
+
+.house{
+    font-family: 'Montserrat', sans-serif;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    border-radius: 50px;
+    border: 1px solid #DCAC01;
+}
+
+.house:hover{
+    background-color: #DCAC01;
+}
+
+#add-new-house{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    background-color: #DCAC01;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    padding: 2.5px 10px;
+    font-weight: bold;
+    outline: none;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#add-new-house:hover{
+    filter: contrast(50%) brightness(120%); 
+}
+
+.glyphicon.glyphicon-plus{
+    font-size: 27px;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.house>a{
+    text-decoration: none;
+    color: black;
+}
+
+.house:hover>a{
+    color: white;
 }
