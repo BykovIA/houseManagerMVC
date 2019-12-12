@@ -164,7 +164,7 @@ public class PageController {
 
 
         HousesService houseCount = new HousesService();
-        if (houseCount.houseCount(address) != 0) { return "ThisHouseIsAlreadyExist"; }
+        if (houseCount.houseCount(new String(address.getBytes("ISO-8859-1"), "UTF-8")) != 0) { return "ThisHouseIsAlreadyExist"; }
 
             HousesService housesService = new HousesService();
             Houses house = new Houses();

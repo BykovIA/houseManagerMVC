@@ -149,25 +149,17 @@ public class HousesService extends Util implements HousesDao{
     @Override
     public int houseCount(String address) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "select count(adress) from accounts_hms where e_mail = ?";
+        int tmp = -1;
+        String sql = "select count(adress) from houses_hms where adress = ?";
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, address);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
-            int tmp = resultSet.getInt("count(adress)");
+            tmp = resultSet.getInt("count(adress)");
             preparedStatement.executeUpdate();
 
-            if (tmp == 1 || tmp == 0) {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-                return tmp;
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -177,32 +169,24 @@ public class HousesService extends Util implements HousesDao{
             if (connection != null) {
                 connection.close();
             }
-            return -1;
         }
+        return tmp;
     }
 
     @Override
     public int tokenCount(int token) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "select count(access_token) from accounts_hms where access_token = ?";
+        int tmp = -1;
+        String sql = "select count(access_token) from houses_hms where access_token = ?";
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, token);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
-            int tmp = resultSet.getInt("count(access_token)");
+            tmp = resultSet.getInt("count(access_token)");
             preparedStatement.executeUpdate();
 
-            if (tmp == 1 || tmp == 0) {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-                return tmp;
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -212,8 +196,8 @@ public class HousesService extends Util implements HousesDao{
             if (connection != null) {
                 connection.close();
             }
-            return -1;
         }
+        return tmp;
     }
 
     @Override
