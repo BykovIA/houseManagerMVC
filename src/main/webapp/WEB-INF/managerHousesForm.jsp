@@ -1,9 +1,13 @@
 <%@ page import ="ru.house.manager.serviceDB.HousesService"%>
 <%@ page import ="ru.house.manager.EntityDB.Houses"%>
 <%@ page import="ru.house.manager.controller.PageController"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
 <% HousesService housesService = new HousesService();
+    List<Houses> housesList = new ArrayList<>();
     Houses house = new Houses();
-    house = housesService.getByManagerId(PageController.manager_id);
+    housesList = housesService.getAllHousesFromManagerId(PageController.manager_id);
+    int a = 10;
 %>
 <%--
   Created by IntelliJ IDEA.
@@ -51,11 +55,15 @@
 
     <script src="WEB-INF/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".form-register-house").hide();
+        });
+    </script>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" ></script>
 </head>
 <body>
-
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -85,15 +93,35 @@
     </div>
 </div>
 <div class="container register-house">
+    <div class="container-list-houses">
+        <h3 id="list-houses-heading">Список ваших домов</h3>
+        <ul id="list-houses">
+            <% for(int i = 0; i < housesList.size(); i++) {
+                int j = 0;%>
+            <li class="house" onclick="location.href='mc-house.html';">
+                <a href=mc-house.html><%=housesList.get(i).getAdress() + "  город " + housesList.get(i).getCity()%></a>
+            </li>
+            <% } %>
+        </ul>
+        <button id="add-new-house" onclick="ShowRegisterForm()">
+            <span class="glyphicon glyphicon-plus"></span>
+            Добавить дом
+        </button>
+        <script>
+            function ShowRegisterForm(){
+                $(".form-register-house").show();
+            }
+        </script>
+    </div>
     <div class="form-register-house">
-        <form id="form-house" action="/house.manager/house-registration/" method="POST" accept-charset="UTF-8" role="form">
+        <form id="form-house" role="form" method="POST" action="/house.manager/house-registration">
             <h3 class="house-register-heading">Подключить новый дом</h3>
             <div class="form-row">
                 <div class="form-row-label">
                     <p>Город:</p>
                 </div>
                 <div class="form-row-value">
-                    <input id="house-info" placeholder="Город" required name ="city">
+                    <input class="house-info" id="house-city" placeholder="Город">
                 </div>
             </div>
             <div class="form-row">
@@ -101,7 +129,7 @@
                     <p>Адрес:</p>
                 </div>
                 <div class="form-row-value">
-                    <input id="house-info" placeholder="Адрес" required name = "address">
+                    <input class="house-info" id="house-address" placeholder="Адрес">
                 </div>
             </div>
             <div class="form-row">
@@ -109,15 +137,18 @@
                     <p>Количество жителей: </p>
                 </div>
                 <div class="form-row-value">
-                    <input id="house-info" placeholder="Количество жителей" required name = "ResidentsNumber">
+                    <input class="house-info" id="house-capacity" placeholder="Количество жителей">
                 </div>
             </div>
             <div class="form-row to-right">
-                <button class="button-register" id="register" type="submit">Зарегистрировать дом</button>
+                <button class="button-register" id="register" onclick="GenerateToken()" type="button">Зарегистрировать дом</button>
             </div>
             <script>
                 function GenerateToken(){
-                    $(".token").val(Math.floor(Math.random()*(5000-0)+0).toString());
+                    $("#token").val(Math.floor(Math.random()*(5000-0)+0).toString());
+                    var city=$("#house-city").val();
+                    var address=$("#house-address").val();
+                    $("#list-houses").append("<li class='house' onclick='location.href=\"mc-house.html\";'>"+"<a href='mc-house.html'>г. "+city+", "+address+"</a></li>");
                 }
             </script>
             <div class="form-row">
@@ -125,14 +156,11 @@
                     <p>Токен дома:</p>
                 </div>
                 <div class="form-row-value">
-                    <input id="house-info" class="token" disabled value=<%=house.getAccessToken()%>>
+                    <input class="house-info" id="token" disabled value=<%=housesList.get(housesList.size() - 1).getAccessToken()%>>
                 </div>
             </div>
         </form>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="bootstrap.min.js"></script>
-
 </body>
 </html>
