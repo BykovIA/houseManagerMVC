@@ -1,11 +1,14 @@
 package ru.house.manager.serviceDB;
 import ru.house.manager.BLDB.Util;
+import ru.house.manager.EntityDB.Applications;
 import ru.house.manager.daoDB.HousesDao;
 import ru.house.manager.EntityDB.Houses;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class HousesService extends Util implements HousesDao{
@@ -141,5 +144,108 @@ public class HousesService extends Util implements HousesDao{
             }
         }
         return house;
+    }
+
+    @Override
+    public int houseCount(String address) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        String sql = "select count(adress) from accounts_hms where e_mail = ?";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, address);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            int tmp = resultSet.getInt("count(adress)");
+            preparedStatement.executeUpdate();
+
+            if (tmp == 1 || tmp == 0) {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+                return tmp;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+            return -1;
+        }
+    }
+
+    @Override
+    public int tokenCount(int token) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        String sql = "select count(access_token) from accounts_hms where access_token = ?";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, token);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            int tmp = resultSet.getInt("count(access_token)");
+            preparedStatement.executeUpdate();
+
+            if (tmp == 1 || tmp == 0) {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+                return tmp;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+            return -1;
+        }
+    }
+
+    @Override
+    public List<Houses> getAllHousesFromManagerId (int manageId) throws SQLException {
+        List<Houses> housesList = new ArrayList<>();
+        PreparedStatement preparedStatement = null;
+        String sql = "SELECT adress, city_name, amount_of_residents, access_token FROM houses_HMS WHERE manage_company_id = ?";
+
+        try {
+            preparedStatement = connection.prepareStatement((sql));
+            preparedStatement.setInt(1, manageId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Houses house = new Houses();
+                house.setAdress(resultSet.getString("adress"));
+                house.setCity(resultSet.getString("city_name"));
+                house.setResidentsNumber(resultSet.getInt("amount_of_residents"));
+                house.setAccessToken(resultSet.getInt("access_token"));
+                housesList.add(house);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return housesList;
     }
 }

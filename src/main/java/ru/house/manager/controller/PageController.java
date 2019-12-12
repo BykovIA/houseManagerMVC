@@ -30,9 +30,14 @@ public class PageController {
     @RequestMapping(value="/user-profile", method = RequestMethod.POST)
     public String postLoginPage(@RequestParam(value="eMail") String eMail, @RequestParam(value="password") String password) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
 
+        String mail = new String(eMail.getBytes("ISO-8859-1"), "UTF-8");
+        mail = mail.toLowerCase();
+        AccountsService count = new AccountsService();
+        if (count.emailCount(mail) != 1) { return "UserNotFound"; }
+
         AccountsService accountsService = new AccountsService();
         Accounts account = new Accounts();
-        account = accountsService.getByEmail(new String(eMail.getBytes("ISO-8859-1"), "UTF-8"));
+        account = accountsService.getByEmail(mail);
         if (HashFunction.getHash(new String(password.getBytes("ISO-8859-1"), "UTF-8"), account.getSalt(), HashFunction.getSalt2()).equals(account.getHashPassword())) {
             client_account_id = account.getId();
             if(account.getResidentFlag() == 1) {
@@ -60,17 +65,22 @@ public class PageController {
         if (!password.equals(password2)) {
             return "passwordNotEquals";
         } else {
+            String mail = new String(eMail.getBytes("ISO-8859-1"), "UTF-8");
+            mail = mail.toLowerCase();
+            AccountsService count = new AccountsService();
+            if (count.emailCount(mail) != 0) { return "ThisE-mailIsBusy"; }
+
             String salt1 = HashFunction.getSalt1();
             AccountsService accountsService = new AccountsService();
             Accounts account = new Accounts();
-            account.seteMail(new String(eMail.getBytes("ISO-8859-1"), "UTF-8"));
+            account.seteMail(mail);
             account.setHashPassword(HashFunction.getHash(password, salt1, HashFunction.getSalt2()));
             account.setResidentFlag(1);
             account.setSalt(salt1);
             accountsService.add(account);
 
             AccountsService idAccount = new AccountsService();
-            Accounts idacc = idAccount.getByEmail(new String(eMail.getBytes("ISO-8859-1"), "UTF-8"));
+            Accounts idacc = idAccount.getByEmail(mail);
 
             HousesService housesService = new HousesService();
             Houses house = housesService.getIdByToken(accessCode);
@@ -83,7 +93,7 @@ public class PageController {
             user.setLastName(new String(lastName.getBytes("ISO-8859-1"), "UTF-8"));
             user.setFatherName(new String(fatherName.getBytes("ISO-8859-1"), "UTF-8"));
             user.setPhoneNumber(new String(phoneNumber.getBytes("ISO-8859-1"), "UTF-8"));
-            user.setEmail(new String(eMail.getBytes("ISO-8859-1"), "UTF-8"));
+            user.setEmail(mail);
             user.setRoomNumber(new String(roomNumber.getBytes("ISO-8859-1"), "UTF-8"));
             usersService.add(user);
 
@@ -107,17 +117,22 @@ public class PageController {
         if (!password.equals(password2)) {
             return "passwordNotEquals";
         } else {
+            String mail = new String(eMail.getBytes("ISO-8859-1"), "UTF-8");
+            mail = mail.toLowerCase();
+            AccountsService count = new AccountsService();
+            if (count.emailCount(mail) != 0) { return "ThisE-mailIsBusy"; }
+
             String salt1 = HashFunction.getSalt1();
             AccountsService accountsService = new AccountsService();
             Accounts account = new Accounts();
-            account.seteMail(new String(eMail.getBytes("ISO-8859-1"), "UTF-8"));
+            account.seteMail(mail);
             account.setHashPassword(HashFunction.getHash(password, salt1, HashFunction.getSalt2()));
             account.setResidentFlag(0);
             account.setSalt(salt1);
             accountsService.add(account);
 
             AccountsService idAccount = new AccountsService();
-            Accounts idacc = idAccount.getByEmail(new String(eMail.getBytes("ISO-8859-1"), "UTF-8"));
+            Accounts idacc = idAccount.getByEmail(mail);
 
             ManagersService managersService = new ManagersService();
             Managers manager = new Managers();
@@ -125,7 +140,7 @@ public class PageController {
             manager.setFirstName(new String(firstName.getBytes("ISO-8859-1"), "UTF-8"));
             manager.setLastName(new String(lastName.getBytes("ISO-8859-1"), "UTF-8"));
             manager.setFatherName(new String(fatherName.getBytes("ISO-8859-1"), "UTF-8"));
-            manager.setEmail(new String(eMail.getBytes("ISO-8859-1"), "UTF-8"));
+            manager.setEmail(mail);
             manager.setPhoneNumber(new String(phoneNumber.getBytes("ISO-8859-1"), "UTF-8"));
             manager.setSomeInfo(new String(someInfo.getBytes("ISO-8859-1"), "UTF-8"));
             manager.setAccountId(idacc.getId());

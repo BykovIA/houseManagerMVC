@@ -187,4 +187,39 @@ public class AccountsService extends Util implements AccountsDao{
             }
         }
     }
+
+    @Override
+    public int emailCount(String eMail) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        String sql = "select count(e_mail) from accounts_hms where e_mail = ?";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, eMail);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            int tmp = resultSet.getInt("count(e_mail)");
+            preparedStatement.executeUpdate();
+
+            if (tmp == 1 || tmp == 0) {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+                return tmp;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+            return -1;
+        }
+    }
 }
