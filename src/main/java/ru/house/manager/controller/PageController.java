@@ -70,6 +70,9 @@ public class PageController {
             AccountsService count = new AccountsService();
             if (count.emailCount(mail) != 0) { return "ThisE-mailIsBusy"; }
 
+            HousesService houseCount = new HousesService();
+            if (houseCount.tokenCount(accessCode) != 1) { return "ThisAccessCodeNotExist"; }
+
             String salt1 = HashFunction.getSalt1();
             AccountsService accountsService = new AccountsService();
             Accounts account = new Accounts();
@@ -159,6 +162,10 @@ public class PageController {
     @RequestMapping(value="/house-registration", method=RequestMethod.POST)
     public String postNewHousePage(@RequestParam(value="city") String city, @RequestParam(value="address") String address, @RequestParam(value="ResidentsNumber") int residentsNumber) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
 
+
+        HousesService houseCount = new HousesService();
+        if (houseCount.houseCount(address) != 0) { return "ThisHouseIsAlreadyExist"; }
+
             HousesService housesService = new HousesService();
             Houses house = new Houses();
             ManagersService managersService = new ManagersService();
@@ -168,11 +175,20 @@ public class PageController {
             house.setAdress(new String(address.getBytes("ISO-8859-1"), "UTF-8"));
             house.setCity(new String(city.getBytes("ISO-8859-1"), "UTF-8"));
             house.setResidentsNumber(residentsNumber);
-            Random random=new Random();
-            int rage=999999;
-            house.setAccessToken(random.nextInt(rage));
+            house.setAccessToken(tokenGen());
             housesService.add(house);
             return "managerHousesForm";
+    }
+
+    private int tokenGen() throws SQLException {
+        Random random=new Random();
+        int rage=999999;
+        int newToken = random.nextInt(rage);
+        HousesService tokenCount = new HousesService();
+        if (tokenCount.tokenCount(newToken) != 0) {
+            newToken = tokenGen();
+        }
+        return newToken;
     }
 
 
