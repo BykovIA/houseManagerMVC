@@ -20,7 +20,7 @@ public class PageController {
 
     public static int client_account_id = -1;
     public static int manager_id = -1;
-    public static int request_context = -1;
+    public static int request_context = 0;
 
     @RequestMapping(value="/", method=RequestMethod.GET)
     public String getLoginPage(Model model) {
@@ -217,7 +217,18 @@ public class PageController {
         application.setData(date.toString());
         application.setStatus(Applications.STATUS_OPEN);
         applicationsService.add(application);
+        return "userRequest";
+    }
 
+    @RequestMapping(value="/users-requests-1", method=RequestMethod.POST)
+    public String postUserButton0(@RequestParam(value="button0") String numb) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
+        request_context = 0;
+        return "userRequest";
+    }
+
+    @RequestMapping(value="/users-requests-2", method=RequestMethod.POST)
+    public String postUserButton1(@RequestParam(value="button1") String numb) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
+        request_context = 1;
         return "userRequest";
     }
 
