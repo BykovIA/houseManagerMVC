@@ -156,15 +156,16 @@ public class PageController {
 
     @RequestMapping(value = "/house-registration", method=RequestMethod.GET)
     public String getNewHousePage() {
-        return "managerHousesForm";
+        return "managerHousesForm22";
     }
 
     @RequestMapping(value="/house-registration", method=RequestMethod.POST)
-    public String postNewHousePage(@RequestParam(value="city") String city, @RequestParam(value="address") String address, @RequestParam(value="ResidentsNumber") int residentsNumber) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
+    public String postNewHousePage(@RequestParam(value="city") String city, @RequestParam(value="street") String street, @RequestParam(value="house") String houseNumber, @RequestParam(value="flat") String flat, @RequestParam(value="ResidentsNumber") int residentsNumber) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
 
 
         HousesService houseCount = new HousesService();
-        if (houseCount.houseCount(new String(address.getBytes("ISO-8859-1"), "UTF-8")) != 0) { return "ThisHouseIsAlreadyExist"; }
+        String fullAddress = new String(street.getBytes("ISO-8859-1"), "UTF-8") + " " + new String(houseNumber.getBytes("ISO-8859-1"), "UTF-8") + " " + new String(flat.getBytes("ISO-8859-1"), "UTF-8");
+        if (houseCount.houseCount(fullAddress) != 0) { return "ThisHouseIsAlreadyExist"; }
 
             HousesService housesService = new HousesService();
             Houses house = new Houses();
@@ -172,12 +173,12 @@ public class PageController {
             Managers manager = managersService.getByAccountId(client_account_id);
             manager_id = manager.getId();
             house.setManageCompanyId(manager_id);
-            house.setAdress(new String(address.getBytes("ISO-8859-1"), "UTF-8"));
+            house.setAdress(fullAddress);
             house.setCity(new String(city.getBytes("ISO-8859-1"), "UTF-8"));
             house.setResidentsNumber(residentsNumber);
             house.setAccessToken(tokenGen());
             housesService.add(house);
-            return "managerHousesForm";
+            return "managerHousesForm22";
     }
 
     private int tokenGen() throws SQLException {
