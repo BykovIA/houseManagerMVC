@@ -52,16 +52,87 @@
             </div>
         </div>
     <div class="container requests manager">
-        <div class="form-show-requests">
+        <div class="request-detalization-container">
+            <form class="request-detalization-form">
+                <h3 class="form-request-heading">Заявка №1488</h3>
+                <div id="request-author">
+                    <div id="request-author-label">Разместил заявку:</div>
+                    <div id="request-author-value">Аркадий Петрович Вальтов</div>
+                </div>
+                <div id="request-description">
+                    <div id="request-description-label">Описание:</div>
+                    <div id="request-description-value">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga rem quaerat quibusdam eius autem temporibus maxime ipsum? Corrupti, ex exercitationem saepe recusandae quis nemo numquam dolor expedita ea ad porro.</div>
+                </div>
+                <div id="request-files">
+                    <div id="request-files-label">Вложения:</div>
+                    <div id="request-files-value">
+                        <div class="request-image"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASIAAACuCAMAAAClZfCTAAAAA1BMVEXdAAAiK5u5AAAASElEQVR4nO3BMQEAAADCoPVPbQhfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABeA8XKAAFZcBBuAAAAAElFTkSuQmCC" alt=""></div>
+                        <div class="request-image"><img src="https://photogora.ru/img/product/thumb/3600/1473674102993123600.jpg" alt=""></div>
+                        <div class="request-image"><img src="https://i.ytimg.com/vi/PthNflknIQU/maxresdefault.jpg" alt=""></div>
+                    </div>
+                </div>
+                <div id="request-status">
+                    <div id="request-status-label">Статус заявки:</div>
+                    <div class="status-value status-new">Новая</div>
+                </div>
+                <div id="request-date">
+                    <div id="request-date-label">Дата размещения:</div>
+                    <div class="request-date-value">6 апреля</div>
+                </div>
+                <div id="request-action">
+                    <button id="delete">Закрыть заявку</button>
+                </div>
+            </form>
+            <div id="request-comments">
+                <h3 id="request-comments-label">Комментарии к заявке</h3>
+                <div id="request-comments-value">
+                    <div class="request-comment">
+                        <div id="request-comment-author">П.В.Хитровой</div>
+                        <div id="request-comment-text">На 10 этаже слишком громко долбятся геи</div>
+                        <div id="request-comment-date">10 ноября 2019 года</div>
+                    </div>
+                    <div class="request-comment">
+                        <div id="request-comment-author">Администрация УК</div>
+                        <div id="request-comment-text">Вы можете и не слушать</div>
+                        <div id="request-comment-date">11 ноября 2020 года</div>
+                    </div>
+                    <div class="request-comment">
+                        <div id="request-comment-author">П.В.Хитровой</div>
+                        <div id="request-comment-text">Спасибо за своевременный ответ, я уже переехал</div>
+                        <div id="request-comment-date">11 ноября 2020 года</div>
+                    </div>
+                </div>
+                <div id="request-comments-addcomm">
+                    <div class="request-comment-input">
+                        <textarea class="request-comment-input-textarrea" type="text" placeholder="Оставить комментарий..."></textarea>
+                    </div>
+                    <button class="request-comment-button">Отправить</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-show-requests" id="mc">
             <h3 class="form-request-heading">Заявки</h3>
             <div class="requests-types">
                 <button id="opened" onclick="ChangeToOpenedContent()">Открытые</button>
                 <button id="archived" onclick="ChangeToArchivedContent()">Архивные</button>
             </div>
             <div id="requests">
-                <div class="request">
+                <script>
+                    function ToDetalization(){
+                        $('.request').removeClass('chosen');
+                        $('.request:hover').addClass('chosen');
+                        var req = $('.request.chosen');
+                        $('#request-author-value').text($('.request.chosen .author-request>.description').text());
+                        $('#request-description-value').text($('.request.chosen .request-row.description').text());
+                    }
+                </script>
+                <div class="request" onclick="ToDetalization()">
+                    <div class="request-row author-request">
+                        <div class="label-description">Отправил:</div>
+                        <div class="description">Алексей Волков</div>
+                    </div>
                     <div class="request-row label-description">Описание:</div>
-                    <div class="request-row description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex doloremque magnam dolor ab natus nostrum corporis voluptate repellendus numquam repellat molestiae cum maiores nulla tempora velit, totam necessitatibus, praesentium omnis.</div>
+                    <div class="request-row description">Дорогие друзья, консультация с профессионалами из IT представляет собой интересный эксперимент проверки направлений прогрессивного развития. Повседневная практика показывает, что рамки и место обучения кадров напрямую зависит от ключевых компонентов планируемого обновления! Не следует, однако, забывать о том, что сложившаяся структура...</div>
                     <div class="request-row status-and-date">
                         <div class="status">
                             <div class="status-label">Статус:</div>
@@ -71,29 +142,40 @@
                         <div class="date"><span class="glyphicon glyphicon-calendar"></span> 6 апреля</div>
                     </div>
                 </div>
-                <div class="request">
-                    <div class="request-row label-description">Описание:</div>
-                    <div class="request-row description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex doloremque magnam dolor ab natus nostrum corporis voluptate repellendus numquam repellat molestiae cum maiores nulla tempora velit, totam necessitatibus, praesentium omnis.</div>
-                    <div class="request-row status-and-date">
-                        <div class="status">
-                            <div class="status-label">Статус:</div>
-                            <div class="status-value status-new">Новая</div>
-                            <div class="imported-content"><span class="glyphicon glyphicon-picture"></span>1</div>
-                        </div>
-                        <div class="date"><span class="glyphicon glyphicon-calendar"></span> 8 апреля</div>
+                <div class="request" onclick="ToDetalization()">
+                    <div class="request-row author-request">
+                        <div class="label-description">Отправил:</div>
+                        <div class="description">Андрей Волков</div>
                     </div>
-                </div>
-                <div class="request">
                     <div class="request-row label-description">Описание:</div>
-                    <div class="request-row description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex doloremque magnam dolor ab natus nostrum corporis voluptate repellendus numquam repellat molestiae cum maiores nulla tempora velit, totam necessitatibus, praesentium omnis.</div>
+                    <div class="request-row description">Разнообразный и богатый опыт консультация с профессионалами из IT требует определения и уточнения существующих финансовых и административных условий! С другой стороны повышение уровня гражданского сознания напрямую зависит от дальнейших направлений развития проекта. Дорогие друзья, постоянное информационно-техническое обеспечение нашей деятельности позволяет...</div>
                     <div class="request-row status-and-date">
                         <div class="status">
                             <div class="status-label">Статус:</div>
                             <div class="status-value status-new">Новая</div>
                             <div class="imported-content"><span class="glyphicon glyphicon-picture"></span>2</div>
                         </div>
-                        <div class="date"><span class="glyphicon glyphicon-calendar"></span> 6 апреля</div>
+                        <div class="date"><span class="glyphicon glyphicon-calendar"></span>8 апреля</div>
                     </div>
+                </div>
+                <div class="request" onclick="ToDetalization()">
+                    <div class="request-row author-request">
+                        <div class="label-description">Отправил:</div>
+                        <div class="description">Волк Алексеев</div>
+                    </div>
+                    <div class="request-row label-description">Описание:</div>
+                    <div class="request-row description">Значимость этих проблем настолько очевидна, что выбранный нами инновационный путь способствует подготовке и реализации экономической целесообразности принимаемых решений? Не следует, однако, забывать о том, что повышение уровня гражданского сознания представляет собой интересный эксперимент проверки направлений прогрессивного развития. Равным образом сложившаяся...</div>
+                    <div class="request-row status-and-date">
+                        <div class="status">
+                            <div class="status-label">Статус:</div>
+                            <div class="status-value status-new">Новая</div>
+                            <div class="imported-content"><span class="glyphicon glyphicon-picture"></span>2</div>
+                        </div>
+                        <div class="date"><span class="glyphicon glyphicon-calendar"></span>10 апреля</div>
+                    </div>
+                    <!--<div class="request-row btn-delete">
+                        <button id="delete" type="submit" value = "<%=i%>" name = "button">Закрыть заявку</button>
+                    </div>-->
                 </div>
             </div>
         </div>

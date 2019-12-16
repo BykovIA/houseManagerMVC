@@ -5,19 +5,20 @@
         font-style: normal;
         font-weight: 600;
         padding: 10px 10px 10px 30px;
-        margin: 0 15px;
-        margin-bottom: 10px;
+        margin: 0;
         background-color: white;
         border-radius: 30px;
     }
     p.p-brief{
-        padding: 10px 10px 10px 10px;
         background-color: transparent;
+        padding: 0;
+        padding-left: 10px;
     }
     p.p-brief.first{
         text-align: center;
-        margin-bottom: 0px;
-        font-size: 16px;
+        padding: 0;
+        font-size: 15px;
+        padding-left: 10px;
     }
     p.p-brief.first>a{
         color: black;
@@ -28,35 +29,33 @@
         vertical-align: middle;
     }
     div.picture{
-        text-align: center;
-        padding-top: 20px;
-        background: white;
         width: 240px;
         height: 240px;
-        border-radius: 50%;
-        margin: 0 auto;
-        margin-top: 0px;
-    }
-    div.picture>img{
-        width: 180px;
-        height: 180px;
     }
     div.connect{
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         text-transform: uppercase;
         font-family: 'Montserrat', sans-serif;
         border: 1px rgb(51, 96, 180) solid;
         width: 120px;
-        margin: 0 auto;
-        margin-top: -40px;
     }
     div.connect>a{
         text-decoration: none;
-        font-size: 14px;
+        font-size: 12px;
     }
     
     span:hover{
         color: gray;
+    }
+
+    .advantages>div{
+        margin-bottom: 10px;
+    }
+
+    .row#signup{
+        margin-top: 15px;
     }
 }
 
@@ -90,14 +89,8 @@
         vertical-align: middle;
     }
     div.picture{
-        text-align: center;
-        padding-top: 20px;
-        background: white;
         width: 385px;
         height: 385px;
-        border-radius: 50%;
-        margin: 0 auto;
-        margin-top: 20px;
     }
     div.connect{
         text-align: center;
@@ -105,8 +98,6 @@
         font-family: 'Montserrat', sans-serif;
         border: 1px rgb(51, 96, 180) solid;
         width: 200px;
-        margin: 0 auto;
-        margin-top: -60px;
     }
     div.connect>a{
         text-decoration: none;
@@ -115,9 +106,18 @@
     span:hover{
         color: gray;
     }
+
+    .row#signup{
+        margin-top: 15px;
+    }
 }
  
-@media (min-width: 768px) and (max-width: 2560px){
+@media (min-width: 768px) and (max-width: 4000px){
+    
+    .container{
+        width: 75%;
+    }
+    
     p{
         /*margin: 10px 0px 50px 0px;*/
         font-family: 'Montserrat', sans-serif;
@@ -147,35 +147,31 @@
         vertical-align: middle;
     }
     div.picture{
-        text-align: center;
-        padding-top: 20px;
-        background: white;
         width: 385px;
         height: 385px;
-        border-radius: 50%;
-        margin: 0 auto;
-        margin-top: 20px;
     }
     div.connect{
-        text-align: center;
+        display: flex;
+        justify-content: center;
         text-transform: uppercase;
         font-family: 'Montserrat', sans-serif;
         border: 1px rgb(51, 96, 180) solid;
         width: 200px;
-        margin: 0 auto;
-        margin-top: -60px;
     }
     div.connect>a{
         text-decoration: none;
     }
-    
     span:hover{
         color: gray;
+    }
+
+    .row#signup{
+        margin-top: 25px;
     }
 }
 
 body {
-    margin: 100px auto;
+    margin: 75px auto 25px;
     min-height: 100%;
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -211,19 +207,42 @@ div.advantages{
 .adv{
     border: 1px solid #DCAC01;
 }
-.adv:hover{
-    font-style: italic;
-}
+
 .scale:hover{
-    transition: 500ms ease-out;
-    transform: scale(1.05);
+    transition: 200ms ease-out;
+    transform: translateY(-5px);
+    color: white;
+    background-color: #DCAC01;
 }
-/*div.col-sm-8.col-sm-offset-2.image{
-    text-align: left;
+
+.row#signup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.picture{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border-radius: 50%;
+    border: 1px solid #DCAC01;
+}
+
+.image{
+    display: flex;
+    flex-direction: column;
+}
+
+/*.image:hover{
+    transition: 0.3s ease-out;
+    transform: translateY(10px);
 }*/
-/*p.p-right{
-    text-align: right;
-}*/
-/*p.p-left{
-    text-align: left;
-}*/
+
+.picture>img{
+    width: 70%;
+    height: 70%;
+    transform: translateY(-5%);
+}

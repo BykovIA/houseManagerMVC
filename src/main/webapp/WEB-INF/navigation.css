@@ -6,7 +6,7 @@
     text-transform: uppercase;
 }
 
-@media (max-width: 3500px){
+@media (max-width: 4000px){
     #brand>a{
         color: #8ED647;
         font-size: 21px;
@@ -74,7 +74,6 @@ div.navbar-header>div#logo-brand{
     margin-left: 15px;
 }
 
-
 /*Dropdown*/
 
 ul.nav.navbar-nav.navbar-right{
@@ -91,6 +90,7 @@ ul.nav.navbar-nav.navbar-right{
 }
 ul.nav.navbar-nav.navbar-right li:hover{
     background: #8ED647;
+    transition: 0.4s;
 }
 
 ul.nav.navbar-nav.navbar-right li.dropdown.open:hover{
