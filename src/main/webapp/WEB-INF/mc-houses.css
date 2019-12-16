@@ -14,30 +14,50 @@ body {
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
+        margin-bottom: 15px;
     }
+
+    .container.register-house>*{
+        margin-bottom: 15px;
+    }
+
+    .container.house-info{
+        flex-direction: column;
+    }
+
+    .container-list-houses{
+        width: 100%;
+    }
+
     .form-row-label{
         margin-right: 10px;
         width: 30%;
     }
+    
     .form-row-value{
         width: 70%;
     }
+
     .form-row-value>input{
         width: 100%;
     }
-    .form-register-house{
+
+    .form-register-house, .form-edit-house{
         display: flex;
         justify-content: center;
 
     }
+
     .form-row-label>p{
         font-size: 12px;
         padding-top: 10px;
     }
+
     form{
         max-width: 100%;
     }
-    .button-register, .button-save{
+    
+    .button-register, .button-save, .button-edit{
         width: 100%;
     }
 }
@@ -46,6 +66,13 @@ body {
     .container.register-house{
         display: flex;
         justify-content: space-between;
+    }
+    .container.house-info{
+        display: flex;
+        justify-content: flex-start;
+    }
+    .container-list-houses{
+        width: 400px;
     }
     .form-row-value>input.house-info{
         width: 350px;
@@ -57,14 +84,14 @@ body {
     .form-row-value{
         flex-grow: 2;
     }
-    .form-register-house{
+    .form-register-house, .form-edit-house{
         display: flex;
         align-items: flex-start;
     }
     .form-row-label>p{
         font-size: 14px;
     }
-    .button-register{
+    .button-register, .button-edit, .button-save{
         width: 50%;
     }
 }
@@ -82,9 +109,9 @@ p{
     margin-bottom: 20px;
 }
 
-.form-row-label{
+.form-row-label>p{
+    height: 100%;
     display: flex;
-    justify-content: flex-start;
     align-items: center;
 }
 
@@ -101,7 +128,7 @@ p{
     box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 14px rgba(240, 206, 94, 0.6);
 }
 
-.house-register-heading{
+.house-register-heading, .house-edit-heading{
     margin: 5px auto 20px auto;
     /*font-family: Georgia, 'Times New Roman', Times, serif;*/
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -128,7 +155,7 @@ input{
 #form-house{
     margin: 0 auto;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 20px;
     border: 1px solid #DCAC01;
     background: white;
 }
@@ -161,9 +188,9 @@ input:disabled{
 .container-list-houses{
     background-color: white;
     border: 1px solid #DCAC01;
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 15px;
-    width: 400px;
+    height: fit-content;
 }
 
 #list-houses-heading{
@@ -175,6 +202,8 @@ input:disabled{
 #list-houses{
     list-style: none;
     padding: 0px;
+    max-height: 400px;
+    overflow: auto;
 }
 
 .house{
@@ -223,4 +252,36 @@ input:disabled{
 
 .house:hover>a{
     color: white;
+}
+
+.button-edit{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    background-color: #8ED647;
+    padding: 5px 10px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    outline: none;
+}
+
+.button-save{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    background-color: #317434;
+    padding: 5px 10px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    outline: none;
+}
+
+.button-edit:hover, .button-save:hover{
+    filter: contrast(50%) brightness(120%);
 }

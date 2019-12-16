@@ -88,15 +88,31 @@
                             <p>Город:</p>
                         </div>
                         <div class="form-row-value">
-                            <input class="house-info" id="house-city" placeholder="Город">
+                            <input class="house-info" id="house-city" placeholder="Город" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-row-label">
-                            <p>Адрес:</p>
+                            <p>Улица:</p>
                         </div>
                         <div class="form-row-value">
-                            <input class="house-info" id="house-address" placeholder="Адрес">
+                            <input class="house-info" id="house-address" placeholder="Название улицы" pattern="[а-Я]{1,30}" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-row-label">
+                            <p>Дом:</p>
+                        </div>
+                        <div class="form-row-value">
+                            <input class="house-info" id="house-address" placeholder="Номер дома" pattern="[0-9]{1,4}" required title="0-9999">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-row-label">
+                            <p>Квартира:</p>
+                        </div>
+                        <div class="form-row-value">
+                            <input class="house-info" id="house-address" placeholder="Номер квартиры" pattern="[0-9]{1,4}" required title="0-9999">
                         </div>
                     </div>
                     <div class="form-row">
@@ -104,7 +120,7 @@
                             <p>Количество жителей: </p>
                         </div>
                         <div class="form-row-value">
-                            <input class="house-info" id="house-capacity" placeholder="Количество жителей">
+                            <input class="house-info" id="house-capacity" placeholder="Количество жителей" pattern="[0-9]{1,4}" required title="0-9999">
                         </div>
                     </div>
                     <div class="form-row to-right">
@@ -123,7 +139,7 @@
                             <p>Токен дома:</p>
                         </div>
                         <div class="form-row-value">
-                            <input class="house-info" id="token" disabled value="1488">
+                            <input class="house-info" id="token" disabled>
                         </div>
                     </div>
                 </form>

@@ -81,9 +81,9 @@ p{
     margin-bottom: 20px;
 }
 
-.form-row-label{
+.form-row-label>p{
+    height: 100%;
     display: flex;
-    justify-content: flex-start;
     align-items: center;
 }
 
