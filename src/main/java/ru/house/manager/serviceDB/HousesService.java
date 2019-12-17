@@ -204,7 +204,7 @@ public class HousesService extends Util implements HousesDao{
     public List<Houses> getAllHousesFromManagerId (int manageId) throws SQLException {
         List<Houses> housesList = new ArrayList<>();
         PreparedStatement preparedStatement = null;
-        String sql = "SELECT adress, city_name, amount_of_residents, access_token FROM houses_HMS WHERE manage_company_id = ?";
+        String sql = "SELECT house_id, adress, city_name, amount_of_residents, access_token FROM houses_HMS WHERE manage_company_id = ?";
 
         try {
             preparedStatement = connection.prepareStatement((sql));
@@ -214,6 +214,7 @@ public class HousesService extends Util implements HousesDao{
 
             while (resultSet.next()) {
                 Houses house = new Houses();
+                house.setHouseId(resultSet.getInt("house_id"));
                 house.setAdress(resultSet.getString("adress"));
                 house.setCity(resultSet.getString("city_name"));
                 house.setResidentsNumber(resultSet.getInt("amount_of_residents"));

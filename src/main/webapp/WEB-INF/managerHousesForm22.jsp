@@ -3,9 +3,14 @@
 <%@ page import="ru.house.manager.controller.PageController"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="ru.house.manager.serviceDB.ManagersService" %>
+<%@ page import="ru.house.manager.EntityDB.Managers" %>
 <% HousesService housesService = new HousesService();
     Houses house = new Houses();
     List<Houses> housesList = new ArrayList<>();
+    ManagersService managersService = new ManagersService();
+    Managers manager = managersService.getByAccountId(PageController.client_account_id);
+    PageController.manager_id = manager.getId();
     housesList = housesService.getAllHousesFromManagerId(PageController.manager_id);
     int accessToken = -1;
     if (housesList.size() > 0) {
@@ -101,8 +106,8 @@
         <h3 id="list-houses-heading">Список ваших домов</h3>
         <ul id="list-houses">
             <% for(int i = 0; i < housesList.size(); i++) { %>
-            <li class="house" onclick="location.href='mc-house.html';">
-                <a href=mc-house.html><%=housesList.get(i).getCity() + housesList.get(i).getAdress()%></a>
+            <li class="house" onclick="location.href='/house.manager/house-menu/<%=housesList.get(i).getHouseId()%>';">
+                <a href="/house.manager/house-menu/<%=housesList.get(i).getHouseId()%>"><%=housesList.get(i).getCity() + housesList.get(i).getAdress()%></a>
             </li>
             <% } %>
         </ul>
