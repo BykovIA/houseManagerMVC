@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.*;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import ru.house.manager.EntityDB.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ public class PageController {
     public static int client_account_id = -1;
     public static int manager_id = -1;
     public static int request_context = 0;
+    public static int house_id = -1;
 
     @RequestMapping(value="/", method=RequestMethod.GET)
     public String getLoginPage(Model model) {
@@ -159,7 +161,7 @@ public class PageController {
         return "managerHousesForm22";
     }
 
-    @RequestMapping(value="/house-registration", method=RequestMethod.POST)
+    @RequestMapping(value="/house-registration" , method=RequestMethod.POST)
     public String postNewHousePage(@RequestParam(value="city") String city, @RequestParam(value="street") String street, @RequestParam(value="house") String houseNumber, @RequestParam(value="flat") String flat, @RequestParam(value="ResidentsNumber") int residentsNumber) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
 
 
@@ -277,5 +279,11 @@ public class PageController {
         request_context = 1;
         return "managerRequest";
 
+    }
+
+    @RequestMapping(value ="/house-menu/{id}", method = RequestMethod.GET)
+    public String pathVariable(@PathVariable int id) {
+        house_id = id;
+        return "houseMenu";
     }
 }
