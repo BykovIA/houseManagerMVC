@@ -212,3 +212,17 @@ add constraint comment_fk11
     INTO   :new.comment_id
     FROM   dual;
   END;
+
+
+  _____________________________
+  delete from table applications_hms
+
+  alter table applications_hms
+  add house_id numeric(10) not null;
+
+
+alter table applications_hms
+add constraint applicHouse_fk1
+  FOREIGN KEY (HOUSE_ID)
+  REFERENCES HOUSES_HMS(house_ID);
+

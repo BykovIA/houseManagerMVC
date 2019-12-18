@@ -139,4 +139,41 @@ public class ApplicationsService extends Util implements ApplicationsDao {
         }
         return applicationsList;
     }
+
+    @Override
+    public List<Applications> getAllForHouse(int id, String status) throws SQLException {
+        List<Applications> applicationsList = new ArrayList<>();
+        PreparedStatement preparedStatement = null;
+        String sql = "SELECT APPLICATION_ID, RESIDENT_ID, DATA_TIME, TEXT, IMAGES_NAME FROM APPLICATIONS_HMS WHERE MANAGE_COMPANY_ID = ? AND STATUS = ?";
+
+        try {
+            preparedStatement = connection.prepareStatement((sql));
+            preparedStatement.setInt(1, id);
+            preparedStatement.setString(2, status);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Applications application = new Applications();
+                application.setApplicationsId(resultSet.getInt("APPLICATION_ID"));
+                application.setUserId(resultSet.getInt("RESIDENT_ID"));
+                application.setData(resultSet.getString("DATA_TIME"));
+                application.setText(resultSet.getString("TEXT"));
+                application.setImageName(resultSet.getString("IMAGES_NAME"));
+                application.setManageId(id);
+                application.setStatus(status);
+                applicationsList.add(application);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return applicationsList;
+    }
 }
