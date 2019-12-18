@@ -11,10 +11,11 @@ public class Applications {
     private String status;
     private String imageName;
     private Integer applicationsId;
+    private Integer house_id;
 
     public static final String STATUS_OPEN = "OPEN";
-    public static final String STATUS_CLOSE = "CLOSE";
 
+    public static final String STATUS_CLOSE = "CLOSE";
     public Integer getApplicationsId() {
         return applicationsId;
     }
@@ -29,6 +30,14 @@ public class Applications {
 
     public void setManageId(Integer manageId) {
         this.manageId = manageId;
+    }
+
+    public Integer getHouse_id() {
+        return house_id;
+    }
+
+    public void setHouse_id(Integer house_id) {
+        this.house_id = house_id;
     }
 
     public Integer getUserId() {

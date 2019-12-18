@@ -16,7 +16,7 @@ public class ApplicationsService extends Util implements ApplicationsDao {
     @Override
     public void add(Applications Application) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO APPLICATIONS_HMS (MANAGE_COMPANY_ID, RESIDENT_ID, DATA_TIME, TEXT, STATUS, IMAGES_NAME) VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO APPLICATIONS_HMS (MANAGE_COMPANY_ID, RESIDENT_ID, DATA_TIME, TEXT, STATUS, IMAGES_NAME, HOUSE_ID) VALUES(?, ?, ?, ?, ?, ?, ?)";
 
         try {
             preparedStatement = connection.prepareStatement((sql));
@@ -26,6 +26,7 @@ public class ApplicationsService extends Util implements ApplicationsDao {
             preparedStatement.setString(4, Application.getText());
             preparedStatement.setString(5, Application.getStatus());
             preparedStatement.setString(6, Application.getImageName());
+            preparedStatement.setInt(7,Application.getHouse_id());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -68,7 +69,7 @@ public class ApplicationsService extends Util implements ApplicationsDao {
     public List<Applications> getAllForResident(int id, String status) throws SQLException {
         List<Applications> applicationsList = new ArrayList<>();
         PreparedStatement preparedStatement = null;
-        String sql = "SELECT APPLICATION_ID, MANAGE_COMPANY_ID, DATA_TIME, TEXT, IMAGES_NAME FROM APPLICATIONS_HMS WHERE RESIDENT_ID = ? AND STATUS = ?";
+        String sql = "SELECT APPLICATION_ID, MANAGE_COMPANY_ID, DATA_TIME, TEXT, IMAGES_NAME, HOUSE_ID FROM APPLICATIONS_HMS WHERE RESIDENT_ID = ? AND STATUS = ?";
 
         try {
             preparedStatement = connection.prepareStatement((sql));
@@ -84,6 +85,7 @@ public class ApplicationsService extends Util implements ApplicationsDao {
                 application.setData(resultSet.getString("DATA_TIME"));
                 application.setText(resultSet.getString("TEXT"));
                 application.setImageName(resultSet.getString("IMAGES_NAME"));
+                application.setHouse_id(resultSet.getInt("HOUSE_ID"));
                 application.setUserId(id);
                 application.setStatus(status);
                 applicationsList.add(application);
@@ -107,7 +109,7 @@ public class ApplicationsService extends Util implements ApplicationsDao {
     public List<Applications> getAllForManager(int id, String status) throws SQLException {
         List<Applications> applicationsList = new ArrayList<>();
         PreparedStatement preparedStatement = null;
-        String sql = "SELECT APPLICATION_ID, RESIDENT_ID, DATA_TIME, TEXT, IMAGES_NAME FROM APPLICATIONS_HMS WHERE MANAGE_COMPANY_ID = ? AND STATUS = ?";
+        String sql = "SELECT APPLICATION_ID, RESIDENT_ID, DATA_TIME, TEXT, IMAGES_NAME, HOUSE_ID FROM APPLICATIONS_HMS WHERE MANAGE_COMPANY_ID = ? AND STATUS = ?";
 
         try {
             preparedStatement = connection.prepareStatement((sql));
@@ -123,6 +125,7 @@ public class ApplicationsService extends Util implements ApplicationsDao {
                 application.setData(resultSet.getString("DATA_TIME"));
                 application.setText(resultSet.getString("TEXT"));
                 application.setImageName(resultSet.getString("IMAGES_NAME"));
+                application.setHouse_id(resultSet.getInt("HOUSE_ID"));
                 application.setManageId(id);
                 application.setStatus(status);
                 applicationsList.add(application);
@@ -144,7 +147,7 @@ public class ApplicationsService extends Util implements ApplicationsDao {
     public List<Applications> getAllForHouse(int id, String status) throws SQLException {
         List<Applications> applicationsList = new ArrayList<>();
         PreparedStatement preparedStatement = null;
-        String sql = "SELECT APPLICATION_ID, RESIDENT_ID, DATA_TIME, TEXT, IMAGES_NAME FROM APPLICATIONS_HMS WHERE MANAGE_COMPANY_ID = ? AND STATUS = ?";
+        String sql = "SELECT APPLICATION_ID, RESIDENT_ID, DATA_TIME, TEXT, IMAGES_NAME, MANGER_COMPANY_ID FROM APPLICATIONS_HMS WHERE HOUSE_ID = ? AND STATUS = ?";
 
         try {
             preparedStatement = connection.prepareStatement((sql));
@@ -160,7 +163,8 @@ public class ApplicationsService extends Util implements ApplicationsDao {
                 application.setData(resultSet.getString("DATA_TIME"));
                 application.setText(resultSet.getString("TEXT"));
                 application.setImageName(resultSet.getString("IMAGES_NAME"));
-                application.setManageId(id);
+                application.setManageId(resultSet.getInt("MANGER_COMPANY_ID"));
+                application.setHouse_id(id);
                 application.setStatus(status);
                 applicationsList.add(application);
             }

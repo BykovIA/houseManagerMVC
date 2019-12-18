@@ -1,5 +1,6 @@
 package ru.house.manager.serviceDB;
 import ru.house.manager.BLDB.Util;
+import ru.house.manager.EntityDB.Accounts;
 import ru.house.manager.EntityDB.Applications;
 import ru.house.manager.daoDB.HousesDao;
 import ru.house.manager.EntityDB.Houses;
@@ -41,6 +42,33 @@ public class HousesService extends Util implements HousesDao{
     }
 
     @Override
+    public void update(Houses house) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        String sql = "UPDATE HOUSES_HMS SET CITY_NAME = ?, ADRESS = ?, ACCESS_TOKEN = ?, AMOUNT_OF_RESIDENTS = ? WHERE HOUSE_ID = ?";
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1,house.getCity());
+            preparedStatement.setString(2, house.getAdress());
+            preparedStatement.setInt(3, house.getAccessToken());
+            preparedStatement.setInt(4, house.getResidentsNumber());
+            preparedStatement.setInt(5, house.getHouseId());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+    }
+
+    @Override
     public Houses getById(int id) throws SQLException {
 
         String sql = "SELECT manage_company_id, adress, city_name, amount_of_residents, access_token FROM houses_HMS WHERE house_ID = ?";
@@ -59,6 +87,7 @@ public class HousesService extends Util implements HousesDao{
             house.setAdress(resultSet.getString("adress"));
             house.setResidentsNumber(resultSet.getInt("AMOUNT_OF_RESIDENTS"));
             house.setCity(resultSet.getString("city_name"));
+            house.setHouseId(id);
 
             preparedStatement.executeUpdate();
 

@@ -214,6 +214,7 @@ public class PageController {
         Houses house = new Houses();
         house = housesService.getById(user.getHouseId());
         application.setManageId(house.getManageCompanyId());
+        application.setHouse_id(user.getHouseId());
         application.setImageName("NONE");
         application.setText(new String(text.getBytes("ISO-8859-1"), "UTF-8"));
         Date date = new Date();
@@ -282,8 +283,53 @@ public class PageController {
     }
 
     @RequestMapping(value ="/house-menu/{id}", method = RequestMethod.GET)
-    public String pathVariable(@PathVariable int id) {
+    public String getHouseMenu(@PathVariable int id) {
         house_id = id;
         return "houseMenu";
+    }
+
+    @RequestMapping(value ="/house-info/{id}", method = RequestMethod.GET)
+    public String getHouseInfo(@PathVariable int id) {
+        house_id = id;
+        return "houseInfo";
+    }
+
+    @RequestMapping(value ="/house-requests/{id}", method = RequestMethod.GET)
+    public String getHouseRequests(@PathVariable int id) {
+        house_id = id;
+        return "houseRequests";
+    }
+
+    @RequestMapping(value ="/house-ads/{id}", method = RequestMethod.GET)
+    public String getHouseAds(@PathVariable int id) {
+        house_id = id;
+        return "houseAds";
+    }
+
+    @RequestMapping(value ="/house-info/{id}", method = RequestMethod.POST)
+    public String postHouseInfo(@PathVariable int id, @RequestParam(value = "city") String city, @RequestParam(value = "street") String street, @RequestParam(value = "houseNumber") String houseNumber,
+                                @RequestParam(value = "corpus") String corpus, @RequestParam(value = "residentNumber") int residentNumber, @RequestParam(value = "token") int token) throws UnsupportedEncodingException, SQLException {
+        house_id = id;
+        HousesService houseCount = new HousesService();
+        String fullAddress = new String(street.getBytes("ISO-8859-1"), "UTF-8") + " " + new String(houseNumber.getBytes("ISO-8859-1"), "UTF-8") + " " + new String(corpus.getBytes("ISO-8859-1"), "UTF-8");
+        if (houseCount.houseCount(fullAddress) != 0) { return "ThisHouseIsAlreadyExist"; }
+        HousesService tokenService = new HousesService();
+        HousesService housesService = new HousesService();
+        Houses house = new Houses();
+        ManagersService managersService = new ManagersService();
+        Managers manager = managersService.getByAccountId(client_account_id);
+        manager_id = manager.getId();
+        house.setManageCompanyId(manager_id);
+        house.setAdress(fullAddress);
+        house.setCity(new String(city.getBytes("ISO-8859-1"), "UTF-8"));
+        house.setResidentsNumber(residentNumber);
+        HousesService tokenCount = new HousesService();
+        if (tokenCount.tokenCount(token) != 0 && token != tokenService.getById(id).getAccessToken()) {
+            return "tokenIsBusy";
+        }
+        house.setAccessToken(token);
+        house.setHouseId(id);
+        housesService.update(house);
+        return "houseInfo";
     }
 }

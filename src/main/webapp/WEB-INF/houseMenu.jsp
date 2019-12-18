@@ -95,7 +95,7 @@
         <%="город " +house.getCity() + " улица " + house.getAdress()%>
     </h3>
     <div class="container-grid-options">
-        <div class="option" onclick="location.href='mc-house-info.html';">
+        <div class="option" onclick="location.href='/house.manager/house-info/<%=PageController.house_id%>';">
             <div class="option-logo">
                 <img src="<c:url value="images/house.png"/>" alt="logo">
             </div>
@@ -111,7 +111,7 @@
                 Создавайте голосования для решения общедомовых вопросов
             </div>
         </div>
-        <div class="option" onclick="location.href='mc-requests.html';">
+        <div class="option" onclick="location.href='/house.manager/house-requests/<%=PageController.house_id%>';">
             <div class="option-logo">
                 <img src="<c:url value="${request.png}"/>" alt="logo">
             </div>
@@ -119,7 +119,7 @@
                 Принимайте заявки от жильцов
             </div>
         </div>
-        <div class="option" onclick="location.href='mc-ads.html';">
+        <div class="option" onclick="location.href='/house.manager/house-ads/<%=PageController.house_id%>';">
             <div class="option-logo">
                 <img src="<c:url value="${news.png}"/>" alt="logo">
             </div>
