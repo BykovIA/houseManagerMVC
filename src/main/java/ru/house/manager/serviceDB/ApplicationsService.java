@@ -147,7 +147,7 @@ public class ApplicationsService extends Util implements ApplicationsDao {
     public List<Applications> getAllForHouse(int id, String status) throws SQLException {
         List<Applications> applicationsList = new ArrayList<>();
         PreparedStatement preparedStatement = null;
-        String sql = "SELECT APPLICATION_ID, RESIDENT_ID, DATA_TIME, TEXT, IMAGES_NAME, MANGER_COMPANY_ID FROM APPLICATIONS_HMS WHERE HOUSE_ID = ? AND STATUS = ?";
+        String sql = "SELECT APPLICATION_ID, RESIDENT_ID, DATA_TIME, TEXT, IMAGES_NAME, MANAGE_COMPANY_ID FROM APPLICATIONS_HMS WHERE HOUSE_ID = ? AND STATUS = ?";
 
         try {
             preparedStatement = connection.prepareStatement((sql));
@@ -163,7 +163,7 @@ public class ApplicationsService extends Util implements ApplicationsDao {
                 application.setData(resultSet.getString("DATA_TIME"));
                 application.setText(resultSet.getString("TEXT"));
                 application.setImageName(resultSet.getString("IMAGES_NAME"));
-                application.setManageId(resultSet.getInt("MANGER_COMPANY_ID"));
+                application.setManageId(resultSet.getInt("MANAGE_COMPANY_ID"));
                 application.setHouse_id(id);
                 application.setStatus(status);
                 applicationsList.add(application);
@@ -179,5 +179,37 @@ public class ApplicationsService extends Util implements ApplicationsDao {
             }
         }
         return applicationsList;
+    }
+
+    @Override
+    public Applications getApplicationById(int id) throws SQLException {
+        Applications application = new Applications();
+        PreparedStatement preparedStatement = null;
+        String sql = "SELECT HOUSE_ID, RESIDENT_ID, DATA_TIME, TEXT, IMAGES_NAME, MANAGE_COMPANY_ID, STATUS FROM APPLICATIONS_HMS WHERE APPLICATION_ID = ?";
+        try {
+            preparedStatement = connection.prepareStatement((sql));
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            application.setHouse_id(resultSet.getInt("HOUSE_ID"));
+            application.setUserId(resultSet.getInt("RESIDENT_ID"));
+            application.setData(resultSet.getString("DATA_TIME"));
+            application.setText(resultSet.getString("TEXT"));
+            application.setImageName(resultSet.getString("IMAGES_NAME"));
+            application.setManageId(resultSet.getInt("MANAGE_COMPANY_ID"));
+            application.setStatus(resultSet.getString("STATUS"));
+            application.setApplicationsId(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return application;
     }
 }

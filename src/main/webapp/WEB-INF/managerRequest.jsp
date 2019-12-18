@@ -24,7 +24,11 @@
     applicationsOpenList = applicationsService.getAllForManager(manager.getId(), Applications.STATUS_OPEN);
     ApplicationsService applicationsService2 = new ApplicationsService();
     applicationsCloseList = applicationsService2.getAllForManager(manager.getId(), Applications.STATUS_CLOSE);
-
+    Applications applicationOnce = new Applications();
+    if(PageController.request_id != -1) {
+        ApplicationsService applicationsServiceOnce = new ApplicationsService();
+        applicationOnce = applicationsServiceOnce.getApplicationById(PageController.request_id);
+    }
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -66,7 +70,13 @@
 
     <script src="WEB-INF/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
+    <script>
+        $(document).ready(function () {
+           $(".request").click(function () {
+                $("#gg").submit();
+           });
+        });
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" ></script>
 </head>
 <body>
@@ -99,7 +109,67 @@
     </div>
 </div>
 <div class="container requests manager">
-    <div class="form-show-requests">
+    <div class="request-detalization-container">
+        <% if (PageController.request_id != -1) {%>
+        <form class="request-detalization-form" action="/house.manager/manager-requests/<%=applicationOnce.getApplicationsId()%>" method="post" accept-charset="UTF-8">
+            <h3 class="form-request-heading">Заявка №<%=applicationOnce.getApplicationsId()%></h3>
+            <div id="request-author">
+                <div id="request-author-label">Разместил заявку:</div>
+                <div id="request-author-value"><%=applicationOnce.getUserId()%></div>
+            </div>
+            <div id="request-description">
+                <div id="request-description-label">Описание:</div>
+                <div id="request-description-value"><%=applicationOnce.getText()%></div>
+            </div>
+            <div id="request-files">
+                <div id="request-files-label">Вложения:</div>
+                <div id="request-files-value">
+                    <div class="request-image"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASIAAACuCAMAAAClZfCTAAAAA1BMVEXdAAAiK5u5AAAASElEQVR4nO3BMQEAAADCoPVPbQhfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABeA8XKAAFZcBBuAAAAAElFTkSuQmCC" alt=""></div>
+                    <div class="request-image"><img src="https://photogora.ru/img/product/thumb/3600/1473674102993123600.jpg" alt=""></div>
+                    <div class="request-image"><img src="https://i.ytimg.com/vi/PthNflknIQU/maxresdefault.jpg" alt=""></div>
+                </div>
+            </div>
+            <div id="request-status">
+                <div id="request-status-label">Статус заявки:</div>
+                <div class="status-value status-new"><%=applicationOnce.getStatus()%></div>
+            </div>
+            <div id="request-date">
+                <div id="request-date-label">Дата размещения:</div>
+                <div class="request-date-value"><%=applicationOnce.getData()%></div>
+            </div>
+            <div id="request-action">
+                <button id="delete">Закрыть заявку</button>
+            </div>
+        </form>
+        <% } %>
+        <div id="request-comments">
+            <h3 id="request-comments-label">Комментарии к заявке</h3>
+            <div id="request-comments-value">
+                <div class="request-comment">
+                    <div id="request-comment-author">П.В.Хитровой</div>
+                    <div id="request-comment-text">На 10 этаже слишком громко долбятся геи</div>
+                    <div id="request-comment-date">10 ноября 2019 года</div>
+                </div>
+                <div class="request-comment">
+                    <div id="request-comment-author">Администрация УК</div>
+                    <div id="request-comment-text">Вы можете и не слушать</div>
+                    <div id="request-comment-date">11 ноября 2020 года</div>
+                </div>
+                <div class="request-comment">
+                    <div id="request-comment-author">П.В.Хитровой</div>
+                    <div id="request-comment-text">Спасибо за своевременный ответ, я уже переехал</div>
+                    <div id="request-comment-date">11 ноября 2020 года</div>
+                </div>
+            </div>
+            <div id="request-comments-addcomm">
+                <div class="request-comment-input">
+                    <textarea class="request-comment-input-textarrea" type="text" placeholder="Оставить комментарий..."></textarea>
+                </div>
+                <button class="request-comment-button">Отправить</button>
+            </div>
+        </div>
+    </div>
+    <div class="form-show-requests" id="mc">
         <h3 class="form-request-heading">Заявки</h3>
         <div class="requests-types">
             <form method="post" action="/house.manager/manager-requests-1" accept-charset="UTF-8" role ="form">
@@ -114,93 +184,55 @@
             <%
                 if (PageController.request_context == 0) {
                     for(int i = 0; i < applicationsOpenList.size(); i++) { %>
-            <form method="post" action="/house.manager/manager-requests" accept-charset="UTF-8" role ="form">
+
                 <div class="request">
-                    <div class="request-row author-request">
-                        <div class="label-description">Отправил:</div>
-                        <div class="description"><%=applicationsOpenList.get(i).getUserId()%></div>
-                    </div>
-                    <div class="request-row label-description">Описание:</div>
-                    <div class="request-row description"><%=applicationsOpenList.get(i).getText()%></div>
-                    <div class="request-row status-and-date">
-                        <div class="status">
-                            <div class="status-label">Статус:</div>
-                            <div class="status-value status-new">Новая</div>
-                            <div class="imported-content"><span class="glyphicon glyphicon-picture"></span>1</div>
+                    <form action="/house.manager/manager-requests/<%=applicationsOpenList.get(i).getApplicationsId()%>", method="get" id="gg">
+                        <div class="request-row author-request">
+                            <div class="label-description">Отправил:</div>
+                            <div class="description"><%=applicationsOpenList.get(i).getUserId()%></div>
                         </div>
-                        <div class="date"><span class="glyphicon glyphicon-calendar"></span><%=applicationsOpenList.get(i).getData()%></div>
-                    </div>
-                    <div class="request-row btn-delete">
-                        <button type="submit" value = "<%=i%>" name = "button">Закрыть заявку</button>
-                    </div>
+                        <div class="request-row label-description">Описание:</div>
+                        <div class="request-row description"><%=applicationsOpenList.get(i).getText()%></div>
+                        <div class="request-row status-and-date">
+                            <div class="status">
+                                <div class="status-label">Статус:</div>
+                                <div class="status-value status-new">Новая</div>
+                                <div class="imported-content"><span class="glyphicon glyphicon-picture"></span>1</div>
+                            </div>
+                            <div class="date"><span class="glyphicon glyphicon-calendar"></span><%=applicationsOpenList.get(i).getData()%></div>
+                        </div>
+                    </form>
                 </div>
-                </form>
+
                     <% }
                     } if (PageController.request_context == 1) {
                         for(int j = 0; j < applicationsCloseList.size(); j++) { %>
-            <form method="post" action="/house.manager/manager-requests" accept-charset="UTF-8" role ="form">
+
                 <div class="request">
-                    <div class="request-row author-request">
-                        <div class="label-description">Отправил:</div>
-                        <div class="description"><%=applicationsCloseList.get(j).getUserId()%></div>
-                    </div>
-                    <div class="request-row label-description">Описание:</div>
-                    <div class="request-row description"><%=applicationsCloseList.get(j).getText()%></div>
-                    <div class="request-row status-and-date">
-                        <div class="status">
-                            <div class="status-label">Статус:</div>
-                            <div class="status-value status-new">Новая</div>
-                            <div class="imported-content"><span class="glyphicon glyphicon-picture"></span>1</div>
+                    <form action="/house.manager/manager-requests/<%=applicationsCloseList.get(j).getApplicationsId()%>" method="get" id="gg">
+                        <div class="request-row author-request">
+                            <div class="label-description">Отправил:</div>
+                            <div class="description"><%=applicationsCloseList.get(j).getUserId()%></div>
                         </div>
-                        <div class="date"><span class="glyphicon glyphicon-calendar"></span><%=applicationsCloseList.get(j).getData()%></div>
-                    </div>
-<%--                    <div class="request-row btn-delete">--%>
-<%--                        <button type="submit" value = "<%=j%>" name = "button">Закрыть заявку</button>--%>
-<%--                    </div>--%>
+                        <div class="request-row label-description">Описание:</div>
+                        <div class="request-row description"><%=applicationsCloseList.get(j).getText()%></div>
+                        <div class="request-row status-and-date">
+                            <div class="status">
+                                <div class="status-label">Статус:</div>
+                                <div class="status-value status-new">Новая</div>
+                                <div class="imported-content"><span class="glyphicon glyphicon-picture"></span>1</div>
+                            </div>
+                            <div class="date"><span class="glyphicon glyphicon-calendar"></span><%=applicationsCloseList.get(j).getData()%></div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+
             <% }
             }%>
             <% %>
         </div>
     </div>
 </div>
-<script>
-    var april_6 = null;
-    var april_8 = null;
-    function ChangeToArchivedContent(){
-        /*var april_6 = $('.requests>ul>li').html();
-        $('.requests>ul>li').remove(':contains("6 апреля")');
-        var april8 = $('.requests>ul>li').html();
-        $('.requests>ul>li').remove(':contains("8 апреля")');*/
-        var r ='                             <div class="label-description">Описание:</div>                            <div class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex doloremque magnam dolor ab natus nostrum corporis voluptate repellendus numquam repellat molestiae cum maiores nulla tempora velit, totam necessitatibus, praesentium omnis.</div><div class="status-and-date"><div class="status"><div class="status-label">Статус:</div><div class="status-value label-success">Выполнена</div><div class="imported-content"><span class="glyphicon glyphicon-picture"></span>1</div></div><div class="date"><span class="glyphicon glyphicon-calendar"></span> 18 марта</div></div>'
-        $('.requests>ul>li').empty();
-        $('.requests>ul').append('<li>'+r+'</li>');
-        $('.requests>ul').append(april_6);
-        $('.requests>ul').append(april_8);
-    }
-    function ChangeToOpenedContent(){
-        $('.requests>ul>').empty();
-        /*var f5 = '<li><div class="label-description">Описание:</div><div class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex doloremque magnam dolor ab natus nostrum corporis voluptate repellendus numquam repellat molestiae cum maiores nulla tempora velit, totam necessitatibus, praesentium omnis.</div><div class="status-and-date"><div class="status"><div class="status-label">Статус:</div><div class="status-value label-danger">Новая</div><div class="imported-content"><span class="glyphicon glyphicon-picture"></span>2</div></div><div class="date"><span class="glyphicon glyphicon-calendar"></span> 6 апреля</div></div></li><li><div class="label-description">Описание:</div><div class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex doloremque magnam dolor ab natus nostrum corporis voluptate repellendus numquam repellat molestiae cum maiores nulla tempora velit, totam necessitatibus, praesentium omnis.</div><div class="status-and-date"><div class="status"><div class="status-label">Статус:</div><div class="status-value label-danger">Новая</div><div class="imported-content"><span class="glyphicon glyphicon-picture"></span>1</div></div><div class="date"><span class="glyphicon glyphicon-calendar"></span> 8 апреля</div></div></li>'
-        $('.requests>ul').append(f5);*/
-    }
-    function ChangeStatus6April(){
-        $('div.button-completed.to-right')[0].remove();
-        $('div.status-value.label-danger').text('Выполнена');
-        $('.status-value.label-danger').removeClass('label-danger');
-        $('.status-value').addClass('label-success');
-        april_6 = $('.requests>ul>li');
-        $('.requests>ul>li').remove(':contains("6 апреля")');
-    }
-    function ChangeStatus8April(){
-        $('div.button-completed.to-right')[0].remove();
-        $('div.status-value.label-danger').text('Выполнена');
-        $('.status-value.label-danger').removeClass('label-danger');
-        $('.status-value').addClass('label-success');
-        april_8 = $('.requests>ul>li');
-        $('.requests>ul>li').remove(':contains("8 апреля")');
-    }
-</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="bootstrap.min.js"></script>
 </body>

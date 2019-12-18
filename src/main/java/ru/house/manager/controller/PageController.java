@@ -23,6 +23,7 @@ public class PageController {
     public static int manager_id = -1;
     public static int request_context = 0;
     public static int house_id = -1;
+    public static int request_id = -1;
 
     @RequestMapping(value="/", method=RequestMethod.GET)
     public String getLoginPage(Model model) {
@@ -242,25 +243,13 @@ public class PageController {
     }
 
 
-    @RequestMapping(value="/manager-requests", method=RequestMethod.POST)
-    public String postManagerRequestsPage(@RequestParam(value="button") String numb) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
-
-
-        int number = Integer.parseInt(numb);
-        ApplicationsService applicationsService = new ApplicationsService();
-        List<Applications> applicationsOpenList = new ArrayList<>();
-        ManagersService managersService = new ManagersService();
-        Managers manager = new Managers();
-        manager = managersService.getByAccountId(PageController.client_account_id);
-        applicationsOpenList = applicationsService.getAllForManager(manager.getId(), Applications.STATUS_OPEN);
-
-
+    @RequestMapping(value="/manager-requests/{id}", method=RequestMethod.POST)
+    public String postManagerRequestsPage(@PathVariable int id) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
+        request_id = id;
         ApplicationsService applicationsService2 = new ApplicationsService();
         Applications application = new Applications();
         application.setStatus(Applications.STATUS_CLOSE);
-        application.setApplicationsId(applicationsOpenList.get(number).getApplicationsId());
-
-
+        application.setApplicationsId(id);
         applicationsService2.update(application);
         return "managerRequest";
 
@@ -331,5 +320,11 @@ public class PageController {
         house.setHouseId(id);
         housesService.update(house);
         return "houseInfo";
+    }
+
+    @RequestMapping(value = "/manager-requests/{id}", method = RequestMethod.GET)
+    public String getChosenRequest(@PathVariable int id) {
+        request_id = id;
+        return "managerRequest";
     }
 }

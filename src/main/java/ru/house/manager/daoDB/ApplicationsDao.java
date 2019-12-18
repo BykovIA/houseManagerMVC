@@ -11,6 +11,7 @@ public interface ApplicationsDao {
     List<Applications> getAllForResident(int id, String status) throws SQLException;
     List<Applications> getAllForManager(int id, String status) throws SQLException;
     List<Applications> getAllForHouse(int id, String status) throws SQLException;
+    Applications getApplicationById(int id) throws SQLException;
 
     // update
     void update(Applications Application) throws SQLException;
