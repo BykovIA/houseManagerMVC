@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import com.sun.mail.iap.ByteArray;
 import org.springframework.web.bind.annotation.PathVariable;
 import ru.house.manager.EntityDB.*;
 import org.springframework.stereotype.Controller;
@@ -491,4 +492,21 @@ public class PageController {
         return "userRequest";
     }
 
+    @RequestMapping(value ="/house-ads/{id}", method = RequestMethod.POST)
+    public String postHouseAds(@PathVariable int id, @RequestParam(value = "text") String text, @RequestParam(value = "status") String status) throws UnsupportedEncodingException, SQLException {
+        house_id = id;
+        Notifications notification = new Notifications();
+        notification.setManagerId(manager_id);
+        notification.setHouseId(house_id);
+        notification.setStatus(status);
+        notification.setUserVisibility(0);
+        String text2 = new String(text.getBytes("ISO-8859-1"), "UTF-8");
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat();
+        notification.setDate((dateFormat.format( date )).toString());
+        notification.setText(text2);
+        NotificationsService notificationsService = new NotificationsService();
+        notificationsService.add(notification);
+        return "houseAds";
+    }
 }
