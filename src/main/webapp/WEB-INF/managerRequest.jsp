@@ -82,7 +82,7 @@
                 $(this).children().submit();
            });
         });
-    </script>
+        </script>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" ></script>
 </head>
@@ -118,7 +118,7 @@
 <div class="container requests manager">
     <div class="request-detalization-container">
         <% if (PageController.request_id != -1) {%>
-        <form class="request-detalization-form" action="/house.manager/manager-requests/<%=applicationOnce.getApplicationsId()%>" method="post" accept-charset="UTF-8">
+        <form class="request-detalization-form" action="/house.manager/manager-requests/<%=applicationOnce.getApplicationsId()%>" method = "post" accept-charset="UTF-8">
             <h3 class="form-request-heading">Заявка №<%=applicationOnce.getApplicationsId()%></h3>
             <div id="request-author">
                 <div id="request-author-label">Разместил заявку:</div>
@@ -138,15 +138,21 @@
             </div>
             <div id="request-status">
                 <div id="request-status-label">Статус заявки:</div>
-                <div class="status-value status-new"><%=applicationOnce.getStatus()%></div>
+                <div class="status-value status-<% if (applicationOnce.getStatus().equals("OPEN")) { %>ready<%} else {%>new<%}%>"><%=applicationOnce.getStatus()%></div>
             </div>
             <div id="request-date">
                 <div id="request-date-label">Дата размещения:</div>
                 <div class="request-date-value"><%=applicationOnce.getData()%></div>
             </div>
-            <div id="request-action">
-                <button id="delete">Закрыть заявку</button>
+            <% if (applicationOnce.getStatus().equals("OPEN")) { %>
+            <div id="request-close-reason">
+                <div id="request-reason-label">Укажите причину закрытия заявки:</div>
+                <div id="request-reason-value">
+                    <textarea id="request-close-reason-textarrea" type="text" placeholder="Указать причину..." name="commentsText" required></textarea>
+                    <button class="request-reason-button" type="submit">Закрыть заявку</button>
+                </div>
             </div>
+            <% } %>
         </form>
         <div id="request-comments">
             <h3 id="request-comments-label">Комментарии к заявке</h3>
@@ -159,6 +165,7 @@
                 </div>
                 <% } %>
             </div>
+            <% if (applicationOnce.getStatus().equals("OPEN")) { %>
             <div id="request-comments-addcomm">
                 <form method="post" action="/house.manager/manager-requests/<%=applicationOnce.getApplicationsId()%>/comments" accept-charset="UTF-8" role ="form">
                     <div class="request-comment-input">
@@ -167,6 +174,7 @@
                     <button class="request-comment-button">Отправить</button>
                 </form>
             </div>
+            <% } %>
         </div>
         <% } %>
     </div>
@@ -197,7 +205,7 @@
                         <div class="request-row status-and-date">
                             <div class="status">
                                 <div class="status-label">Статус:</div>
-                                <div class="status-value status-new">Новая</div>
+                                <div class="status-value status-ready">Выполняется</div>
                                 <div class="imported-content"><span class="glyphicon glyphicon-picture"></span>1</div>
                             </div>
                             <div class="date"><span class="glyphicon glyphicon-calendar"></span><%=applicationsOpenList.get(i).getData()%></div>
@@ -220,7 +228,7 @@
                         <div class="request-row status-and-date">
                             <div class="status">
                                 <div class="status-label">Статус:</div>
-                                <div class="status-value status-new">Новая</div>
+                                <div class="status-value status-new">Выполнена</div>
                                 <div class="imported-content"><span class="glyphicon glyphicon-picture"></span>1</div>
                             </div>
                             <div class="date"><span class="glyphicon glyphicon-calendar"></span><%=applicationsCloseList.get(j).getData()%></div>

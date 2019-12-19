@@ -243,17 +243,6 @@ public class PageController {
     }
 
 
-    @RequestMapping(value="/manager-requests/{id}", method=RequestMethod.POST)
-    public String postManagerRequestsPage(@PathVariable int id) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
-        request_id = id;
-        ApplicationsService applicationsService2 = new ApplicationsService();
-        Applications application = new Applications();
-        application.setStatus(Applications.STATUS_CLOSE);
-        application.setApplicationsId(id);
-        applicationsService2.update(application);
-        return "managerRequest";
-    }
-
 
     @RequestMapping(value="/manager-requests-1", method=RequestMethod.POST)
     public String postbutton0 (@RequestParam(value="button0") String numb) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
@@ -335,6 +324,30 @@ public class PageController {
         String text = new String(commentText.getBytes("ISO-8859-1"), "UTF-8");
         comment.setApplicationId(id);
         comment.setText(text);
+        Date date = new Date();
+        comment.setDate(date.toString());
+        ManagersService managersService = new ManagersService();
+        Managers manager = new Managers();
+        manager = managersService.getByAccountId(client_account_id);
+        comment.setCommentator(manager.getCompanyName());
+        commentsService.add(comment);
+        return "managerRequest";
+    }
+
+    @RequestMapping(value="/manager-requests/{id}", method=RequestMethod.POST)
+    public String postManagerRequestsPage(@PathVariable int id, @RequestParam(value = "commentsText") String commentText) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
+        request_id = id;
+        ApplicationsService applicationsService2 = new ApplicationsService();
+        Applications application = new Applications();
+        application.setStatus(Applications.STATUS_CLOSE);
+        application.setApplicationsId(id);
+        applicationsService2.update(application);
+        Comments comment = new Comments();
+        CommentsService commentsService = new CommentsService();
+        String text = new String(commentText.getBytes("ISO-8859-1"), "UTF-8");
+        String text2 = "ЗАЯВКА ЗАКРЫТА!\n" + text;
+        comment.setApplicationId(id);
+        comment.setText(text2);
         Date date = new Date();
         comment.setDate(date.toString());
         ManagersService managersService = new ManagersService();
