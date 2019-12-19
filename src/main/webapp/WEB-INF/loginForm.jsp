@@ -1,3 +1,4 @@
+<%@ page import="ru.house.manager.controller.PageController" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -85,6 +86,9 @@
                 <h3 class="form-signin-heading">Вход в сервис</h3>
                 <input type="email" class="form-control" placeholder="Адрес электронной почты" name = "eMail" autofocus required>
                 <input type="password" class="form-control" placeholder="Пароль" name = "password" required>
+                <% if(PageController.validatorHasError) { %>
+                <div><%=PageController.validator%></div>
+                <% } %>
                 <label class="checkbox">
                     <input type="checkbox" value="remember-me">Запомнить меня
                 </label>

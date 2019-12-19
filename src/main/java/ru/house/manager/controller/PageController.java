@@ -26,6 +26,8 @@ public class PageController {
     public static int request_context = 0;
     public static int house_id = -1;
     public static int request_id = -1;
+    public static String validator = "";
+    public static Boolean validatorHasError = Boolean.FALSE;
 
     @RequestMapping(value="/", method=RequestMethod.GET)
     public String getLoginPage(Model model) {
@@ -38,7 +40,11 @@ public class PageController {
         String mail = new String(eMail.getBytes("ISO-8859-1"), "UTF-8");
         mail = mail.toLowerCase();
         AccountsService count = new AccountsService();
-        if (count.emailCount(mail) != 1) { return "UserNotFound"; }
+        if (count.emailCount(mail) != 1) {
+            validator = "Пользователя с таким e-mail не существует!";
+            validatorHasError = Boolean.TRUE;
+            return "loginForm";
+        }
 
         AccountsService accountsService = new AccountsService();
         Accounts account = new Accounts();
@@ -46,13 +52,21 @@ public class PageController {
         if (HashFunction.getHash(new String(password.getBytes("ISO-8859-1"), "UTF-8"), account.getSalt(), HashFunction.getSalt2()).equals(account.getHashPassword())) {
             client_account_id = account.getId();
             if(account.getResidentFlag() == 1) {
+                validatorHasError = Boolean.FALSE;
                 return "userProFileForm";
             }
             if(account.getResidentFlag() == 0) {
+                validatorHasError = Boolean.FALSE;
                 return "managerProFileForm";
             }
-            else { return  "residentFlag not exst";}
+            else {
+                validatorHasError = Boolean.TRUE;
+                validator = "Пользователь не идентифицирован по роли!";
+                return  "loginForm";
+            }
         } else {
+            validatorHasError = Boolean.TRUE;
+            validator = "Неизвестная ошибка :c";
             return "loginForm";
         }
     }
@@ -68,15 +82,22 @@ public class PageController {
                                   @RequestParam(value="password2") String password2, @RequestParam(value="accessCode") int accessCode) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
 
         if (!password.equals(password2)) {
-            return "passwordNotEquals";
+            validator = "Пароли не совпадают!";
+            return "userRegistrationForm";
         } else {
             String mail = new String(eMail.getBytes("ISO-8859-1"), "UTF-8");
             mail = mail.toLowerCase();
             AccountsService count = new AccountsService();
-            if (count.emailCount(mail) != 0) { return "ThisE-mailIsBusy"; }
+            if (count.emailCount(mail) != 0) {
+                validator = "Данный e-mail уже существует в системе!";
+                return "userRegistrationForm";
+            }
 
             HousesService houseCount = new HousesService();
-            if (houseCount.tokenCount(accessCode) != 1) { return "ThisAccessCodeNotExist"; }
+            if (houseCount.tokenCount(accessCode) != 1) {
+                validator = "Введенный вами токен доступа не существует!";
+                return "userRegistrationForm";
+            }
 
             String salt1 = HashFunction.getSalt1();
             AccountsService accountsService = new AccountsService();
