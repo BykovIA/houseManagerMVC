@@ -18,7 +18,7 @@ public class NotificationsService extends Util implements NotificationsDao {
     @Override
     public void add(Notifications notification) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO NOTIFICATIONS_HMS (HOUSE_ID, MANAFER_ID, USER_VISIBILITY, NOTIF_DATE, TEXT, STATUS) VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO NOTIFICATIONS_HMS (HOUSE_ID, MANAGER_ID, USER_VISIBILITY, NOTIF_DATE, TEXT, STATUS) VALUES(?, ?, ?, ?, ?, ?)";
         try {
             preparedStatement = connection.prepareStatement((sql));
             preparedStatement.setInt(1, notification.getHouseId());
@@ -44,7 +44,7 @@ public class NotificationsService extends Util implements NotificationsDao {
     public List<Notifications> getAllFromHouseId(int id) throws SQLException {
         List<Notifications> notificationsList = new ArrayList<>();
         PreparedStatement preparedStatement = null;
-        String sql = "SELECT NOTIFICATION_ID, MANAGER_ID, USER_VISIBILITY, NOTIF_DATE, TEXT, STATUS FROM NOTIFICATIONS_HMS WHERE HOUSE_ID = ? order by NOTIF_DATE DESC";
+        String sql = "SELECT NOTIFICATION_ID, MANAGER_ID, USER_VISIBILITY, NOTIF_DATE, TEXT, STATUS FROM NOTIFICATIONS_HMS WHERE HOUSE_ID = ? order by NOTIFICATION_ID DESC";
 
         try {
             preparedStatement = connection.prepareStatement((sql));
@@ -79,7 +79,7 @@ public class NotificationsService extends Util implements NotificationsDao {
     public List<Notifications> getAllFromManageId(int id) throws SQLException {
         List<Notifications> notificationsList = new ArrayList<>();
         PreparedStatement preparedStatement = null;
-        String sql = "SELECT NOTIFICATION_ID, HOUSE_ID, USER_VISIBILITY, NOTIF_DATE, TEXT, STATUS FROM NOTIFICATIONS_HMS WHERE MANAGER_ID = ? order by NOTIF_DATE DESC";
+        String sql = "SELECT NOTIFICATION_ID, HOUSE_ID, USER_VISIBILITY, NOTIF_DATE, TEXT, STATUS FROM NOTIFICATIONS_HMS WHERE MANAGER_ID = ? order by NOTIFICATION_ID DESC";
 
         try {
             preparedStatement = connection.prepareStatement((sql));

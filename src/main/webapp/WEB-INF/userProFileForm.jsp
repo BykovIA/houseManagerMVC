@@ -90,7 +90,7 @@ house = housesService.getById(user.getHouseId());
                 <li><a href="resident-main.html">Главная</a></li>
                 <li><a href="resident-account.html">Профиль</a></li>
                 <li><a href="/house.manager/users-requests">Оставить заявку</a></li>
-                <li><a href="#">Новости и объявления</a></li>
+                <li><a href="/house.manager/users-ads">Новости и объявления</a></li>
                 <li><a href="#">Настройки</a></li>
                 <li><a href="login.html">Выйти</a></li>
             </ul>

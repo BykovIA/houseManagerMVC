@@ -509,4 +509,10 @@ public class PageController {
         notificationsService.add(notification);
         return "houseAds";
     }
+
+    @RequestMapping(value = "/users-ads", method = RequestMethod.GET)
+    public String getUsersAds() {
+
+        return "userAds";
+    }
 }
