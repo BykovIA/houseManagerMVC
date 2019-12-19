@@ -252,7 +252,6 @@ public class PageController {
         application.setApplicationsId(id);
         applicationsService2.update(application);
         return "managerRequest";
-
     }
 
 
@@ -325,6 +324,24 @@ public class PageController {
     @RequestMapping(value = "/manager-requests/{id}", method = RequestMethod.GET)
     public String getChosenRequest(@PathVariable int id) {
         request_id = id;
+        return "managerRequest";
+    }
+
+    @RequestMapping(value="/manager-requests/{id}/comments", method=RequestMethod.POST)
+    public String postManagerRequestCommentPage(@PathVariable int id, @RequestParam(value = "commentsText") String commentText) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
+        request_id = id;
+        Comments comment = new Comments();
+        CommentsService commentsService = new CommentsService();
+        String text = new String(commentText.getBytes("ISO-8859-1"), "UTF-8");
+        comment.setApplicationId(id);
+        comment.setText(text);
+        Date date = new Date();
+        comment.setDate(date.toString());
+        ManagersService managersService = new ManagersService();
+        Managers manager = new Managers();
+        manager = managersService.getByAccountId(client_account_id);
+        comment.setCommentator(manager.getCompanyName());
+        commentsService.add(comment);
         return "managerRequest";
     }
 }

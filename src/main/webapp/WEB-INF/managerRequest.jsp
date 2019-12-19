@@ -15,6 +15,8 @@
 <%@ page import="ru.house.manager.EntityDB.Users" %>
 <%@ page import="ru.house.manager.serviceDB.ManagersService" %>
 <%@ page import="ru.house.manager.EntityDB.Managers" %>
+<%@ page import="ru.house.manager.serviceDB.CommentsService" %>
+<%@ page import="ru.house.manager.EntityDB.Comments" %>
 <% ApplicationsService applicationsService = new ApplicationsService();
     List<Applications> applicationsOpenList = new ArrayList<>();
     List<Applications> applicationsCloseList = new ArrayList<>();
@@ -25,9 +27,12 @@
     ApplicationsService applicationsService2 = new ApplicationsService();
     applicationsCloseList = applicationsService2.getAllForManager(manager.getId(), Applications.STATUS_CLOSE);
     Applications applicationOnce = new Applications();
+    CommentsService commentsService = new CommentsService();
+    List<Comments> commentsList = new ArrayList<>();
     if(PageController.request_id != -1) {
         ApplicationsService applicationsServiceOnce = new ApplicationsService();
         applicationOnce = applicationsServiceOnce.getApplicationById(PageController.request_id);
+        commentsList = commentsService.getAllFromApplicationId(applicationOnce.getApplicationsId());
     }
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -70,13 +75,15 @@
 
     <script src="WEB-INF/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
     <script>
         $(document).ready(function () {
            $(".request").click(function () {
-                $("#gg").submit();
+                $(this).children().submit();
            });
         });
     </script>
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" ></script>
 </head>
 <body>
@@ -141,33 +148,27 @@
                 <button id="delete">Закрыть заявку</button>
             </div>
         </form>
-        <% } %>
         <div id="request-comments">
             <h3 id="request-comments-label">Комментарии к заявке</h3>
             <div id="request-comments-value">
+                <% for(int i = 0; i < commentsList.size(); i++) { %>
                 <div class="request-comment">
-                    <div id="request-comment-author">П.В.Хитровой</div>
-                    <div id="request-comment-text">На 10 этаже слишком громко долбятся геи</div>
-                    <div id="request-comment-date">10 ноября 2019 года</div>
+                    <div id="request-comment-author"><%=commentsList.get(i).getCommentator()%></div>
+                    <div id="request-comment-text"><%=commentsList.get(i).getText()%></div>
+                    <div id="request-comment-date"><%=commentsList.get(i).getDate()%></div>
                 </div>
-                <div class="request-comment">
-                    <div id="request-comment-author">Администрация УК</div>
-                    <div id="request-comment-text">Вы можете и не слушать</div>
-                    <div id="request-comment-date">11 ноября 2020 года</div>
-                </div>
-                <div class="request-comment">
-                    <div id="request-comment-author">П.В.Хитровой</div>
-                    <div id="request-comment-text">Спасибо за своевременный ответ, я уже переехал</div>
-                    <div id="request-comment-date">11 ноября 2020 года</div>
-                </div>
+                <% } %>
             </div>
             <div id="request-comments-addcomm">
-                <div class="request-comment-input">
-                    <textarea class="request-comment-input-textarrea" type="text" placeholder="Оставить комментарий..."></textarea>
-                </div>
-                <button class="request-comment-button">Отправить</button>
+                <form method="post" action="/house.manager/manager-requests/<%=applicationOnce.getApplicationsId()%>/comments" accept-charset="UTF-8" role ="form">
+                    <div class="request-comment-input">
+                        <textarea class="request-comment-input-textarrea" type="text" placeholder="Оставить комментарий..." name="commentsText"></textarea>
+                    </div>
+                    <button class="request-comment-button">Отправить</button>
+                </form>
             </div>
         </div>
+        <% } %>
     </div>
     <div class="form-show-requests" id="mc">
         <h3 class="form-request-heading">Заявки</h3>
@@ -186,7 +187,7 @@
                     for(int i = 0; i < applicationsOpenList.size(); i++) { %>
 
                 <div class="request">
-                    <form action="/house.manager/manager-requests/<%=applicationsOpenList.get(i).getApplicationsId()%>", method="get" id="gg">
+                    <form action="/house.manager/manager-requests/<%=applicationsOpenList.get(i).getApplicationsId()%>", method="get">
                         <div class="request-row author-request">
                             <div class="label-description">Отправил:</div>
                             <div class="description"><%=applicationsOpenList.get(i).getUserId()%></div>
@@ -209,7 +210,7 @@
                         for(int j = 0; j < applicationsCloseList.size(); j++) { %>
 
                 <div class="request">
-                    <form action="/house.manager/manager-requests/<%=applicationsCloseList.get(j).getApplicationsId()%>" method="get" id="gg">
+                    <form action="/house.manager/manager-requests/<%=applicationsCloseList.get(j).getApplicationsId()%>" method="get">
                         <div class="request-row author-request">
                             <div class="label-description">Отправил:</div>
                             <div class="description"><%=applicationsCloseList.get(j).getUserId()%></div>
