@@ -41,7 +41,7 @@ public class CommentsService extends Util implements CommentsDao {
     public List<Comments> getAllFromApplicationId (int id) throws SQLException {
         List<Comments> commentsList = new ArrayList<>();
         PreparedStatement preparedStatement = null;
-        String sql = "SELECT COMMENT_ID, COMMENTATOR, TEXT, COMMENT_DATE FROM COMMENTS_HMS WHERE APPLICATION_ID = ? order by comment_date ASC";
+        String sql = "SELECT COMMENT_ID, COMMENTATOR, TEXT, COMMENT_DATE FROM COMMENTS_HMS WHERE APPLICATION_ID = ? order by comment_date DESC";
 
         try {
             preparedStatement = connection.prepareStatement((sql));

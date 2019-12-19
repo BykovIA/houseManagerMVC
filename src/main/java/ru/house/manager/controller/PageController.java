@@ -327,7 +327,8 @@ public class PageController {
         comment.setApplicationId(id);
         comment.setText(text);
         Date date = new Date();
-        comment.setDate(date.toString());
+        SimpleDateFormat dateFormat = new SimpleDateFormat();
+        comment.setDate((dateFormat.format( date )).toString());
         ManagersService managersService = new ManagersService();
         Managers manager = new Managers();
         manager = managersService.getByAccountId(client_account_id);
@@ -347,7 +348,7 @@ public class PageController {
         Comments comment = new Comments();
         CommentsService commentsService = new CommentsService();
         String text = new String(commentText.getBytes("ISO-8859-1"), "UTF-8");
-        String text2 = "ЗАЯВКА ЗАКРЫТА!\n" + text;
+        String text2 = "Ваша заявка была выполнена Управляющей компанией! \n" + text +"\n Спасибо за Ваше обращение.";
         comment.setApplicationId(id);
         comment.setText(text2);
         Date date = new Date();
@@ -359,4 +360,134 @@ public class PageController {
         commentsService.add(comment);
         return "managerRequest";
     }
+
+
+    /**
+     * Для домов
+     */
+    @RequestMapping(value = "/house-requests", method = RequestMethod.GET)
+    public String getHouseRequestsPage() {
+        return "houseRequests";
+    }
+
+
+
+    @RequestMapping(value="/house-requests-1", method=RequestMethod.POST)
+    public String postbutton00 (@RequestParam(value="button0") String numb) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
+        request_context = 0;
+        return "houseRequests";
+
+    }
+
+
+    @RequestMapping(value="/house-requests-2", method=RequestMethod.POST)
+    public String postbutton11 (@RequestParam(value="button1") String numb) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
+        request_context = 1;
+        return "houseRequests";
+    }
+
+    @RequestMapping(value = "/house-request/{id}", method = RequestMethod.GET)
+    public String getChosenRequest1(@PathVariable int id) {
+        request_id = id;
+        return "houseRequests";
+    }
+
+    @RequestMapping(value="/house-requests/{id}/comments", method=RequestMethod.POST)
+    public String postHouseRequestCommentPage(@PathVariable int id, @RequestParam(value = "commentsText") String commentText) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
+        request_id = id;
+        Comments comment = new Comments();
+        CommentsService commentsService = new CommentsService();
+        String text = new String(commentText.getBytes("ISO-8859-1"), "UTF-8");
+        comment.setApplicationId(id);
+        comment.setText(text);
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat();
+        comment.setDate((dateFormat.format( date )).toString());
+        ManagersService managersService = new ManagersService();
+        Managers manager = new Managers();
+        manager = managersService.getByAccountId(client_account_id);
+        comment.setCommentator(manager.getCompanyName());
+        commentsService.add(comment);
+        return "houseRequests";
+    }
+
+    @RequestMapping(value="/house-requests/{id}", method=RequestMethod.POST)
+    public String postHouseRequestsPage(@PathVariable int id, @RequestParam(value = "commentsText") String commentText) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
+        request_id = id;
+        ApplicationsService applicationsService2 = new ApplicationsService();
+        Applications application = new Applications();
+        application.setStatus(Applications.STATUS_CLOSE);
+        application.setApplicationsId(id);
+        applicationsService2.update(application);
+        Comments comment = new Comments();
+        CommentsService commentsService = new CommentsService();
+        String text = new String(commentText.getBytes("ISO-8859-1"), "UTF-8");
+        String text2 = "Ваша заявка была выполнена Управляющей компанией! \n" + text +"\n Спасибо за Ваше обращение.";
+        comment.setApplicationId(id);
+        comment.setText(text2);
+        Date date = new Date();
+        comment.setDate(date.toString());
+        ManagersService managersService = new ManagersService();
+        Managers manager = new Managers();
+        manager = managersService.getByAccountId(client_account_id);
+        comment.setCommentator(manager.getCompanyName());
+        commentsService.add(comment);
+        return "houseRequests";
+    }
+
+    /**
+     * Для ЛСов
+     */
+    @RequestMapping(value="/user-requests/{id}", method=RequestMethod.POST)
+    public String postUserRequestsPage(@PathVariable int id, @RequestParam(value = "commentsText") String commentText) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
+        request_id = id;
+        ApplicationsService applicationsService2 = new ApplicationsService();
+        Applications application = new Applications();
+        application.setStatus(Applications.STATUS_CLOSE);
+        application.setApplicationsId(id);
+        applicationsService2.update(application);
+        Comments comment = new Comments();
+        CommentsService commentsService = new CommentsService();
+        String text = new String(commentText.getBytes("ISO-8859-1"), "UTF-8");
+        String text2 = "ЗАЯВКА ЗАКРЫТА!\n" + text;
+        comment.setApplicationId(id);
+        comment.setText(text2);
+        Date date = new Date();
+        comment.setDate(date.toString());
+        UsersService usersService = new UsersService();
+        Users user = new Users();
+        user = usersService.getById(client_account_id);
+        String writer = user.getFirstName() + " " + user.getLastName();
+        comment.setCommentator(writer);
+        commentsService.add(comment);
+        return "userRequest";
+    }
+
+
+    @RequestMapping(value="/user-requests/{id}/comments", method=RequestMethod.POST)
+    public String postUserRequestCommentPage(@PathVariable int id, @RequestParam(value = "commentsText") String commentText) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
+        request_id = id;
+        Comments comment = new Comments();
+        CommentsService commentsService = new CommentsService();
+        String text = new String(commentText.getBytes("ISO-8859-1"), "UTF-8");
+        comment.setApplicationId(id);
+        comment.setText(text);
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat();
+        comment.setDate((dateFormat.format( date )).toString());
+        UsersService usersService = new UsersService();
+        Users user = new Users();
+        user = usersService.getById(client_account_id);
+        String writer = user.getFirstName() + " " + user.getLastName();
+        comment.setCommentator(writer);
+        commentsService.add(comment);
+        return "userRequest";
+    }
+
+    @RequestMapping(value = "/user-requests/{id}", method = RequestMethod.GET)
+    public String getChosenRequest2(@PathVariable int id) {
+        request_id = id;
+        return "userRequest";
+    }
+
 }

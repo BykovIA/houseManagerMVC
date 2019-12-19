@@ -11,8 +11,6 @@
 <%@ page import="ru.house.manager.controller.PageController"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="ru.house.manager.serviceDB.UsersService" %>
-<%@ page import="ru.house.manager.EntityDB.Users" %>
 <%@ page import="ru.house.manager.serviceDB.ManagersService" %>
 <%@ page import="ru.house.manager.EntityDB.Managers" %>
 <%@ page import="ru.house.manager.serviceDB.CommentsService" %>
