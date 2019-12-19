@@ -301,6 +301,8 @@ textarea{
 
 .status{
     display: flex;
+    align-items: center;
+
 }
 
 .status>div{
@@ -620,6 +622,7 @@ textarea{
 
 #request-reason-label{
     margin-bottom: 10px;
+    font-weight: bold;
 }
 
 #request-close-reason-textarrea{

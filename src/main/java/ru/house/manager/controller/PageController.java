@@ -3,6 +3,7 @@ package ru.house.manager.controller;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -219,7 +220,8 @@ public class PageController {
         application.setImageName("NONE");
         application.setText(new String(text.getBytes("ISO-8859-1"), "UTF-8"));
         Date date = new Date();
-        application.setData(date.toString());
+        SimpleDateFormat dateFormat = new SimpleDateFormat();
+        application.setData((dateFormat.format( date )).toString());
         application.setStatus(Applications.STATUS_OPEN);
         applicationsService.add(application);
         return "userRequest";
