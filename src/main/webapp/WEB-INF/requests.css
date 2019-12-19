@@ -81,6 +81,7 @@ form {
     .form-create-request{
         display: flex;
         align-items: flex-start;
+        width: 440px;
     }
     .form-row-label>p{
         font-size: 14px;
@@ -101,6 +102,10 @@ form {
     .request-detalization-form{
         max-width: 572px;
         min-width: 480px;
+    }
+    #request-comments{
+        min-width: 480px;
+        max-width: 572px;
     }
 }
 
@@ -649,8 +654,21 @@ textarea{
     width: 25%;
     height: 60px;
 }
+#request-comment-text{
+    white-space: pre-wrap;
+    width: 100%;
+}
 
 #request-reason-value{
     display: flex;
     width: 100%;
+}
+
+.column{
+    display:flex;
+    flex-direction: column;
+
+}
+.column>div{
+    margin-bottom: 10px;
 }

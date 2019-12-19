@@ -348,11 +348,12 @@ public class PageController {
         Comments comment = new Comments();
         CommentsService commentsService = new CommentsService();
         String text = new String(commentText.getBytes("ISO-8859-1"), "UTF-8");
-        String text2 = "Ваша заявка была выполнена Управляющей компанией! \n" + text +"\n Спасибо за Ваше обращение.";
+        String text2 = "Ваша заявка была выполнена Управляющей компанией! \n" + text +"\nСпасибо за Ваше обращение.";
         comment.setApplicationId(id);
         comment.setText(text2);
         Date date = new Date();
-        comment.setDate(date.toString());
+        SimpleDateFormat dateFormat = new SimpleDateFormat();
+        comment.setDate((dateFormat.format( date )).toString());
         ManagersService managersService = new ManagersService();
         Managers manager = new Managers();
         manager = managersService.getByAccountId(client_account_id);
@@ -422,7 +423,7 @@ public class PageController {
         Comments comment = new Comments();
         CommentsService commentsService = new CommentsService();
         String text = new String(commentText.getBytes("ISO-8859-1"), "UTF-8");
-        String text2 = "Ваша заявка была выполнена Управляющей компанией! \n" + text +"\n Спасибо за Ваше обращение.";
+        String text2 = "Ваша заявка была выполнена Управляющей компанией! \n" + text +"\nСпасибо за Ваше обращение.";
         comment.setApplicationId(id);
         comment.setText(text2);
         Date date = new Date();
