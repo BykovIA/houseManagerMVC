@@ -15,7 +15,6 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background:  #EEF0ED;
-  /*background: url(https://i.redd.it/f42q8ogdl7k31.png);*/
   background-size: cover;
 }
     
@@ -26,36 +25,52 @@ body {
     align-items: center;
     justify-content: center;
   }
+
+  .container.roflan>div{
+    margin-bottom: 15px;
+  }
+
   .roflan-content>img{
-    max-width: 720px;
-    height: 280px;
+    background-size: contain;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    border: 1px #DCAC01 solid;
   } 
+  
+  .expire{
+    width: 100%;
+  }
+
   .form-signin {
-      width: 280px;
+      width: 100%;
       padding: 15px;
       margin: 0px auto;
       background: white;
       border: 1px #DCAC01 solid;
       border-radius: 20px;
     }
+
     #management-company{
       margin: 15px auto;
-      width: 280px;
+      width: 100%;
       background: white;
       border: 1px #DCAC01 solid;
       border-radius: 20px;
       padding: 15px;
     }
-    .expire{
-      margin-left: auto;
-      margin-right: auto;
-    }
+
 }
  
-@media (min-width: 601px) and (max-width: 2560px)
+@media (min-width: 601px) and (max-width: 4000px)
 {
-  .form-signin {
-    width: 350px;
+  .container.roflan{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .form-signin{
+    width: 25vw;
     padding: 15px;
     margin: auto auto;
     background: white;
@@ -64,14 +79,23 @@ body {
   }
   #management-company{
     margin-top: 15px;
-    width: 350px;
+    width: 25vw;
     background: white;
     border: 1px #DCAC01 solid;
     border-radius: 20px;
     padding: 15px;
   }
+  .roflan-content>img{
+    width: 50vw;
+    height: auto;
+    border-radius: 20px;
+    border: 1px solid #DCAC01;
+  }
   .expire{
-    margin-left: auto;
+    height: auto;
+  }
+  .expire>form{
+    margin-bottom: auto;
   }
 }
 
@@ -142,7 +166,7 @@ label.checkbox input{
   padding: 8px 15px;
   border: none;
   border-radius: 7px;
-  width: 75%;
+  width: 100%;
   margin-bottom: 10px;
 }
 
@@ -156,18 +180,11 @@ label.checkbox input{
   background-color: rgb(221, 190, 77);
 }
 
-.container.roflan{
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
 .expire{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: auto;
 }
 
 .form-signin .form-signin-heading,
@@ -191,9 +208,13 @@ label.checkbox input{
   font-size: 16px;
 }
 
+.form-signin-heading{
+  margin-top: 5px;
+}
+
 .form-signin-footing{
   padding-top: 10px;
-  margin-bottom: 0px;
+  margin-bottom: 5px;
   margin-top: 10px;
 }
 
@@ -222,16 +243,10 @@ label.checkbox input{
   box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(240, 206, 94, 0.6)
 }
 
-.roflan-content>img{
-  max-width: 720px;
-  max-height: 580px;
-  border-radius: 10px;
-  border: 1px solid #DCAC01;
-}
-
 #management-company-heading{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
   color: black;
-  margin-top: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
 }

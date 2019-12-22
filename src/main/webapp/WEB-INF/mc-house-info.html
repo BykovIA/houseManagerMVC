@@ -21,11 +21,7 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="bootstrap.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $(".form-register-house").hide();
-            });
-        </script>
+
     </head>
     <body>
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -56,39 +52,16 @@
                 </div>
             </div>
         </div>
-        <div class="container register-house">
-            <div class="container-list-houses">
-                <h3 id="list-houses-heading">Список ваших домов</h3>
-                <ul id="list-houses">
-                    <li class="house" onclick="location.href='mc-house.html';">
-                        <a href=mc-house.html>г. Екатеринбург, ул. Малышева 144</a>
-                    </li>
-                    <li class="house" onclick="location.href='mc-house.html';">
-                        <a href=mc-house.html>г. Екатеринбург, ул. Коминтерна 5</a>
-                    </li>
-                    <li class="house" onclick="location.href='mc-house.html';">
-                        <a href=mc-house.html>г. Екатеринбург, ул. Разбитых фонарей 6</a>
-                    </li>
-                </ul>
-                <button id="add-new-house" onclick="ShowRegisterForm()">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    Добавить дом
-                </button>
-                <script>
-                    function ShowRegisterForm(){
-                        $(".form-register-house").show();
-                    }
-                </script>
-            </div>
-            <div class="form-register-house"> 
+        <div class="container house-info">
+            <div class="form-edit-house"> 
                 <form id="form-house">
-                    <h3 class="house-register-heading">Подключить новый дом</h3>
+                    <h3 class="house-edit-heading">Информация о доме</h3>
                     <div class="form-row">
                         <div class="form-row-label">
                             <p>Город:</p>
                         </div>
                         <div class="form-row-value">
-                            <input class="house-info" id="house-city" placeholder="Город" required>
+                            <input class="house-info" id="house-city" placeholder="Город" required disabled>
                         </div>
                     </div>
                     <div class="form-row">
@@ -96,7 +69,7 @@
                             <p>Улица:</p>
                         </div>
                         <div class="form-row-value">
-                            <input class="house-info" id="house-street" placeholder="Название улицы" pattern="[а-Я]{1,30}" required>
+                            <input class="house-info" id="house-street" placeholder="Название улицы" pattern="[а-Я]{1,30}" required disabled>
                         </div>
                     </div>
                     <div class="form-row">
@@ -104,7 +77,7 @@
                             <p>Дом:</p>
                         </div>
                         <div class="form-row-value">
-                            <input class="house-info" id="house-house" placeholder="Номер дома" pattern="[0-9]{1,4}" required title="0-9999">
+                            <input class="house-info" id="house-house" placeholder="Номер дома" pattern="[0-9]{1,4}" required title="0-9999" disabled>
                         </div>
                     </div>
                     <div class="form-row">
@@ -112,7 +85,7 @@
                             <p>Квартира:</p>
                         </div>
                         <div class="form-row-value">
-                            <input class="house-info" id="house-flat" placeholder="Номер квартиры" pattern="[0-9]{1,4}" required title="0-9999">
+                            <input class="house-info" id="house-roomnumber" placeholder="Номер квартиры" pattern="[0-9]{1,4}" required title="0-9999" disabled>
                         </div>
                     </div>
                     <div class="form-row">
@@ -120,20 +93,9 @@
                             <p>Количество жителей: </p>
                         </div>
                         <div class="form-row-value">
-                            <input class="house-info" id="house-capacity" placeholder="Количество жителей" pattern="[0-9]{1,4}" required title="0-9999">
+                            <input class="house-info" id="house-capacity" placeholder="Количество жителей" pattern="[0-9]{1,4}" required title="0-9999" disabled>
                         </div>
                     </div>
-                    <div class="form-row to-right">
-                        <button class="button-register" id="register" onclick="GenerateToken()" type="button">Зарегистрировать дом</button>
-                    </div>
-                    <script>
-                        function GenerateToken(){
-                            $("#token").val(Math.floor(Math.random()*(5000-0)+0).toString());
-                            var city=$("#house-city").val();
-                            var address=$("#house-address").val();
-                            $("#list-houses").append("<li class='house' onclick='location.href=\"mc-house.html\";'>"+"<a href='mc-house.html'>г. "+city+", "+address+"</a></li>");
-                        }
-                    </script>
                     <div class="form-row">
                         <div class="form-row-label">
                             <p>Токен дома:</p>
@@ -142,6 +104,25 @@
                             <input class="house-info" id="token" disabled>
                         </div>
                     </div>
+                    <div class="form-row edit to-right">
+                        <button class="button-edit" id="edit" onclick="Edit()" type="button">Редактировать</button>
+                    </div>
+                    <script>
+                        function Edit(){
+                            $(':disabled').each(function(){
+                                $(this).removeAttr('disabled');
+                            });
+                            $('button.button-edit#edit').hide();
+                            $('div.form-row.edit.to-right').append("<button class='button-save' type='button' onclick='Save()'>Сохранить изменения</button>");
+                        }
+                        function Save(){
+                            $('div.form-row-value>input.house-info').each(function(){
+                                $(this).prop('disabled', true);
+                            });
+                            $('button.button-save').remove();
+                            $('button.button-edit#edit').show();
+                        }
+                    </script>
                 </form>
             </div>    
         </div>

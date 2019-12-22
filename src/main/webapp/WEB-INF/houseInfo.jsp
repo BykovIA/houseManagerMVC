@@ -5,11 +5,11 @@
 <%@ page import ="ru.house.manager.EntityDB.Houses"%>
 <%@ page import="ru.house.manager.controller.PageController"%>
 <% UsersService usersService = new UsersService();
-HousesService housesService = new HousesService();
-Users user = new Users();
-Houses house = new Houses();
-user = usersService.getById(PageController.client_account_id);
-house = housesService.getById(user.getHouseId());
+    HousesService housesService = new HousesService();
+    Houses house = new Houses();
+    house = housesService.getById(PageController.house_id);
+    String[] strArr;
+    strArr = (house.getAdress()).split(" ");
 %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
@@ -25,21 +25,18 @@ house = housesService.getById(user.getHouseId());
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-    <title>Личный кабинет</title>
+    <title>Информация о доме</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap.css" rel="stylesheet">
     <link href="bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="account.css" rel="stylesheet">
     <link href="navigation.css" rel="stylesheet">
+    <link href="mc-houses.css" rel="stylesheet">
     <!-- Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <style>
         <%@include file="bootstrap.css"%>
-    </style>
-    <style>
-        <%@include file="account.css"%>
     </style>
     <style>
         <%@include file="bootstrap.min.css"%>
@@ -48,10 +45,7 @@ house = housesService.getById(user.getHouseId());
         <%@include file="navigation.css"%>
     </style>
     <style>
-        <%@include file="registration.css"%>
-    </style>
-    <style>
-        <%@include file="signin.css"%>
+        <%@include file="mc-houses.css"%>
     </style>
     <script type="text/javascript">
         <%@include file="bootstrap.min.js"%>
@@ -66,11 +60,9 @@ house = housesService.getById(user.getHouseId());
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" ></script>
 
 </head>
-
-
 <body>
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container navigation">
+    <div class="container">
         <div class="navbar-header">
             <div id="logo-brand">
                 <img id="logo" src="https://i.ibb.co/Thxf6jk/brandlogo.png" alt="Лого">
@@ -87,73 +79,65 @@ house = housesService.getById(user.getHouseId());
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/house.manager/resident-profile">Профиль</a></li>
-                <li><a href="/house.manager/users-requests">Оставить заявку</a></li>
-                <li><a href="/house.manager/users-ads">Новости и объявления</a></li>
+                <li><a href="/house.manager/manager-profile/">Профиль</a></li>
+                <li><a href="/house.manager/house-registration/">Дома</a></li>
+                <li><a href="/house.manager/manager-requests/">Заявки</a></li>
                 <li><a href="#">Настройки</a></li>
                 <li><a href="/house.manager/">Выйти</a></li>
             </ul>
         </div>
     </div>
 </div>
-<div class="container account">
-    <div class="form-user-info">
-        <form id="form-account">
-            <h3 class="account-info-heading">Информация о пользователе</h3>
+<div class="container house-info">
+    <div class="form-edit-house">
+        <form id="form-house" action="/house.manager/house-info/<%=house.getHouseId()%>" method="post" accept-charset="UTF-8">
+            <h3 class="house-edit-heading">Информация о доме</h3>
             <div class="form-row">
                 <div class="form-row-label">
-                    <p>Фамилия:</p>
+                    <p>Город:</p>
                 </div>
                 <div class="form-row-value">
-                    <input id="user-info" disabled value="<%=user.getLastName()%>">
+                    <input class="house-info" id="house-city" value="<%=house.getCity()%>" placeholder="Город" required disabled name="city">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-row-label">
-                    <p>Имя:</p>
+                    <p>Улица:</p>
                 </div>
                 <div class="form-row-value">
-                    <input id="user-info" disabled value="<%=user.getFirstName()%>">
+                    <input class="house-info" id="house-street" placeholder="Название улицы" value="<%=strArr[0]%>" pattern="[а-Я]{1,30}" required disabled name="street">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-row-label">
-                    <p>Отчество:</p>
+                    <p>Дом:</p>
                 </div>
                 <div class="form-row-value">
-                    <input id="user-info" disabled value="<%=user.getFatherName()%>">
+                    <input class="house-info" id="house-house" placeholder="Номер дома" value="<%=strArr[1]%>" pattern="[0-9]{1,4}" required title="0-9999" disabled name="houseNumber">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-row-label">
-                    <p>Адрес дома:</p>
+                    <p>Корпус:</p>
                 </div>
                 <div class="form-row-value">
-                    <input id="user-info" disabled value="<%=house.getAdress()%>">
+                    <input class="house-info" id="house-roomnumber" placeholder="Корпус" value="<%=strArr[2]%>" pattern="[0-9]{1,4}" required title="0-9999" disabled name="corpus">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-row-label">
-                    <p>Квартира:</p>
+                    <p>Количество жителей: </p>
                 </div>
                 <div class="form-row-value">
-                    <input id="user-info" disabled value="<%=user.getRoomNumber()%>">
+                    <input class="house-info" id="house-capacity" placeholder="Количество жителей" value="<%=house.getResidentsNumber()%>"pattern="[0-9]{1,4}" required title="0-9999" disabled name="residentNumber">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-row-label">
-                    <p>Телефон:</p>
+                    <p>Токен дома:</p>
                 </div>
                 <div class="form-row-value">
-                    <input id="user-info" disabled value="<%=user.getPhoneNumber()%>">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-row-label">
-                    <p>Электронная почта:</p>
-                </div>
-                <div class="form-row-value">
-                    <input id="user-info" disabled value="<%=user.getEmail()%>">
+                    <input class="house-info" id="token" value="<%=house.getAccessToken()%>"disabled name="token">
                 </div>
             </div>
             <div class="form-row edit to-right">
@@ -165,53 +149,19 @@ house = housesService.getById(user.getHouseId());
                         $(this).removeAttr('disabled');
                     });
                     $('button.button-edit#edit').hide();
-                    $('div.form-row.edit.to-right').append("<button class='button-save' type='button' onclick='Save()'>Сохранить изменения</button>");
+                    $('div.form-row.edit.to-right').append("<button class='button-save' type='submit' >Сохранить изменения</button>" );
                 }
                 function Save(){
-                    $('div.form-row-value>input#user-info').each(function(){
+                    $('div.form-row-value>input.house-info').each(function(){
                         $(this).prop('disabled', true);
                     });
                     $('button.button-save').remove();
                     $('button.button-edit#edit').show();
+                    $("#form-house").submit();
                 }
             </script>
         </form>
     </div>
-    <div class="form-user-password">
-        <form id="form-account">
-            <h3 class="account-info-heading">Сменить пароль</h3>
-            <div class="form-row">
-                <div class="form-row-label">
-                    <p>Введите пароль:</p>
-                </div>
-                <div class="form-row-value">
-                    <input type="password">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-row-label">
-                    <p>Введите новый пароль:</p>
-                </div>
-                <div class="form-row-value">
-                    <input type="password">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-row-label">
-                    <p>Повторите пароль:</p>
-                </div>
-                <div class="form-row-value">
-                    <input type="password">
-                </div>
-            </div>
-            <div class="form-row to-right">
-                <button class="button-edit" type="submit">Сменить пароль</button>
-            </div>
-        </form>
-    </div>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="bootstrap.min.js"></script>
 </body>
 </html>

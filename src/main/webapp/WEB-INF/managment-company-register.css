@@ -36,7 +36,7 @@
     }
  }
  
- @media (min-width: 721px) and (max-width: 2560px)
+ @media (min-width: 721px) and (max-width: 4000px)
  {
     button.btn-lg.btn-info{
         width: 200px;
@@ -51,7 +51,6 @@
 
 h4.form-registration-info {
     text-align: left;
-    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 textarea.form-control{
     font-family: 'Montserrat', sans-serif;
@@ -60,7 +59,7 @@ textarea.form-control{
 
 div.buttons-navigation{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .button-return{
@@ -70,10 +69,10 @@ div.buttons-navigation{
     text-align: center;
     color: white;
     background-color: red;
-    padding: 8px 15px;
+    padding: 15px 15px;
     border: none;
     border-radius: 7px;
-    width: auto;
+    width: 100%;
     margin-top: 0px;
     margin-bottom: 5px;
   }
@@ -85,28 +84,37 @@ div.buttons-navigation{
     text-align: center;
     color: white;
     background-color: #8ED647;
-    padding: 8px 15px;
+    padding: auto 15px;
     border: none;
     border-radius: 7px;
-    width: auto;
+    width: 100%;
     margin-top: 0px;
     margin-bottom: 5px;
   }
   
-  div.btn-return{
+  .btn-return{
     display: flex;
     justify-content: center;
+    width: 50%;
+    margin-right: 10px;
   }
-  div.btn-registration{
+  .btn-registration{
     display: flex;
     justify-content: center;
+    width: 50%;
   }
 
   .button-return:hover{
-    background-color: rgb(250, 85, 85);
-  }
+    /*background-color: rgb(250, 85, 85);*/
+    filter: contrast(80%);
+  } 
 
   a.button-return{
     color: white;
     text-decoration: none;
+  }
+
+  .form-registration-info{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
   }

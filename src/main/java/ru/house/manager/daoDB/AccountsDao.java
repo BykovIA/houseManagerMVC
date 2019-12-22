@@ -17,4 +17,6 @@ public interface AccountsDao {
 
     // delete
     void remove(Accounts Account) throws SQLException;
+
+    int emailCount(String eMail) throws SQLException;
 }

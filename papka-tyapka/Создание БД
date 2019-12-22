@@ -128,3 +128,101 @@ add constraint mc_fk10
   FOREIGN KEY (resident_ID)
   REFERENCES USERS_HMS(user_ID);
 
+
+-------------------------------------------------------------
+ALTER TABLE ACCOUNTS_HMS 
+MODIFY E_MAIL VARCHAR2(100);
+
+ALTER TABLE HOUSES_HMS
+MODIFY ( ADRESS VARCHAR2(300),
+CITY_NAME VARCHAR2(120));
+
+ALTER TABLE MANAGECOMPANIES_HMS
+MODIFY ( COMPANY_NAME VARCHAR2(100),
+FIRST_NAME VARCHAR2(100),
+LAST_NAME VARCHAR2(100),
+father_name VARCHAR2(100),
+EMAIL VARCHAR2(100),
+TELEPHONE VARCHAR2(40),
+SOME_INFO VARCHAR2(250));
+
+ALTER TABLE USERS_HMS
+MODIFY (FIRST_NAME VARCHAR2(100),
+LAST_NAME VARCHAR2(100),
+father_name VARCHAR2(100),
+E_MAIL VARCHAR2(100),
+PHONE_NUMBER VARCHAR2(40));
+
+-------------------------------------------------------------------
+
+create table NOTIFICATIONS_HMS
+(notification_id numeric(15) not null,
+HOUSE_ID numeric(10) not null,
+MANAGER_ID numeric(10) not null,
+USER_VISIBILITY numeric(3) not null,
+TEXT varchar2(300) not null,
+STATUS varchar2(50) not null,
+NOTIF_DATE varchar2(60) not null,
+CONSTRAINT notif_1 PRIMARY KEY(NOTIFICATION_ID)
+);
+
+CREATE SEQUENCE notif_tmp START WITH 1;
+
+CREATE OR REPLACE TRIGGER notif_trg
+BEFORE INSERT ON notifications_HMS
+FOR EACH ROW
+BEGIN
+  SELECT notif_TMP.nextval
+  INTO   :new.notification_id
+  FROM   dual;
+END;
+
+alter table notifications_HMS
+add constraint notif_fk11
+  FOREIGN KEY (MANAGER_ID)
+  REFERENCES MANAGECOMPANIES_HMS(MANAGE_COMPANY_ID);
+alter table notifications_HMS
+add constraint mnotif_fk10
+  FOREIGN KEY (HOUSE_ID)
+  REFERENCES HOUSES_HMS(house_ID);
+
+
+
+create table COMMENTS_HMS
+(comment_id numeric(20) not null,
+application_id numeric(10) not null,
+TEXT varchar2(300) not null,
+COMMENTATOR varchar2(120) not null,
+COMMENT_DATE varchar2(60) not null,
+CONSTRAINT ncomment_1 PRIMARY KEY(comment_ID)
+);
+
+alter table COMMENTS_HMS
+add constraint comment_fk11
+  FOREIGN KEY (application_ID)
+  REFERENCES APPLICATIONS_HMS(APPLICATION_ID);
+
+  CREATE SEQUENCE ncomment_tmp START WITH 1;
+
+  CREATE OR REPLACE TRIGGER comment_trg
+  BEFORE INSERT ON comments_HMS
+  FOR EACH ROW
+  BEGIN
+    SELECT ncomment_TMP.nextval
+    INTO   :new.comment_id
+    FROM   dual;
+  END;
+
+
+  _____________________________
+  delete from table applications_hms
+
+  alter table applications_hms
+  add house_id numeric(10) not null;
+
+
+alter table applications_hms
+add constraint applicHouse_fk1
+  FOREIGN KEY (HOUSE_ID)
+  REFERENCES HOUSES_HMS(house_ID);
+

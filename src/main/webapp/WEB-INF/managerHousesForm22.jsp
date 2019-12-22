@@ -1,14 +1,21 @@
 <%@ page import ="ru.house.manager.serviceDB.HousesService"%>
 <%@ page import ="ru.house.manager.EntityDB.Houses"%>
 <%@ page import="ru.house.manager.controller.PageController"%>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="ru.house.manager.serviceDB.ManagersService" %>
+<%@ page import="ru.house.manager.EntityDB.Managers" %>
 <% HousesService housesService = new HousesService();
-    List<Houses> housesList = new ArrayList<>();
     Houses house = new Houses();
+    List<Houses> housesList = new ArrayList<>();
+    ManagersService managersService = new ManagersService();
+    Managers manager = managersService.getByAccountId(PageController.client_account_id);
+    PageController.manager_id = manager.getId();
     housesList = housesService.getAllHousesFromManagerId(PageController.manager_id);
-    int token = -1;
-    if (housesList.size() > 0) token = housesList.get(housesList.size() - 1).getAccessToken();
+    int accessToken = -1;
+    if (housesList.size() > 0) {
+        accessToken = housesList.get(housesList.size() - 1).getAccessToken();
+    }
 %>
 <%--
   Created by IntelliJ IDEA.
@@ -56,15 +63,16 @@
 
     <script src="WEB-INF/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" ></script>
     <script>
         $(document).ready(function() {
             $(".form-register-house").hide();
         });
     </script>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" ></script>
 </head>
 <body>
+
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -96,10 +104,9 @@
     <div class="container-list-houses">
         <h3 id="list-houses-heading">Список ваших домов</h3>
         <ul id="list-houses">
-            <% for(int i = 0; i < housesList.size(); i++) {
-                %>
-            <li class="house" onclick="location.href='mc-house.html';">
-                <a href=mc-house.html><%=housesList.get(i).getAdress() + "  город " + housesList.get(i).getCity()%></a>
+            <% for(int i = 0; i < housesList.size(); i++) { %>
+            <li class="house" onclick="location.href='/house.manager/house-menu/<%=housesList.get(i).getHouseId()%>';">
+                <a href="/house.manager/house-menu/<%=housesList.get(i).getHouseId()%>"><%=housesList.get(i).getCity() + " " + housesList.get(i).getAdress()%></a>
             </li>
             <% } %>
         </ul>
@@ -114,22 +121,38 @@
         </script>
     </div>
     <div class="form-register-house">
-        <form id="form-house" role="form" method="POST" action="/house.manager/house-registration">
+        <form id="form-house" action="/house.manager/house-registration" method="post" accept-charset="UTF-8">
             <h3 class="house-register-heading">Подключить новый дом</h3>
             <div class="form-row">
                 <div class="form-row-label">
                     <p>Город:</p>
                 </div>
                 <div class="form-row-value">
-                    <input class="house-info" id="house-city" placeholder="Город">
+                    <input class="house-info" id="house-city" placeholder="Город" required name="city">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-row-label">
-                    <p>Адрес:</p>
+                    <p>Улица:</p>
                 </div>
                 <div class="form-row-value">
-                    <input class="house-info" id="house-address" placeholder="Адрес">
+                    <input class="house-info" id="house-street" placeholder="Название улицы" pattern="[а-Я]{1,30}" required name="street">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-row-label">
+                    <p>Дом:</p>
+                </div>
+                <div class="form-row-value">
+                    <input class="house-info" id="house-house" placeholder="Номер дома" pattern="[0-9]{1,4}" required title="0-9999" name="house">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-row-label">
+                    <p>Корпус:</p>
+                </div>
+                <div class="form-row-value">
+                    <input class="house-info" id="house-flat" placeholder="Корпус" required name="flat">
                 </div>
             </div>
             <div class="form-row">
@@ -137,26 +160,18 @@
                     <p>Количество жителей: </p>
                 </div>
                 <div class="form-row-value">
-                    <input class="house-info" id="house-capacity" placeholder="Количество жителей">
+                    <input class="house-info" id="house-capacity" placeholder="Количество жителей" pattern="[0-9]{1,4}" required title="0-9999", name="ResidentsNumber">
                 </div>
             </div>
             <div class="form-row to-right">
-                <button class="button-register" id="register" onclick="GenerateToken()" type="button">Зарегистрировать дом</button>
+                <button class="button-register" id="register"  type="submit">Зарегистрировать дом</button>
             </div>
-            <script>
-                function GenerateToken(){
-                    $("#token").val(Math.floor(Math.random()*(5000-0)+0).toString());
-                    var city=$("#house-city").val();
-                    var address=$("#house-address").val();
-                    $("#list-houses").append("<li class='house' onclick='location.href=\"mc-house.html\";'>"+"<a href='mc-house.html'>г. "+city+", "+address+"</a></li>");
-                }
-            </script>
             <div class="form-row">
                 <div class="form-row-label">
                     <p>Токен дома:</p>
                 </div>
                 <div class="form-row-value">
-                    <input class="house-info" id="token" disabled value=<%=token%>>
+                    <input class="house-info" id="token" value="<%=accessToken%>" disabled>
                 </div>
             </div>
         </form>
