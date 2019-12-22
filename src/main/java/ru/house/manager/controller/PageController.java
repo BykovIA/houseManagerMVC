@@ -28,6 +28,7 @@ public class PageController {
     public static String validator = "";
     public static Boolean validatorHasError = Boolean.FALSE;
 
+
     @RequestMapping(value="/", method=RequestMethod.GET)
     public String getLoginPage(Model model) {
         return "loginForm";
@@ -266,7 +267,19 @@ public class PageController {
         return "userRequest";
     }
 
-    @RequestMapping(value = "/manager-requests", method = RequestMethod.GET)
+    @RequestMapping(value="/users-requests-1", method=RequestMethod.POST)
+    public String postUserButton0(@RequestParam(value="button0") String numb) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
+        request_context = 0;
+        return "userRequest";
+    }
+
+    @RequestMapping(value="/users-requests-2", method=RequestMethod.POST)
+    public String postUserButton1(@RequestParam(value="button1") String numb) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
+        request_context = 1;
+        return "userRequest";
+    }
+
+        @RequestMapping(value = "/manager-requests", method = RequestMethod.GET)
     public String getManagerRequestsPage() {
         return "managerRequest";
     }
@@ -404,7 +417,6 @@ public class PageController {
     public String postbutton00 (@RequestParam(value="button0") String numb) throws UnsupportedEncodingException, SQLException, NoSuchAlgorithmException {
         request_context = 0;
         return "houseRequests";
-
     }
 
 
@@ -538,7 +550,6 @@ public class PageController {
 
     @RequestMapping(value = "/users-ads", method = RequestMethod.GET)
     public String getUsersAds() {
-
         return "userAds";
     }
 }
