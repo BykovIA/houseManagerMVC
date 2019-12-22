@@ -77,7 +77,7 @@
     <div class="container">
         <div class="navbar-header">
             <div id="logo-brand">
-                <img id="logo" src="brandlogo.png" alt="Лого">
+                <img id="logo" src="https://i.ibb.co/Thxf6jk/brandlogo.png" alt="Лого">
                 <div id="brand">
                     <a href="#">HOUSE MANAGER</a>
                 </div>
@@ -91,12 +91,11 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="mc-main.html">Главная</a></li>
-                <li><a href="mc-account.html">Профиль</a></li>
-                <li><a href="mc-houses.html">Дома</a></li>
-                <li><a href="mc-requests.html">Заявки</a></li>
+                <li><a href="/house.manager/manager-profile/">Профиль</a></li>
+                <li><a href="/house.manager/house-registration/">Дома</a></li>
+                <li><a href="/house.manager/manager-requests/">Заявки</a></li>
                 <li><a href="#">Настройки</a></li>
-                <li><a href="login.html">Выйти</a></li>
+                <li><a href="/house.manager/">Выйти</a></li>
             </ul>
         </div>
     </div>
@@ -107,7 +106,7 @@
         <ul id="list-houses">
             <% for(int i = 0; i < housesList.size(); i++) { %>
             <li class="house" onclick="location.href='/house.manager/house-menu/<%=housesList.get(i).getHouseId()%>';">
-                <a href="/house.manager/house-menu/<%=housesList.get(i).getHouseId()%>"><%=housesList.get(i).getCity() + housesList.get(i).getAdress()%></a>
+                <a href="/house.manager/house-menu/<%=housesList.get(i).getHouseId()%>"><%=housesList.get(i).getCity() + " " + housesList.get(i).getAdress()%></a>
             </li>
             <% } %>
         </ul>
@@ -150,10 +149,10 @@
             </div>
             <div class="form-row">
                 <div class="form-row-label">
-                    <p>Квартира:</p>
+                    <p>Корпус:</p>
                 </div>
                 <div class="form-row-value">
-                    <input class="house-info" id="house-flat" placeholder="Корпус" pattern="[0-9]{1,4}" required title="0-9999, [а-я]" name="flat">
+                    <input class="house-info" id="house-flat" placeholder="Корпус" required name="flat">
                 </div>
             </div>
             <div class="form-row">

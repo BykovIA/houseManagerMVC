@@ -71,6 +71,12 @@ public class PageController {
         }
     }
 
+    @RequestMapping(value = "/manager-profile", method=RequestMethod.GET)
+    public String getManagerProfile() {return "managerProFileForm";}
+
+    @RequestMapping(value = "/resident-profile", method=RequestMethod.GET)
+    public String getUserProfile() {return "userProFileForm";}
+
     @RequestMapping(value = "/user-registration", method=RequestMethod.GET)
     public String getNewUserPage() {
         return "userRegistrationForm";

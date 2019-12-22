@@ -73,7 +73,7 @@ house = housesService.getById(user.getHouseId());
     <div class="container navigation">
         <div class="navbar-header">
             <div id="logo-brand">
-                <img id="logo" src="logo-site.png" alt="Лого">
+                <img id="logo" src="https://i.ibb.co/Thxf6jk/brandlogo.png" alt="Лого">
                 <div id="brand">
                     <a href="#">HOUSE MANAGER</a>
                 </div>
@@ -87,12 +87,11 @@ house = housesService.getById(user.getHouseId());
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="resident-main.html">Главная</a></li>
-                <li><a href="resident-account.html">Профиль</a></li>
+                <li><a href="/house.manager/resident-profile">Профиль</a></li>
                 <li><a href="/house.manager/users-requests">Оставить заявку</a></li>
                 <li><a href="/house.manager/users-ads">Новости и объявления</a></li>
                 <li><a href="#">Настройки</a></li>
-                <li><a href="login.html">Выйти</a></li>
+                <li><a href="/house.manager/">Выйти</a></li>
             </ul>
         </div>
     </div>

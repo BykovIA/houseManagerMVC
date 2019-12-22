@@ -65,7 +65,7 @@
     <div class="container">
         <div class="navbar-header">
             <div id="logo-brand">
-                <img id="logo" src="C://Users/Igor/IdeaProjects/houseManagerMVC/src/main/webapp/images/brandlogo.png" alt="Лого"/>
+                <img id="logo" src="https://i.ibb.co/Thxf6jk/brandlogo.png" alt="Лого"/>
                 <div id="brand">
                     <a href="#">HOUSE MANAGER</a>
                 </div>
@@ -79,25 +79,24 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="mc-main.html">Главная</a></li>
-                <li><a href="mc-account.html">Профиль</a></li>
-                <li><a href="mc-houses.html">Дома</a></li>
-                <li><a href="mc-requests.html">Заявки</a></li>
+                <li><a href="/house.manager/manager-profile/">Профиль</a></li>
+                <li><a href="/house.manager/house-registration/">Дома</a></li>
+                <li><a href="/house.manager/manager-requests/">Заявки</a></li>
                 <li><a href="#">Настройки</a></li>
-                <li><a href="login.html">Выйти</a></li>
+                <li><a href="/house.manager/">Выйти</a></li>
             </ul>
         </div>
     </div>
 </div>
 <div class="container house">
     <h3 id="house-address-heading">
-        <a href="mc-houses.html" title="К списку домов"><span class="glyphicon glyphicon-arrow-left"></span></a>
+        <a href="/house.manager/house-registration/" title="К списку домов"><span class="glyphicon glyphicon-arrow-left"></span></a>
         <%="город " +house.getCity() + " улица " + house.getAdress()%>
     </h3>
     <div class="container-grid-options">
         <div class="option" onclick="location.href='/house.manager/house-info/<%=PageController.house_id%>';">
             <div class="option-logo">
-                <img src="<c:url value="images/house.png"/>" alt="logo">
+                <img src="https://i.ibb.co/9nGzxC0/house.png" alt="logo">
             </div>
             <div class="option-text">
                 Смотрите и редактируйте сведения о доме
@@ -105,7 +104,7 @@
         </div>
         <div class="option">
             <div class="option-logo">
-                <img src="<c:url value="${vote.png}"/>" alt="logo">
+                <img src="https://i.ibb.co/V3KHW03/vote.png" alt="logo">
             </div>
             <div class="option-text">
                 Создавайте голосования для решения общедомовых вопросов
@@ -113,7 +112,7 @@
         </div>
         <div class="option" onclick="location.href='/house.manager/house-requests/<%=PageController.house_id%>';">
             <div class="option-logo">
-                <img src="<c:url value="${request.png}"/>" alt="logo">
+                <img src="https://i.ibb.co/dJf5cDZ/requests.png" alt="logo">
             </div>
             <div class="option-text">
                 Принимайте заявки от жильцов
@@ -121,7 +120,7 @@
         </div>
         <div class="option" onclick="location.href='/house.manager/house-ads/<%=PageController.house_id%>';">
             <div class="option-logo">
-                <img src="<c:url value="${news.png}"/>" alt="logo">
+                <img src="https://i.ibb.co/jT86sVx/news.png" alt="logo">
             </div>
             <div class="option-text">
                 Выкладывайте важные объявления и новости
