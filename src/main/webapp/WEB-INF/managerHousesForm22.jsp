@@ -37,25 +37,25 @@
     <title>Регистрация дома</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="WEB-INF/bootstrap.css" rel="stylesheet">
-    <link href="WEB-INF/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="WEB-INF/navigation.css" rel="stylesheet">
-    <link href="WEB-INF/mc-houses.css" rel="stylesheet">
+    <link href="../css/navigation.css" rel="stylesheet">
+    <link href="../css/mc-houses.css" rel="stylesheet">
     <!-- Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
     <style>
-        <%@include file="bootstrap.css"%>
+        <%@include file="../css/bootstrap.css"%>
     </style>
     <style>
-        <%@include file="bootstrap.min.css"%>
+        <%@include file="../css/bootstrap.min.css"%>
     </style>
     <style>
-        <%@include file="navigation.css"%>
+        <%@include file="../css/navigation.css"%>
     </style>
     <style>
-        <%@include file="mc-houses.css"%>
+        <%@include file="../css/mc-houses.css"%>
     </style>
     <script type="text/javascript">
         <%@include file="jquery.min.js"%>

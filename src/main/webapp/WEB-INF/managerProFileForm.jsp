@@ -32,22 +32,22 @@
     <!-- Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <style>
-        <%@include file="bootstrap.css"%>
+        <%@include file="../css/bootstrap.css"%>
     </style>
     <style>
-        <%@include file="account.css"%>
+        <%@include file="../css/account.css"%>
     </style>
     <style>
-        <%@include file="bootstrap.min.css"%>
+        <%@include file="../css/bootstrap.min.css"%>
     </style>
     <style>
-        <%@include file="navigation.css"%>
+        <%@include file="../css/navigation.css"%>
     </style>
     <style>
-        <%@include file="registration.css"%>
+        <%@include file="../css/registration.css"%>
     </style>
     <style>
-        <%@include file="signin.css"%>
+        <%@include file="../css/signin.css"%>
     </style>
     <script type="text/javascript">
         <%@include file="bootstrap.min.js"%>

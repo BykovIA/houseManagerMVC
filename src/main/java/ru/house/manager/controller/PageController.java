@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import com.sun.mail.iap.ByteArray;
 import org.springframework.web.bind.annotation.PathVariable;
 import ru.house.manager.EntityDB.*;
 import org.springframework.stereotype.Controller;
@@ -394,7 +393,7 @@ public class PageController {
     /**
      * Для домов
      */
-    @RequestMapping(value = "/house-requests", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/house-requests", method = RequestMethod.GET)
     public String getHouseRequestsPage() {
         return "houseRequests";
     }
@@ -462,7 +461,7 @@ public class PageController {
         comment.setCommentator(manager.getCompanyName());
         commentsService.add(comment);
         return "houseRequests";
-    }
+    }*/
 
     /**
      * Для ЛСов

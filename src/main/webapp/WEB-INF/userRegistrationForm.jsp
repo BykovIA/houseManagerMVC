@@ -17,16 +17,16 @@
     <!-- Fonts-->
     <link href="http://allfont.ru/allfont.css?fonts=montserrat" rel="stylesheet" type="text/css" />
     <style>
-        <%@include file="bootstrap.css"%>
+        <%@include file="../css/bootstrap.css"%>
     </style>
     <style>
-        <%@include file="bootstrap.min.css"%>
+        <%@include file="../css/bootstrap.min.css"%>
     </style>
     <style>
-        <%@include file="navigation.css"%>
+        <%@include file="../css/navigation.css"%>
     </style>
     <style>
-        <%@include file="registration.css"%>
+        <%@include file="../css/registration.css"%>
     </style>
     <script type="text/javascript">
         <%@include file="jquery.min.js"%>

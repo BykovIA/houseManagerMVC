@@ -39,16 +39,16 @@
     <!-- Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <style>
-        <%@include file="bootstrap.css"%>
+        <%@include file="../css/bootstrap.css"%>
     </style>
     <style>
-        <%@include file="bootstrap.min.css"%>
+        <%@include file="../css/bootstrap.min.css"%>
     </style>
     <style>
-        <%@include file="navigation.css"%>
+        <%@include file="../css/navigation.css"%>
     </style>
     <style>
-        <%@include file="mc-house.css"%>
+        <%@include file="../css/mc-house.css"%>
     </style>
     <script type="text/javascript">
         <%@include file="bootstrap.min.js"%>

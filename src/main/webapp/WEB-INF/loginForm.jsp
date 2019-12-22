@@ -16,27 +16,27 @@
         <title>Сервис УК - Жильцы</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="WEB-INF/bootstrap.css" rel="stylesheet">
-        <link href="WEB-INF/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/bootstrap.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
         <!-- Custom styles for this template -->
         <link href="signin.css" rel="stylesheet">
         <link href="navigation.css" rel="stylesheet">
         <!-- Fonts-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
         <style>
-            <%@include file="bootstrap.css"%>
+            <%@include file="../css/bootstrap.css"%>
         </style>
         <style>
-            <%@include file="bootstrap.min.css"%>
+            <%@include file="../css/bootstrap.min.css"%>
         </style>
         <style>
-            <%@include file="navigation.css"%>
+            <%@include file="../css/navigation.css"%>
         </style>
         <style>
-            <%@include file="registration.css"%>
+            <%@include file="../css/registration.css"%>
         </style>
         <style>
-            <%@include file="signin.css"%>
+            <%@include file="../css/signin.css"%>
         </style>
         <script type="text/javascript">
             <%@include file="bootstrap.min.js"%>

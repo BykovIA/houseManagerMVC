@@ -56,16 +56,16 @@
     <title>Ваши заявки</title>
 
     <style>
-        <%@include file="bootstrap.css"%>
+        <%@include file="../css/bootstrap.css"%>
     </style>
     <style>
-        <%@include file="bootstrap.min.css"%>
+        <%@include file="../css/bootstrap.min.css"%>
     </style>
     <style>
-        <%@include file="navigation.css"%>
+        <%@include file="../css/navigation.css"%>
     </style>
     <style>
-        <%@include file="requests.css"%>
+        <%@include file="../css/requests.css"%>
     </style>
     <script type="text/javascript">
         <%@include file="jquery.min.js"%>
